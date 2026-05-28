@@ -491,6 +491,44 @@ h3 {
   font-size: 2.4rem;
 }
 
+.scope-table {
+  border: 1px solid rgba(255, 253, 248, 0.22);
+  background: rgba(255, 253, 248, 0.12);
+}
+
+.scope-row {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.8fr);
+  gap: 1px;
+  border-bottom: 1px solid rgba(255, 253, 248, 0.16);
+}
+
+.scope-row:last-child {
+  border-bottom: 0;
+}
+
+.scope-row > div {
+  padding: clamp(18px, 2.5vw, 28px);
+  background: var(--ink);
+}
+
+.scope-row > div:first-child {
+  color: var(--white);
+  font-weight: 700;
+}
+
+.scope-row > div:last-child {
+  color: rgba(255, 253, 248, 0.76);
+}
+
+.scope-head > div {
+  color: var(--sage);
+  background: rgba(255, 253, 248, 0.06);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
 .credibility {
   background: var(--white);
 }
@@ -778,6 +816,19 @@ address .button-primary {
 
   .gallery {
     grid-template-columns: 1fr;
+  }
+
+  .scope-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .scope-row > div:first-child {
+    padding-bottom: 8px;
+  }
+
+  .scope-row > div:last-child {
+    padding-top: 8px;
   }
 
   .site-footer {
