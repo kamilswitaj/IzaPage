@@ -594,27 +594,65 @@ h3 {
 }
 
 .portfolio-section {
-  background: linear-gradient(180deg, var(--paper) 0%, #f1eee6 100%);
+  position: relative;
+  background:
+    linear-gradient(180deg, var(--paper) 0%, #f2efe7 46%, #e9eee8 100%);
+  overflow: hidden;
+}
+
+.portfolio-section::before {
+  position: absolute;
+  inset: 120px auto auto -14vw;
+  content: "";
+  width: 38vw;
+  min-width: 360px;
+  aspect-ratio: 1;
+  border: 1px solid rgba(111, 133, 109, 0.18);
+  transform: rotate(18deg);
+  pointer-events: none;
+}
+
+.portfolio-section::after {
+  position: absolute;
+  right: clamp(20px, 6vw, 86px);
+  top: 96px;
+  content: "";
+  width: min(36vw, 520px);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(47, 95, 115, 0.42));
+  pointer-events: none;
+}
+
+.portfolio-section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .project-gallery {
   display: grid;
-  gap: 28px;
+  gap: clamp(34px, 6vw, 74px);
 }
 
 .project-card {
   display: grid;
-  grid-template-columns: minmax(260px, 0.45fr) minmax(0, 1fr);
-  gap: clamp(22px, 4vw, 44px);
-  padding: clamp(18px, 3vw, 34px);
-  border: 1px solid var(--line);
+  grid-template-columns: minmax(240px, 0.38fr) minmax(0, 1fr);
+  gap: clamp(24px, 5vw, 58px);
+  padding: clamp(20px, 3.5vw, 46px);
+  border: 1px solid rgba(255, 253, 248, 0.78);
   border-radius: var(--radius);
-  background: var(--white);
-  box-shadow: var(--shadow);
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.94), rgba(248, 246, 240, 0.72)),
+    var(--white);
+  box-shadow:
+    0 34px 90px rgba(16, 36, 63, 0.14),
+    inset 0 1px 0 rgba(255, 253, 248, 0.86);
+  overflow: hidden;
 }
 
 .project-card-feature {
-  background: linear-gradient(135deg, var(--white), #f2f0e8);
+  background:
+    linear-gradient(135deg, rgba(255, 253, 248, 0.96), rgba(217, 225, 212, 0.44)),
+    var(--white);
 }
 
 .project-copy {
@@ -634,7 +672,7 @@ h3 {
 .project-copy h3 {
   margin-bottom: 14px;
   font-family: var(--serif);
-  font-size: clamp(1.65rem, 3vw, 2.55rem);
+  font-size: clamp(1.9rem, 3.2vw, 3.2rem);
   line-height: 1.05;
 }
 
@@ -645,50 +683,109 @@ h3 {
 .project-carousel {
   position: relative;
   min-width: 0;
+  padding: clamp(14px, 2vw, 22px);
+}
+
+.project-carousel::before {
+  position: absolute;
+  inset: 0 26px 30px 0;
+  content: "";
+  border: 1px solid rgba(47, 95, 115, 0.18);
+  border-radius: var(--radius);
+  transform: translate(16px, 16px);
+  pointer-events: none;
+}
+
+.project-carousel::after {
+  position: absolute;
+  inset: auto 52px 0 auto;
+  content: "";
+  width: 38%;
+  height: 42%;
+  border-right: 1px solid rgba(111, 133, 109, 0.28);
+  border-bottom: 1px solid rgba(111, 133, 109, 0.28);
+  pointer-events: none;
+}
+
+.carousel-meta {
+  position: absolute;
+  z-index: 4;
+  left: clamp(26px, 3vw, 40px);
+  top: clamp(26px, 3vw, 40px);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  border: 1px solid rgba(255, 253, 248, 0.64);
+  border-radius: 999px;
+  color: var(--white);
+  background: rgba(16, 36, 63, 0.58);
+  box-shadow: 0 14px 36px rgba(16, 36, 63, 0.22);
+  backdrop-filter: blur(12px);
+  font-size: 0.76rem;
+  font-weight: 800;
+}
+
+.carousel-meta span:nth-child(2) {
+  width: 28px;
+  height: 1px;
+  background: rgba(255, 253, 248, 0.72);
 }
 
 .project-track {
   display: flex;
-  gap: 14px;
+  gap: clamp(16px, 2vw, 24px);
   overflow-x: auto;
   scroll-behavior: smooth;
   scroll-snap-type: x mandatory;
-  scrollbar-width: thin;
-  scrollbar-color: var(--green) rgba(16, 36, 63, 0.12);
-  padding: 2px 2px 16px;
+  scrollbar-width: none;
+  padding: 2px;
+  overscroll-behavior-x: contain;
 }
 
 .project-track::-webkit-scrollbar {
-  height: 8px;
-}
-
-.project-track::-webkit-scrollbar-track {
-  background: rgba(16, 36, 63, 0.1);
-  border-radius: 999px;
-}
-
-.project-track::-webkit-scrollbar-thumb {
-  background: var(--green);
-  border-radius: 999px;
+  display: none;
 }
 
 .project-slide {
-  flex: 0 0 clamp(260px, 31vw, 430px);
+  position: relative;
+  flex: 0 0 clamp(320px, 52vw, 760px);
   display: flex;
   flex-direction: column;
   margin: 0;
   overflow: hidden;
   scroll-snap-align: start;
   border-radius: var(--radius);
-  background: var(--paper);
-  border: 1px solid rgba(16, 36, 63, 0.1);
-  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+  background: #101827;
+  border: 1px solid rgba(255, 253, 248, 0.72);
+  box-shadow: 0 22px 58px rgba(16, 36, 63, 0.16);
+  transform: scale(0.965);
+  transform-origin: center;
+  opacity: 0.72;
+  transition:
+    transform 260ms ease,
+    box-shadow 260ms ease,
+    border-color 260ms ease,
+    opacity 260ms ease;
 }
 
-.project-slide:hover {
-  transform: translateY(-3px);
-  border-color: rgba(111, 133, 109, 0.45);
-  box-shadow: 0 18px 42px rgba(16, 36, 63, 0.12);
+.project-slide.is-active,
+.project-slide:hover,
+.project-slide:focus-within {
+  transform: scale(1);
+  opacity: 1;
+  border-color: rgba(255, 253, 248, 0.94);
+  box-shadow: 0 30px 82px rgba(16, 36, 63, 0.24);
+}
+
+.project-slide::after {
+  position: absolute;
+  inset: 0;
+  content: "";
+  background:
+    linear-gradient(180deg, rgba(16, 36, 63, 0) 44%, rgba(16, 36, 63, 0.72) 100%),
+    linear-gradient(90deg, rgba(16, 36, 63, 0.18), rgba(16, 36, 63, 0));
+  pointer-events: none;
 }
 
 .image-open {
@@ -704,54 +801,66 @@ h3 {
 
 .image-open img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
-  transition: transform 240ms ease, filter 240ms ease;
+  transition: transform 380ms ease, filter 380ms ease;
 }
 
 .project-slide:hover .image-open img,
+.project-slide.is-active .image-open img,
 .image-open:focus-visible img {
-  transform: scale(1.035);
-  filter: saturate(1.04);
+  transform: scale(1.045);
+  filter: saturate(1.05) contrast(1.02);
 }
 
 .project-slide figcaption {
-  padding: 14px 15px;
-  color: var(--ink-soft);
-  font-size: 0.88rem;
+  position: absolute;
+  z-index: 1;
+  left: clamp(18px, 3vw, 30px);
+  right: clamp(18px, 3vw, 30px);
+  bottom: clamp(16px, 2.4vw, 28px);
+  max-width: 520px;
+  padding: 0;
+  color: rgba(255, 253, 248, 0.92);
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  font-weight: 600;
   line-height: 1.45;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
 }
 
 .carousel-button {
   position: absolute;
-  z-index: 2;
-  top: 40%;
+  z-index: 4;
+  top: 50%;
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
+  width: 48px;
+  height: 48px;
   border: 1px solid rgba(255, 253, 248, 0.88);
   border-radius: 50%;
   color: var(--white);
-  background: rgba(16, 36, 63, 0.62);
-  box-shadow: 0 12px 32px rgba(16, 36, 63, 0.2);
+  background: rgba(16, 36, 63, 0.64);
+  box-shadow: 0 16px 40px rgba(16, 36, 63, 0.26);
   cursor: pointer;
   font-size: 1.8rem;
   line-height: 1;
-  transition: transform 160ms ease, background 160ms ease;
+  transform: translateY(-50%);
+  backdrop-filter: blur(12px);
+  transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
 }
 
 .carousel-button:hover {
-  transform: translateY(-1px);
+  transform: translateY(-50%) scale(1.06);
   background: rgba(16, 36, 63, 0.82);
+  border-color: var(--white);
 }
 
 .carousel-button-prev {
-  left: 10px;
+  left: 0;
 }
 
 .carousel-button-next {
-  right: 10px;
+  right: 0;
 }
 
 .lightbox {
@@ -943,6 +1052,14 @@ address .button-primary {
   .project-copy {
     position: static;
   }
+
+  .project-carousel {
+    padding-inline: 8px;
+  }
+
+  .project-slide {
+    flex-basis: min(76vw, 620px);
+  }
 }
 
 @media (max-width: 720px) {
@@ -1066,15 +1183,47 @@ address .button-primary {
     grid-template-columns: 1fr;
   }
 
+  .project-carousel {
+    padding: 8px 0 0;
+  }
+
+  .project-carousel::before,
+  .project-carousel::after {
+    display: none;
+  }
+
+  .carousel-meta {
+    left: 12px;
+    top: 12px;
+    padding: 7px 10px;
+  }
+
   .project-slide {
-    flex-basis: min(82vw, 360px);
+    flex-basis: min(86vw, 380px);
+    transform: none;
+    opacity: 1;
+  }
+
+  .project-slide figcaption {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    font-size: 0.88rem;
   }
 
   .carousel-button {
     width: 38px;
     height: 38px;
-    top: 36%;
+    top: 45%;
     font-size: 1.55rem;
+  }
+
+  .carousel-button-prev {
+    left: 4px;
+  }
+
+  .carousel-button-next {
+    right: 4px;
   }
 
   .lightbox-close {
