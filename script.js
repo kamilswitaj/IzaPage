@@ -8,6 +8,7 @@ const lightboxCaption = document.querySelector("[data-lightbox-caption]");
 const lightboxClose = document.querySelector("[data-lightbox-close]");
 const lightboxPlaceholder = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 let lastLightboxTrigger = null;
+const carouselControllers = new Map();
 
 function formatSlideNumber(number) {
   return String(number).padStart(2, "0");
@@ -24,6 +25,14 @@ function restoreGalleryImages() {
     image.alt = trigger.dataset.lightboxAlt || trigger.dataset.lightboxCaption || "";
     trigger.prepend(image);
   });
+}
+
+function pauseAllCarousels() {
+  carouselControllers.forEach((controller) => controller.pause());
+}
+
+function startAllCarousels() {
+  carouselControllers.forEach((controller) => controller.start());
 }
 
 function updateHeader() {
@@ -52,57 +61,149 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   const next = carousel.querySelector(".carousel-button-next");
   const current = carousel.querySelector("[data-carousel-current]");
   const total = carousel.querySelector("[data-carousel-total]");
-  const slides = Array.from(carousel.querySelectorAll(".project-slide"));
+  const originalSlides = Array.from(carousel.querySelectorAll(".project-slide"));
+  const realCount = originalSlides.length;
+  let slides = [];
+  let activeIndex = realCount;
+  let autoplayTimer = null;
+  let resumeTimer = null;
 
   if (total) {
-    total.textContent = formatSlideNumber(slides.length);
+    total.textContent = formatSlideNumber(realCount);
   }
 
-  function updateActiveSlide() {
+  if (!track || realCount === 0) {
+    return;
+  }
+
+  function buildLoop() {
+    const before = originalSlides.map((slide) => slide.cloneNode(true));
+    const after = originalSlides.map((slide) => slide.cloneNode(true));
+
+    track.prepend(...before);
+    track.append(...after);
+    slides = Array.from(track.querySelectorAll(".project-slide"));
+  }
+
+  function getRealIndex(index) {
+    return ((index % realCount) + realCount) % realCount;
+  }
+
+  function centerSlide(index, behavior = "smooth") {
+    const slide = slides[index];
+
+    if (!track || !slide) {
+      return;
+    }
+
+    activeIndex = index;
+    track.scrollTo({
+      left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
+      behavior,
+    });
+    updateActiveSlide(index);
+  }
+
+  function normalizeLoopPosition() {
+    if (activeIndex >= realCount * 2) {
+      centerSlide(activeIndex - realCount, "auto");
+    }
+
+    if (activeIndex < realCount) {
+      centerSlide(activeIndex + realCount, "auto");
+    }
+  }
+
+  function updateActiveSlide(forcedIndex) {
     if (!track || slides.length === 0) {
       return;
     }
 
-    const trackCenter = track.scrollLeft + track.clientWidth / 2;
-    let activeIndex = 0;
-    let nearestDistance = Infinity;
+    let newActiveIndex = forcedIndex;
+
+    if (typeof newActiveIndex !== "number") {
+      const trackCenter = track.scrollLeft + track.clientWidth / 2;
+      let nearestDistance = Infinity;
+
+      slides.forEach((slide, index) => {
+        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
+        const distance = Math.abs(slideCenter - trackCenter);
+
+        if (distance < nearestDistance) {
+          nearestDistance = distance;
+          newActiveIndex = index;
+        }
+      });
+    }
+
+    activeIndex = newActiveIndex;
+
+    const activeRealIndex = getRealIndex(activeIndex);
 
     slides.forEach((slide, index) => {
-      const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-      const distance = Math.abs(slideCenter - trackCenter);
-
-      if (distance < nearestDistance) {
-        nearestDistance = distance;
-        activeIndex = index;
-      }
-
-      slide.classList.remove("is-active");
+      slide.classList.toggle("is-active", getRealIndex(index) === activeRealIndex && index === activeIndex);
     });
 
-    slides[activeIndex].classList.add("is-active");
-
     if (current) {
-      current.textContent = formatSlideNumber(activeIndex + 1);
+      current.textContent = formatSlideNumber(activeRealIndex + 1);
     }
   }
 
-  function scrollCarousel(direction) {
-    if (!track) {
+  function pauseAutoplay() {
+    window.clearInterval(autoplayTimer);
+    window.clearTimeout(resumeTimer);
+    autoplayTimer = null;
+    carousel.classList.add("is-paused");
+  }
+
+  function startAutoplay() {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches || autoplayTimer) {
       return;
     }
 
-    track.scrollBy({
-      left: direction * Math.max(track.clientWidth * 0.82, 260),
-      behavior: "smooth",
-    });
+    carousel.classList.remove("is-paused");
+    autoplayTimer = window.setInterval(() => {
+      centerSlide(activeIndex + 1);
+    }, 3000);
   }
+
+  function restartAutoplay(delay = 1800) {
+    pauseAutoplay();
+    resumeTimer = window.setTimeout(startAutoplay, delay);
+  }
+
+  function scrollCarousel(direction) {
+    centerSlide(activeIndex + direction);
+    restartAutoplay();
+  }
+
+  buildLoop();
+  centerSlide(activeIndex, "auto");
 
   previous?.addEventListener("click", () => scrollCarousel(-1));
   next?.addEventListener("click", () => scrollCarousel(1));
 
-  track?.addEventListener("scroll", () => window.requestAnimationFrame(updateActiveSlide), { passive: true });
-  window.addEventListener("resize", updateActiveSlide);
-  updateActiveSlide();
+  track.addEventListener(
+    "scroll",
+    () => {
+      window.requestAnimationFrame(() => {
+        updateActiveSlide();
+        window.clearTimeout(track.scrollEndTimer);
+        track.scrollEndTimer = window.setTimeout(normalizeLoopPosition, 160);
+      });
+    },
+    { passive: true }
+  );
+
+  track.addEventListener("pointerdown", () => restartAutoplay(3000));
+  window.addEventListener("resize", () => centerSlide(activeIndex, "auto"));
+
+  carouselControllers.set(carousel, {
+    pause: pauseAutoplay,
+    start: startAutoplay,
+  });
+
+  startAutoplay();
 });
 
 function closeLightbox() {
@@ -119,6 +220,8 @@ function closeLightbox() {
   }
 
   restoreGalleryImages();
+
+  startAllCarousels();
 }
 
 function openLightbox(trigger) {
@@ -138,6 +241,7 @@ function openLightbox(trigger) {
   lightboxImage.alt = image?.alt || caption;
   lightboxCaption.textContent = caption;
   lastLightboxTrigger = trigger;
+  pauseAllCarousels();
   lightbox.hidden = false;
   document.body.classList.add("lightbox-open");
   lightboxClose?.focus();
