@@ -67,6 +67,7 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   let activeIndex = realCount;
   let autoplayTimer = null;
   let resumeTimer = null;
+  let isJumping = false;
 
   if (total) {
     total.textContent = formatSlideNumber(realCount);
@@ -89,7 +90,11 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     return ((index % realCount) + realCount) % realCount;
   }
 
-  function centerSlide(index, behavior = "smooth") {
+  function setTrackTransition(enabled) {
+    track.style.transition = enabled ? "" : "none";
+  }
+
+  function centerSlide(index, animate = true) {
     const slide = slides[index];
 
     if (!track || !slide) {
@@ -97,51 +102,41 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     }
 
     activeIndex = index;
-    track.scrollTo({
-      left: slide.offsetLeft - (track.clientWidth - slide.offsetWidth) / 2,
-      behavior,
-    });
+    setTrackTransition(animate);
+    track.style.transform = `translate3d(${(carousel.clientWidth - slide.offsetWidth) / 2 - slide.offsetLeft}px, 0, 0)`;
     updateActiveSlide(index);
   }
 
   function normalizeLoopPosition() {
     if (activeIndex >= realCount * 2) {
-      centerSlide(activeIndex - realCount, "auto");
+      isJumping = true;
+      centerSlide(activeIndex - realCount, false);
+      track.offsetHeight;
+      setTrackTransition(true);
+      isJumping = false;
     }
 
     if (activeIndex < realCount) {
-      centerSlide(activeIndex + realCount, "auto");
+      isJumping = true;
+      centerSlide(activeIndex + realCount, false);
+      track.offsetHeight;
+      setTrackTransition(true);
+      isJumping = false;
     }
   }
 
   function updateActiveSlide(forcedIndex) {
-    if (!track || slides.length === 0) {
+    if (slides.length === 0) {
       return;
     }
 
-    let newActiveIndex = forcedIndex;
-
-    if (typeof newActiveIndex !== "number") {
-      const trackCenter = track.scrollLeft + track.clientWidth / 2;
-      let nearestDistance = Infinity;
-
-      slides.forEach((slide, index) => {
-        const slideCenter = slide.offsetLeft + slide.offsetWidth / 2;
-        const distance = Math.abs(slideCenter - trackCenter);
-
-        if (distance < nearestDistance) {
-          nearestDistance = distance;
-          newActiveIndex = index;
-        }
-      });
-    }
-
-    activeIndex = newActiveIndex;
+    activeIndex = typeof forcedIndex === "number" ? forcedIndex : activeIndex;
 
     const activeRealIndex = getRealIndex(activeIndex);
 
     slides.forEach((slide, index) => {
-      slide.classList.toggle("is-active", getRealIndex(index) === activeRealIndex && index === activeIndex);
+      slide.classList.toggle("is-active", index === activeIndex);
+      slide.classList.toggle("is-neighbour", Math.abs(index - activeIndex) === 1);
     });
 
     if (current) {
@@ -164,7 +159,7 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
     carousel.classList.remove("is-paused");
     autoplayTimer = window.setInterval(() => {
       centerSlide(activeIndex + 1);
-    }, 3000);
+    }, 5000);
   }
 
   function restartAutoplay(delay = 1800) {
@@ -178,25 +173,19 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   }
 
   buildLoop();
-  centerSlide(activeIndex, "auto");
+  centerSlide(activeIndex, false);
 
   previous?.addEventListener("click", () => scrollCarousel(-1));
   next?.addEventListener("click", () => scrollCarousel(1));
 
-  track.addEventListener(
-    "scroll",
-    () => {
-      window.requestAnimationFrame(() => {
-        updateActiveSlide();
-        window.clearTimeout(track.scrollEndTimer);
-        track.scrollEndTimer = window.setTimeout(normalizeLoopPosition, 160);
-      });
-    },
-    { passive: true }
-  );
+  track.addEventListener("transitionend", (event) => {
+    if (event.propertyName === "transform" && !isJumping) {
+      normalizeLoopPosition();
+    }
+  });
 
   track.addEventListener("pointerdown", () => restartAutoplay(3000));
-  window.addEventListener("resize", () => centerSlide(activeIndex, "auto"));
+  window.addEventListener("resize", () => centerSlide(activeIndex, false));
 
   carouselControllers.set(carousel, {
     pause: pauseAutoplay,
