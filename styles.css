@@ -76,6 +76,11 @@ summary:focus-visible {
   backdrop-filter: blur(18px);
 }
 
+.site-header.is-scrolled .brand-mark,
+.site-header.is-open .brand-mark {
+  border-color: rgba(16, 36, 63, 0.14);
+}
+
 .brand {
   display: inline-flex;
   align-items: center;
@@ -86,12 +91,19 @@ summary:focus-visible {
 .brand-mark {
   display: grid;
   place-items: center;
-  width: 42px;
-  height: 42px;
-  border: 1px solid currentColor;
-  border-radius: 50%;
-  font-family: var(--serif);
-  font-weight: 700;
+  width: 54px;
+  height: 54px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 253, 248, 0.62);
+  border-radius: var(--radius);
+  background: var(--white);
+  box-shadow: 0 10px 28px rgba(16, 36, 63, 0.1);
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .brand strong,
@@ -1102,7 +1114,16 @@ address .button-primary {
   }
 
   .site-header {
-    padding: 14px 18px;
+    padding: 12px 18px;
+  }
+
+  .brand {
+    gap: 10px;
+  }
+
+  .brand-mark {
+    width: 46px;
+    height: 46px;
   }
 
   .nav-toggle {
@@ -1272,11 +1293,22 @@ address .button-primary {
   }
 
   .project-slide figcaption {
-    left: 16px;
-    right: 16px;
-    bottom: 16px;
+    position: static;
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 12px 14px 14px;
+    color: var(--ink-soft);
+    background: var(--white);
+    backdrop-filter: none;
     font-size: 0.88rem;
     line-height: 1.35;
+    text-shadow: none;
+  }
+
+  .project-slide::after,
+  .project-slide.is-active::after {
+    display: none;
   }
 
   .carousel-button {
