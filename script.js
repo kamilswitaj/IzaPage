@@ -63,8 +63,10 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   const total = carousel.querySelector("[data-carousel-total]");
   const originalSlides = Array.from(carousel.querySelectorAll(".project-slide"));
   const realCount = originalSlides.length;
+  const loopCopies = 7;
+  const middleLoop = Math.floor(loopCopies / 2);
   let slides = [];
-  let activeIndex = realCount;
+  let activeIndex = realCount * middleLoop;
   let autoplayTimer = null;
   let resumeTimer = null;
   let isJumping = false;
@@ -78,11 +80,15 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   }
 
   function buildLoop() {
-    const before = originalSlides.map((slide) => slide.cloneNode(true));
-    const after = originalSlides.map((slide) => slide.cloneNode(true));
+    const loopedSlides = [];
 
-    track.prepend(...before);
-    track.append(...after);
+    for (let copyIndex = 0; copyIndex < loopCopies; copyIndex += 1) {
+      originalSlides.forEach((slide) => {
+        loopedSlides.push(slide.cloneNode(true));
+      });
+    }
+
+    track.replaceChildren(...loopedSlides);
     slides = Array.from(track.querySelectorAll(".project-slide"));
   }
 
@@ -108,17 +114,11 @@ document.querySelectorAll("[data-carousel]").forEach((carousel) => {
   }
 
   function normalizeLoopPosition() {
-    if (activeIndex >= realCount * 2) {
-      isJumping = true;
-      centerSlide(activeIndex - realCount, false);
-      track.offsetHeight;
-      setTrackTransition(true);
-      isJumping = false;
-    }
+    const middleIndex = realCount * middleLoop + getRealIndex(activeIndex);
 
-    if (activeIndex < realCount) {
+    if (activeIndex >= realCount * (loopCopies - 2) || activeIndex < realCount) {
       isJumping = true;
-      centerSlide(activeIndex + realCount, false);
+      centerSlide(middleIndex, false);
       track.offsetHeight;
       setTrackTransition(true);
       isJumping = false;

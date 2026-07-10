@@ -798,9 +798,13 @@ h3 {
   inset: 0;
   content: "";
   background:
-    linear-gradient(180deg, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.46) 100%),
+    linear-gradient(180deg, rgba(0, 0, 0, 0) 68%, rgba(0, 0, 0, 0.28) 100%),
     linear-gradient(90deg, rgba(0, 0, 0, 0.08), rgba(0, 0, 0, 0));
   pointer-events: none;
+}
+
+.project-slide.is-active::after {
+  opacity: 0;
 }
 
 .image-open {
@@ -835,8 +839,12 @@ h3 {
   right: clamp(18px, 3vw, 30px);
   bottom: clamp(16px, 2.4vw, 28px);
   max-width: 520px;
-  padding: 0;
+  width: fit-content;
+  padding: 8px 10px;
+  border-radius: var(--radius);
   color: rgba(255, 253, 248, 0.92);
+  background: rgba(16, 36, 63, 0.34);
+  backdrop-filter: blur(10px);
   font-size: clamp(0.92rem, 1.2vw, 1.05rem);
   font-weight: 600;
   line-height: 1.45;
