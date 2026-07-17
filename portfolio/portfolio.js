@@ -1,64 +1,59 @@
 (() => {
-  const printButtons = document.querySelectorAll("[data-print]");
-  const imageButtons = Array.from(document.querySelectorAll("[data-lightbox-src]"));
   const lightbox = document.querySelector(".portfolio-lightbox");
 
-  printButtons.forEach((button) => {
-    button.addEventListener("click", () => window.print());
-  });
-
-  if (!lightbox || imageButtons.length === 0) {
+  if (!lightbox) {
     return;
   }
 
-  const lightboxImage = lightbox.querySelector("img");
-  const lightboxCaption = lightbox.querySelector("figcaption");
+  const image = lightbox.querySelector("img");
+  const caption = lightbox.querySelector("figcaption");
   const closeButton = lightbox.querySelector(".lightbox-close");
-  const prevButton = lightbox.querySelector(".lightbox-prev");
+  const previousButton = lightbox.querySelector(".lightbox-prev");
   const nextButton = lightbox.querySelector(".lightbox-next");
-  const focusableControls = [closeButton, prevButton, nextButton].filter(Boolean);
+  const controls = [closeButton, previousButton, nextButton].filter(Boolean);
+  let projectImages = [];
   let activeIndex = 0;
-  let lastFocusedElement = null;
+  let opener = null;
 
-  const setImage = (index) => {
-    activeIndex = (index + imageButtons.length) % imageButtons.length;
-    const trigger = imageButtons[activeIndex];
-    const nestedImage = trigger.querySelector("img");
-    const caption = trigger.dataset.lightboxCaption || nestedImage?.alt || "";
+  const showImage = (index) => {
+    activeIndex = (index + projectImages.length) % projectImages.length;
+    const button = projectImages[activeIndex];
+    const sourceImage = button.querySelector("img");
 
-    lightboxImage.src = trigger.dataset.lightboxSrc;
-    lightboxImage.alt = nestedImage?.alt || caption;
-    lightboxCaption.textContent = caption;
+    image.src = button.dataset.lightboxSrc;
+    image.alt = sourceImage.alt;
+    image.width = Number(sourceImage.getAttribute("width"));
+    image.height = Number(sourceImage.getAttribute("height"));
+    caption.textContent = button.dataset.lightboxCaption || sourceImage.alt;
   };
 
-  const openLightbox = (index) => {
-    lastFocusedElement = document.activeElement;
-    setImage(index);
+  const openLightbox = (button) => {
+    const gallery = button.closest(".project-gallery-grid");
+    projectImages = Array.from(gallery.querySelectorAll("[data-lightbox-src]"));
+    activeIndex = projectImages.indexOf(button);
+    opener = button;
+    showImage(activeIndex);
     lightbox.hidden = false;
     document.body.classList.add("lightbox-open");
-    closeButton?.focus();
+    closeButton.focus();
   };
 
   const closeLightbox = () => {
     lightbox.hidden = true;
     document.body.classList.remove("lightbox-open");
-    lightboxImage.removeAttribute("src");
-
-    if (lastFocusedElement instanceof HTMLElement) {
-      lastFocusedElement.focus();
-    }
+    image.removeAttribute("src");
+    image.removeAttribute("width");
+    image.removeAttribute("height");
+    opener?.focus();
   };
 
-  const showPrevious = () => setImage(activeIndex - 1);
-  const showNext = () => setImage(activeIndex + 1);
-
-  imageButtons.forEach((button, index) => {
-    button.addEventListener("click", () => openLightbox(index));
+  document.querySelectorAll("[data-lightbox-src]").forEach((button) => {
+    button.addEventListener("click", () => openLightbox(button));
   });
 
-  closeButton?.addEventListener("click", closeLightbox);
-  prevButton?.addEventListener("click", showPrevious);
-  nextButton?.addEventListener("click", showNext);
+  closeButton.addEventListener("click", closeLightbox);
+  previousButton.addEventListener("click", () => showImage(activeIndex - 1));
+  nextButton.addEventListener("click", () => showImage(activeIndex + 1));
 
   lightbox.addEventListener("click", (event) => {
     if (event.target === lightbox) {
@@ -73,26 +68,20 @@
 
     if (event.key === "Escape") {
       closeLightbox();
-    }
+    } else if (event.key === "ArrowLeft") {
+      showImage(activeIndex - 1);
+    } else if (event.key === "ArrowRight") {
+      showImage(activeIndex + 1);
+    } else if (event.key === "Tab") {
+      const first = controls[0];
+      const last = controls[controls.length - 1];
 
-    if (event.key === "ArrowLeft") {
-      showPrevious();
-    }
-
-    if (event.key === "ArrowRight") {
-      showNext();
-    }
-
-    if (event.key === "Tab" && focusableControls.length > 0) {
-      const firstControl = focusableControls[0];
-      const lastControl = focusableControls[focusableControls.length - 1];
-
-      if (event.shiftKey && document.activeElement === firstControl) {
+      if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
-        lastControl.focus();
-      } else if (!event.shiftKey && document.activeElement === lastControl) {
+        last.focus();
+      } else if (!event.shiftKey && document.activeElement === last) {
         event.preventDefault();
-        firstControl.focus();
+        first.focus();
       }
     }
   });
