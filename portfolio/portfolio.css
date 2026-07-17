@@ -490,6 +490,11 @@ h3 {
     grid-template-columns: 1fr 2fr;
   }
 
+  .project-narrative {
+    columns: 1;
+    column-rule: 0;
+  }
+
   .gallery-item-wide,
   .gallery-item-narrow,
   .gallery-item-half {
