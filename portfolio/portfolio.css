@@ -346,20 +346,6 @@ h3 {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.project--japandi .gallery-item:nth-child(5n + 1) {
-  grid-column: 1 / -1;
-}
-
-.project--organic .project-media {
-  width: 100%;
-  max-width: 720px;
-  justify-self: end;
-}
-
-.project--organic .project-gallery-grid {
-  grid-template-columns: 1fr;
-}
-
 .project-gallery-section + .project-gallery-section {
   margin-top: clamp(48px, 6vw, 76px);
 }
@@ -576,10 +562,6 @@ h3 {
     order: -1;
   }
 
-  .project--organic .project-media {
-    max-width: none;
-  }
-
   .project-narrative {
     max-width: 760px;
     margin: 0 auto;
@@ -710,10 +692,6 @@ h3 {
     scroll-snap-type: inline mandatory;
     scrollbar-color: var(--sage-dark) transparent;
     scrollbar-width: thin;
-  }
-
-  .project--japandi .gallery-item:nth-child(5n + 1) {
-    grid-column: auto;
   }
 
   .project-media .gallery-item {
