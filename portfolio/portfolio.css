@@ -359,6 +359,77 @@ h3 {
   line-height: 1.2;
 }
 
+@media (min-width: 901px) {
+  .project--neo .project-story,
+  .project--japandi .project-story,
+  .project--organic .project-story {
+    display: block;
+  }
+
+  .project--neo .project-story::after,
+  .project--japandi .project-story::after,
+  .project--organic .project-story::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+
+  .project--neo .project-narrative {
+    float: left;
+    width: 37%;
+    max-width: none;
+    margin: 0 clamp(38px, 4.5vw, 68px) 30px 0;
+  }
+
+  .project--neo .project-media,
+  .project--neo .project-gallery-section,
+  .project--neo .project-gallery-grid {
+    display: contents;
+  }
+
+  .project--neo .project-gallery-section h4 {
+    margin-bottom: 22px;
+  }
+
+  .project--neo .project-gallery-section + .project-gallery-section h4 {
+    margin-top: clamp(48px, 6vw, 76px);
+  }
+
+  .project--neo .gallery-item {
+    display: inline-block;
+    width: min(330px, 100%);
+    margin: 0 clamp(14px, 1.5vw, 24px) 28px 0;
+    vertical-align: top;
+  }
+
+  .project--japandi .project-story--media-wrap,
+  .project--organic .project-story--media-wrap {
+    position: relative;
+  }
+
+  .project--japandi .project-story--media-wrap::before,
+  .project--organic .project-story--media-wrap::before {
+    content: "";
+    float: right;
+    width: calc(58% + clamp(40px, 5vw, 72px));
+    height: var(--project-media-height, 0);
+  }
+
+  .project--japandi .project-story--media-wrap .project-media,
+  .project--organic .project-story--media-wrap .project-media {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 58%;
+    margin: 0;
+  }
+
+  .project--japandi .project-narrative,
+  .project--organic .project-narrative {
+    max-width: none;
+  }
+}
+
 .gallery-item {
   min-width: 0;
   margin: 0;
@@ -554,11 +625,15 @@ h3 {
   }
 
   .project-story {
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
     gap: 52px;
   }
 
   .project-media {
+    float: none;
+    width: 100%;
+    margin: 0;
     order: -1;
   }
 

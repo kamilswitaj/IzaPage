@@ -1,4 +1,34 @@
 (() => {
+  const flowingProjects = document.querySelectorAll(".project--japandi, .project--organic");
+
+  const syncProjectMediaFlow = () => {
+    flowingProjects.forEach((project) => {
+      const story = project.querySelector(".project-story");
+      const media = project.querySelector(".project-media");
+
+      if (!story || !media) {
+        return;
+      }
+
+      story.style.setProperty("--project-media-height", `${media.offsetHeight + 36}px`);
+      story.classList.add("project-story--media-wrap");
+    });
+  };
+
+  syncProjectMediaFlow();
+
+  if ("ResizeObserver" in window) {
+    const mediaObserver = new ResizeObserver(syncProjectMediaFlow);
+    flowingProjects.forEach((project) => {
+      const media = project.querySelector(".project-media");
+      if (media) {
+        mediaObserver.observe(media);
+      }
+    });
+  } else {
+    window.addEventListener("resize", syncProjectMediaFlow);
+  }
+
   const lightbox = document.querySelector(".portfolio-lightbox");
 
   if (!lightbox) {
