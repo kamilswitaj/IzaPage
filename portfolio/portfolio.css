@@ -397,8 +397,8 @@ h3 {
 
   .project--neo .gallery-item {
     display: inline-block;
-    width: min(330px, 100%);
-    margin: 0 clamp(14px, 1.5vw, 24px) 28px 0;
+    width: calc((58% - clamp(18px, 2vw, 28px)) / 2);
+    margin: 0 clamp(6px, 0.7vw, 10px) 28px 0;
     vertical-align: top;
   }
 
