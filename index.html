@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="styles.css?v=20260724-1" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -83,248 +83,86 @@
             jako punkt wyjścia do rozmowy o realnych potrzebach domowników.
           </p>
         </div>
-        <div class="project-gallery">
-          <article class="project-card project-card-feature">
-            <div class="project-copy">
+        <div class="project-preview-grid">
+          <article class="project-preview-card">
+            <button
+              class="project-preview-image image-open"
+              type="button"
+              data-lightbox-src="assets/gallery/diploma-living-room.webp"
+              data-lightbox-caption="Neo modernizm - uporządkowana strefa dzienna"
+              aria-label="Powiększ zdjęcie projektu Neo modernizm"
+            >
+              <img
+                src="assets/gallery/diploma-living-room.webp"
+                alt="Strefa dzienna z sofą i uporządkowaną zabudową RTV"
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <div class="project-preview-copy">
               <p class="project-kicker">Mieszkanie z kuchnią i łazienką</p>
               <h3>Neo modernizm</h3>
               <p>
-                Koncepcja mieszkania oparta na prostych liniach, uporządkowanej zabudowie i
-                spokojnej palecie z zielenią oraz drewnem. Projekt pokazuje pracę z funkcją,
-                przechowywaniem i strefami codziennego życia.
+                Proste linie, pojemna zabudowa i czytelny podział stref pomagają zachować
+                porządek bez rezygnowania z ciepła drewna i naturalnej zieleni.
               </p>
-            </div>
-            <div class="project-carousel" data-carousel data-project-name="Neo modernizm">
-              <div class="carousel-meta" aria-live="polite">
-                <span data-carousel-current>01</span>
-                <span></span>
-                <span data-carousel-total>14</span>
-              </div>
-              <button class="carousel-button carousel-button-prev" type="button" aria-label="Poprzednie zdjęcie">
-                ‹
-              </button>
-              <div class="project-track" data-carousel-track>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-entry-kitchen.webp" data-lightbox-caption="Neo modernizm - hol i widok na kuchnię">
-                    <img src="assets/gallery/diploma-entry-kitchen.webp" alt="Hol z widokiem na kuchnię w projekcie Neo modernizm" width="1448" height="1086" />
-                  </button>
-                  <figcaption>Hol i kuchnia: czytelne wejście oraz zabudowa porządkująca przestrzeń</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-living-room.webp" data-lightbox-caption="Neo modernizm - strefa dzienna">
-                    <img src="assets/gallery/diploma-living-room.webp" alt="Strefa dzienna z sofą i zabudową RTV" width="1672" height="941" />
-                  </button>
-                  <figcaption>Strefa dzienna: wypoczynek, światło i spokojna zabudowa</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-living-tv.webp" data-lightbox-caption="Neo modernizm - zabudowa RTV">
-                    <img src="assets/gallery/diploma-living-tv.webp" alt="Zabudowa RTV z zielonymi frontami" width="1672" height="941" />
-                  </button>
-                  <figcaption>Zabudowa RTV: przechowywanie i uporządkowana kompozycja</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-child-bed.webp" data-lightbox-caption="Neo modernizm - pokój dzieci, strefa snu">
-                    <img src="assets/gallery/diploma-child-bed.webp" alt="Pokój dzieci z łóżkiem i zabudową" width="1672" height="941" />
-                  </button>
-                  <figcaption>Pokój dzieci: wygodna strefa snu i zabudowa na małym metrażu</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-child-bunk.webp" data-lightbox-caption="Neo modernizm - pokój dzieci, schody i przechowywanie">
-                    <img src="assets/gallery/diploma-child-bunk.webp" alt="Pokój dzieci ze schodami do łóżka i schowkami" width="1672" height="941" />
-                  </button>
-                  <figcaption>Schody i przechowywanie: dodatkowa funkcja w zwartej zabudowie</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-child-desk.webp" data-lightbox-caption="Neo modernizm - pokój dzieci, biurka">
-                    <img src="assets/gallery/diploma-child-desk.webp" alt="Pokój dzieci z dwoma miejscami do nauki" width="1672" height="941" />
-                  </button>
-                  <figcaption>Strefa nauki: dwa miejsca do pracy i dostępne przechowywanie</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-child-storage.webp" data-lightbox-caption="Neo modernizm - pokój dzieci, zabudowa">
-                    <img src="assets/gallery/diploma-child-storage.webp" alt="Pokój dzieci z wysoką zabudową i półkami" width="1672" height="941" />
-                  </button>
-                  <figcaption>Zabudowa pokoju: porządek, półki i miejsce na codzienne rzeczy</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-bathroom-overview.webp" data-lightbox-caption="Neo modernizm - łazienka">
-                    <img src="assets/gallery/diploma-bathroom-overview.webp" alt="Łazienka z prysznicem, zabudową i pralką" width="1448" height="1086" />
-                  </button>
-                  <figcaption>Łazienka: strefy sanitarne, pranie i przechowywanie w jednej zabudowie</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-bathroom-bath.webp" data-lightbox-caption="Neo modernizm - strefa wanny">
-                    <img src="assets/gallery/diploma-bathroom-bath.webp" alt="Wanna z parawanem i jasną okładziną" width="1672" height="941" />
-                  </button>
-                  <figcaption>Strefa wanny: jasne materiały i wygodne codzienne użytkowanie</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-bathroom-vanity.webp" data-lightbox-caption="Neo modernizm - umywalka i lustro">
-                    <img src="assets/gallery/diploma-bathroom-vanity.webp" alt="Umywalka z drewnianą szafką i okrągłym lustrem" width="1672" height="941" />
-                  </button>
-                  <figcaption>Strefa umywalki: lekka szafka, lustro i praktyczne światło</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-bathroom-detail.webp" data-lightbox-caption="Neo modernizm - detal łazienki">
-                    <img src="assets/gallery/diploma-bathroom-detail.webp" alt="Detal umywalki i szafki w łazience" width="1448" height="1086" />
-                  </button>
-                  <figcaption>Detal łazienki: spójność drewna, ceramiki i jasnej bazy</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-hall-console.webp" data-lightbox-caption="Neo modernizm - konsola w holu">
-                    <img src="assets/gallery/diploma-hall-console.webp" alt="Drewniana konsola i lustro w holu" width="1447" height="1087" />
-                  </button>
-                  <figcaption>Hol: podręczna konsola i lustro przy strefie wejściowej</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-hall.webp" data-lightbox-caption="Neo modernizm - komunikacja i hol">
-                    <img src="assets/gallery/diploma-hall.webp" alt="Jasny hol z drewnianą konsolą" width="1448" height="1086" />
-                  </button>
-                  <figcaption>Komunikacja: jasna przestrzeń i dyskretne miejsce odkładcze</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/diploma-plan.webp" data-lightbox-caption="Neo modernizm - układ funkcjonalny">
-                    <img src="assets/gallery/diploma-plan.webp" alt="Rzut funkcjonalny mieszkania w projekcie Neo modernizm" width="1672" height="941" />
-                  </button>
-                  <figcaption>Układ funkcjonalny: podział stref i logika codziennego użytkowania</figcaption>
-                </figure>
-              </div>
-              <button class="carousel-button carousel-button-next" type="button" aria-label="Następne zdjęcie">
-                ›
-              </button>
             </div>
           </article>
 
-          <article class="project-card">
-            <div class="project-copy">
+          <article class="project-preview-card">
+            <button
+              class="project-preview-image image-open"
+              type="button"
+              data-lightbox-src="assets/gallery/organic-sofa.webp"
+              data-lightbox-caption="Organic modern z graficzną zielenią - strefa wypoczynku"
+              aria-label="Powiększ zdjęcie projektu Organic modern z graficzną zielenią"
+            >
+              <img
+                src="assets/gallery/organic-sofa.webp"
+                alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą"
+                width="1672"
+                height="941"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <div class="project-preview-copy">
               <p class="project-kicker">Salon z aneksem i home office</p>
               <h3>Organic modern z graficzną zielenią</h3>
               <p>
-                Kompaktowa przestrzeń dzienna, w której aneks kuchenny, wypoczynek i miejsce
-                do pracy muszą działać razem. Akcenty zieleni porządkują wnętrze i nadają mu
-                wyrazisty, ale nadal codzienny charakter.
+                Aneks kuchenny, wypoczynek i miejsce do pracy tworzą jedną spójną przestrzeń,
+                a przemyślana zabudowa pozwala wygodnie zmieniać jej funkcję w ciągu dnia.
               </p>
-            </div>
-            <div class="project-carousel" data-carousel data-project-name="Organic modern z graficzną zielenią">
-              <div class="carousel-meta" aria-live="polite">
-                <span data-carousel-current>01</span>
-                <span></span>
-                <span data-carousel-total>05</span>
-              </div>
-              <button class="carousel-button carousel-button-prev" type="button" aria-label="Poprzednie zdjęcie">
-                ‹
-              </button>
-              <div class="project-track" data-carousel-track>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/organic-kitchen.webp" data-lightbox-caption="Organic modern - aneks i jadalnia">
-                    <img src="assets/gallery/organic-kitchen.webp" alt="Salon z aneksem kuchennym w zielonej zabudowie" width="1184" height="864" />
-                  </button>
-                  <figcaption>Aneks i jadalnia: spójna zabudowa, przechowywanie i miejsce spotkań</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/organic-sofa.webp" data-lightbox-caption="Organic modern - strefa wypoczynku">
-                    <img src="assets/gallery/organic-sofa.webp" alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą" width="1672" height="941" />
-                  </button>
-                  <figcaption>Strefa wypoczynku: miękkie formy i mocny motyw ścienny</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/organic-home-office.webp" data-lightbox-caption="Organic modern - home office">
-                    <img src="assets/gallery/organic-home-office.webp" alt="Zabudowa RTV połączona z miejscem do pracy" width="1672" height="941" />
-                  </button>
-                  <figcaption>Home office: biurko wpisane w zabudowę RTV i strefę dzienną</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/organic-rtv-closed.webp" data-lightbox-caption="Organic modern - zamknięta zabudowa RTV">
-                    <img src="assets/gallery/organic-rtv-closed.webp" alt="Zamknięta zabudowa RTV w salonie z zielonym akcentem" width="1672" height="941" />
-                  </button>
-                  <figcaption>Zamknięta zabudowa RTV: porządek wizualny i miejsce na przechowywanie</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/organic-rtv-open.webp" data-lightbox-caption="Organic modern - otwarta zabudowa RTV">
-                    <img src="assets/gallery/organic-rtv-open.webp" alt="Otwarta zabudowa RTV z wysuwanym miejscem do pracy" width="1672" height="941" />
-                  </button>
-                  <figcaption>Otwarta zabudowa RTV: dostęp do sprzętu i dodatkowej strefy pracy</figcaption>
-                </figure>
-              </div>
-              <button class="carousel-button carousel-button-next" type="button" aria-label="Następne zdjęcie">
-                ›
-              </button>
             </div>
           </article>
 
-          <article class="project-card">
-            <div class="project-copy">
+          <article class="project-preview-card">
+            <button
+              class="project-preview-image image-open"
+              type="button"
+              data-lightbox-src="assets/gallery/japandi-library.webp"
+              data-lightbox-caption="Japandi z biblioteką - zabudowa na książki"
+              aria-label="Powiększ zdjęcie projektu Japandi z biblioteką"
+            >
+              <img
+                src="assets/gallery/japandi-library.webp"
+                alt="Biblioteka z dekoracyjnymi przesuwnymi panelami"
+                width="1600"
+                height="1200"
+                loading="lazy"
+                decoding="async"
+              />
+            </button>
+            <div class="project-preview-copy">
               <p class="project-kicker">Mieszkanie bibliofilów</p>
               <h3>Japandi z biblioteką</h3>
               <p>
-                Ciepłe, spokojne wnętrze dla osób, które potrzebują miejsca na książki,
-                rytuały i codzienną wygodę. Styl japandi łączy tu naturalne drewno,
-                miękką kolorystykę i zabudowy porządkujące przestrzeń.
+                Zabudowa na książki porządkuje strefę dzienną i staje się częścią jej
+                charakteru, zachowując spokojną paletę oraz wygodne codzienne użytkowanie.
               </p>
             </div>
-            <div class="project-carousel" data-carousel data-project-name="Japandi z biblioteką">
-              <div class="carousel-meta" aria-live="polite">
-                <span data-carousel-current>01</span>
-                <span></span>
-                <span data-carousel-total>03</span>
-              </div>
-              <button class="carousel-button carousel-button-prev" type="button" aria-label="Poprzednie zdjęcie">
-                ‹
-              </button>
-              <div class="project-track" data-carousel-track>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/japandi-moodboard-3d.webp" data-lightbox-caption="Japandi z biblioteką - moodboard materiałowy">
-                    <img src="assets/gallery/japandi-moodboard-3d.webp" alt="Moodboard materiałowy projektu Japandi z biblioteką" width="1800" height="1143" />
-                  </button>
-                  <figcaption>Moodboard materiałowy: drewno, miękkie tkaniny i graficzny akcent</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/japandi-moodboard-2d.webp" data-lightbox-caption="Japandi z biblioteką - kierunek wizualny">
-                    <img src="assets/gallery/japandi-moodboard-2d.webp" alt="Moodboard inspiracji projektu Japandi z biblioteką" width="1240" height="1800" />
-                  </button>
-                  <figcaption>Kierunek wizualny: naturalne materiały, sztuka i spokojne światło</figcaption>
-                </figure>
-                <figure class="project-slide">
-                  <button class="image-open" type="button" data-lightbox-src="assets/gallery/japandi-plan.webp" data-lightbox-caption="Japandi z biblioteką - układ funkcjonalny">
-                    <img src="assets/gallery/japandi-plan.webp" alt="Rzut funkcjonalny mieszkania w projekcie Japandi z biblioteką" width="1600" height="1200" />
-                  </button>
-                  <figcaption>Układ funkcjonalny: strefa dzienna, sypialnia i uporządkowana komunikacja</figcaption>
-                </figure>
-              </div>
-              <button class="carousel-button carousel-button-next" type="button" aria-label="Następne zdjęcie">
-                ›
-              </button>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <section class="section decision-section" aria-labelledby="decision-title">
-        <div class="section-heading">
-          <p class="eyebrow">Od chaosu do decyzji</p>
-          <h2 id="decision-title">Największa wartość projektu często pojawia się zanim zacznie się remont.</h2>
-          <p>
-            Nie zawsze chodzi o wielką metamorfozę. Często wystarczy uporządkować to, co
-            już jest: układ, przechowywanie, światło, kolory i listę zakupów. Dzięki temu
-            decyzje są spokojniejsze, a ryzyko nietrafionych wydatków mniejsze.
-          </p>
-        </div>
-        <div class="decision-grid">
-          <article>
-            <span>Przed</span>
-            <h3>Pomysły, które trudno połączyć</h3>
-            <p>
-              Inspiracje z wielu źródeł, niepewność przy materiałach, obawa przed złym
-              układem mebli i poczucie, że każda decyzja pociąga za sobą kolejną.
-            </p>
-          </article>
-          <article>
-            <span>Po rozmowie i koncepcji</span>
-            <h3>Kierunek, który można realizować</h3>
-            <p>
-              Czytelny plan działania: co zostaje, co warto zmienić, jakie rozwiązania
-              pasują do budżetu, stylu życia i realnego sposobu korzystania z wnętrza.
-            </p>
           </article>
         </div>
       </section>
@@ -633,6 +471,6 @@
       </figure>
     </div>
 
-    <script src="script.js"></script>
+    <script src="script.js?v=20260724-1"></script>
   </body>
 </html>
