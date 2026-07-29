@@ -3,9 +3,9 @@ const nav = document.querySelector("[data-nav]");
 const navToggle = document.querySelector("[data-nav-toggle]");
 const year = document.querySelector("[data-year]");
 const lightbox = document.querySelector("[data-lightbox]");
-const lightboxImage = document.querySelector("[data-lightbox-image]");
-const lightboxCaption = document.querySelector("[data-lightbox-caption]");
-const lightboxClose = document.querySelector("[data-lightbox-close]");
+const lightboxImage = lightbox?.querySelector("[data-lightbox-image]");
+const lightboxCaption = lightbox?.querySelector("[data-lightbox-caption]");
+const lightboxClose = lightbox?.querySelector("[data-lightbox-close]");
 const lightboxPlaceholder = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==";
 let lastLightboxTrigger = null;
 
@@ -18,6 +18,7 @@ if (navToggle && nav && header) {
     const isOpen = nav.classList.toggle("is-open");
     header.classList.toggle("is-open", isOpen);
     navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute("aria-label", isOpen ? "Zamknij menu" : "Otwórz menu");
   });
 
   nav.addEventListener("click", (event) => {
@@ -25,9 +26,104 @@ if (navToggle && nav && header) {
       nav.classList.remove("is-open");
       header.classList.remove("is-open");
       navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Otwórz menu");
     }
   });
 }
+
+function formatProjectIndex(index) {
+  return String(index + 1).padStart(2, "0");
+}
+
+document.querySelectorAll("[data-project-gallery]").forEach((gallery) => {
+  const mainButton = gallery.querySelector("[data-project-main]");
+  const mainImage = gallery.querySelector("[data-project-main-image]");
+  const caption = gallery.querySelector("[data-project-caption]");
+  const counter = gallery.querySelector("[data-project-counter]");
+  const previous = gallery.querySelector("[data-project-prev]");
+  const next = gallery.querySelector("[data-project-next]");
+  const thumbnails = Array.from(gallery.querySelectorAll("[data-project-thumb]"));
+  const projectName = gallery.dataset.projectName || "projektu";
+  let currentIndex = 0;
+
+  if (!mainButton || !mainImage || !caption || !counter || thumbnails.length === 0) {
+    return;
+  }
+
+  function showImage(index, { focusThumbnail = false, revealThumbnail = false } = {}) {
+    currentIndex = (index + thumbnails.length) % thumbnails.length;
+
+    const activeThumbnail = thumbnails[currentIndex];
+    const thumbnailImage = activeThumbnail.querySelector("img");
+
+    if (!thumbnailImage) {
+      return;
+    }
+
+    const source = thumbnailImage.getAttribute("src");
+    const imageAlt = thumbnailImage.alt;
+    const imageCaption = activeThumbnail.dataset.caption || imageAlt;
+    const fit = activeThumbnail.dataset.fit || "cover";
+
+    mainImage.src = source;
+    mainImage.alt = imageAlt;
+    mainImage.width = Number(thumbnailImage.getAttribute("width")) || thumbnailImage.naturalWidth;
+    mainImage.height = Number(thumbnailImage.getAttribute("height")) || thumbnailImage.naturalHeight;
+    mainImage.dataset.fit = fit;
+
+    mainButton.dataset.lightboxSrc = source;
+    mainButton.dataset.lightboxCaption = `${projectName} - ${imageCaption}`;
+    mainButton.setAttribute("aria-label", `Powiększ zdjęcie projektu ${projectName}: ${imageCaption}`);
+
+    caption.textContent = imageCaption;
+    counter.textContent = `${formatProjectIndex(currentIndex)} / ${String(thumbnails.length).padStart(2, "0")}`;
+
+    thumbnails.forEach((thumbnail, thumbnailIndex) => {
+      const isActive = thumbnailIndex === currentIndex;
+      thumbnail.classList.toggle("is-active", isActive);
+      thumbnail.setAttribute("aria-pressed", String(isActive));
+      thumbnail.tabIndex = isActive ? 0 : -1;
+    });
+
+    if (revealThumbnail) {
+      activeThumbnail.scrollIntoView({ behavior: "auto", block: "nearest", inline: "nearest" });
+    }
+
+    if (focusThumbnail) {
+      activeThumbnail.focus();
+    }
+  }
+
+  thumbnails.forEach((thumbnail, index) => {
+    thumbnail.addEventListener("click", () => showImage(index, { revealThumbnail: true }));
+    thumbnail.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        showImage(index - 1, { focusThumbnail: true, revealThumbnail: true });
+      }
+
+      if (event.key === "ArrowRight") {
+        event.preventDefault();
+        showImage(index + 1, { focusThumbnail: true, revealThumbnail: true });
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        showImage(0, { focusThumbnail: true, revealThumbnail: true });
+      }
+
+      if (event.key === "End") {
+        event.preventDefault();
+        showImage(thumbnails.length - 1, { focusThumbnail: true, revealThumbnail: true });
+      }
+    });
+  });
+
+  previous?.addEventListener("click", () => showImage(currentIndex - 1, { revealThumbnail: true }));
+  next?.addEventListener("click", () => showImage(currentIndex + 1, { revealThumbnail: true }));
+
+  showImage(0);
+});
 
 
 function closeLightbox() {

@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260724-1" />
+    <link rel="stylesheet" href="styles.css?v=20260729-1" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -29,7 +29,7 @@
           <small>projektantka wnętrz</small>
         </span>
       </a>
-      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" data-nav-toggle>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Otwórz menu" data-nav-toggle>
         <span></span>
         <span></span>
       </button>
@@ -83,85 +83,244 @@
             jako punkt wyjścia do rozmowy o realnych potrzebach domowników.
           </p>
         </div>
-        <div class="project-preview-grid">
-          <article class="project-preview-card">
-            <button
-              class="project-preview-image image-open"
-              type="button"
-              data-lightbox-src="assets/gallery/diploma-living-room.webp"
-              data-lightbox-caption="Neo modernizm - uporządkowana strefa dzienna"
-              aria-label="Powiększ zdjęcie projektu Neo modernizm"
-            >
-              <img
-                src="assets/gallery/diploma-living-room.webp"
-                alt="Strefa dzienna z sofą i uporządkowaną zabudową RTV"
-                width="1672"
-                height="941"
-                loading="lazy"
-                decoding="async"
-              />
-            </button>
-            <div class="project-preview-copy">
+        <div class="home-project-list">
+          <article class="home-project-showcase" data-project-gallery data-project-name="Neo modernizm">
+            <div class="home-project-copy">
+              <span class="project-number" aria-hidden="true">01</span>
               <p class="project-kicker">Mieszkanie z kuchnią i łazienką</p>
               <h3>Neo modernizm</h3>
               <p>
                 Proste linie, pojemna zabudowa i czytelny podział stref pomagają zachować
                 porządek bez rezygnowania z ciepła drewna i naturalnej zieleni.
               </p>
+              <p class="project-detail">
+                W projekcie ważne są wygodna komunikacja, przechowywanie wpisane w architekturę
+                wnętrza oraz spójne rozwiązania dla całego mieszkania.
+              </p>
+            </div>
+
+            <div class="home-project-viewer">
+              <button
+                class="project-main-image image-open"
+                type="button"
+                data-project-main
+                data-lightbox-src="assets/gallery/diploma-living-room.webp"
+                data-lightbox-caption="Neo modernizm - strefa dzienna"
+                aria-label="Powiększ aktualne zdjęcie projektu Neo modernizm"
+              >
+                <img
+                  src="assets/gallery/diploma-living-room.webp"
+                  alt="Strefa dzienna z sofą i uporządkowaną zabudową RTV"
+                  width="1672"
+                  height="941"
+                  loading="lazy"
+                  decoding="async"
+                  data-project-main-image
+                  data-fit="cover"
+                />
+                <span class="project-zoom-hint" aria-hidden="true">Powiększ</span>
+              </button>
+
+              <div class="project-viewer-info">
+                <p class="project-image-caption" data-project-caption>Strefa dzienna: wypoczynek, światło i spokojna zabudowa</p>
+                <div class="project-viewer-toolbar">
+                  <button class="project-nav" type="button" data-project-prev aria-label="Poprzednie zdjęcie projektu Neo modernizm">←</button>
+                  <span class="project-counter" data-project-counter aria-live="polite">01 / 14</span>
+                  <button class="project-nav" type="button" data-project-next aria-label="Następne zdjęcie projektu Neo modernizm">→</button>
+                </div>
+              </div>
+
+              <div class="project-thumbnails" data-project-thumbs role="group" aria-label="Miniatury projektu Neo modernizm">
+                <button class="project-thumbnail is-active" type="button" data-project-thumb data-caption="Strefa dzienna: wypoczynek, światło i spokojna zabudowa" aria-label="Pokaż strefę dzienną" aria-pressed="true">
+                  <img src="assets/gallery/diploma-living-room.webp" alt="Strefa dzienna z sofą i uporządkowaną zabudową RTV" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Zabudowa RTV: przechowywanie i uporządkowana kompozycja" aria-label="Pokaż zabudowę RTV" aria-pressed="false">
+                  <img src="assets/gallery/diploma-living-tv.webp" alt="Zabudowa RTV z zielonymi frontami" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Hol i kuchnia: czytelne wejście oraz zabudowa porządkująca przestrzeń" aria-label="Pokaż hol i kuchnię" aria-pressed="false">
+                  <img src="assets/gallery/diploma-entry-kitchen.webp" alt="Hol z widokiem na kuchnię" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Pokój dzieci: wygodna strefa snu i zabudowa na małym metrażu" aria-label="Pokaż strefę snu w pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-bed.webp" alt="Pokój dzieci z łóżkiem i zabudową" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Schody i przechowywanie: dodatkowa funkcja w zwartej zabudowie" aria-label="Pokaż schody i przechowywanie w pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-bunk.webp" alt="Pokój dzieci ze schodami do łóżka i schowkami" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa nauki: dwa miejsca do pracy i dostępne przechowywanie" aria-label="Pokaż strefę nauki w pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-desk.webp" alt="Pokój dzieci z dwoma miejscami do nauki" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Zabudowa pokoju: porządek, półki i miejsce na codzienne rzeczy" aria-label="Pokaż zabudowę pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-storage.webp" alt="Pokój dzieci z wysoką zabudową i półkami" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Łazienka: strefy sanitarne, pranie i przechowywanie w jednej zabudowie" aria-label="Pokaż widok łazienki" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-overview.webp" alt="Łazienka z prysznicem, zabudową i pralką" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa wanny: jasne materiały i wygodne codzienne użytkowanie" aria-label="Pokaż strefę wanny" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-bath.webp" alt="Wanna z parawanem i jasną okładziną" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa umywalki: lekka szafka, lustro i praktyczne światło" aria-label="Pokaż strefę umywalki" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-vanity.webp" alt="Umywalka z drewnianą szafką i okrągłym lustrem" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Detal łazienki: spójność drewna, ceramiki i jasnej bazy" aria-label="Pokaż detal łazienki" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-detail.webp" alt="Detal umywalki i szafki w łazience" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Hol: podręczna konsola i lustro przy strefie wejściowej" aria-label="Pokaż konsolę w holu" aria-pressed="false">
+                  <img src="assets/gallery/diploma-hall-console.webp" alt="Drewniana konsola i lustro w holu" width="1447" height="1087" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Komunikacja: jasna przestrzeń i dyskretne miejsce odkładcze" aria-label="Pokaż komunikację i hol" aria-pressed="false">
+                  <img src="assets/gallery/diploma-hall.webp" alt="Jasny hol z drewnianą konsolą" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Układ funkcjonalny: podział stref i logika codziennego użytkowania" data-fit="contain" aria-label="Pokaż układ funkcjonalny" aria-pressed="false">
+                  <img src="assets/gallery/diploma-plan.webp" alt="Rzut funkcjonalny mieszkania" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+              </div>
             </div>
           </article>
 
-          <article class="project-preview-card">
-            <button
-              class="project-preview-image image-open"
-              type="button"
-              data-lightbox-src="assets/gallery/organic-sofa.webp"
-              data-lightbox-caption="Organic modern z graficzną zielenią - strefa wypoczynku"
-              aria-label="Powiększ zdjęcie projektu Organic modern z graficzną zielenią"
-            >
-              <img
-                src="assets/gallery/organic-sofa.webp"
-                alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą"
-                width="1672"
-                height="941"
-                loading="lazy"
-                decoding="async"
-              />
-            </button>
-            <div class="project-preview-copy">
+          <article class="home-project-showcase" data-project-gallery data-project-name="Organic modern z graficzną zielenią">
+            <div class="home-project-copy">
+              <span class="project-number" aria-hidden="true">02</span>
               <p class="project-kicker">Salon z aneksem i home office</p>
               <h3>Organic modern z graficzną zielenią</h3>
               <p>
                 Aneks kuchenny, wypoczynek i miejsce do pracy tworzą jedną spójną przestrzeń,
                 a przemyślana zabudowa pozwala wygodnie zmieniać jej funkcję w ciągu dnia.
               </p>
+              <p class="project-detail">
+                Graficzny motyw zieleni nadaje wnętrzu charakter, a zamykane elementy zabudowy
+                pozwalają szybko przywrócić wizualny porządek.
+              </p>
+            </div>
+
+            <div class="home-project-viewer">
+              <button
+                class="project-main-image image-open"
+                type="button"
+                data-project-main
+                data-lightbox-src="assets/gallery/organic-sofa.webp"
+                data-lightbox-caption="Organic modern z graficzną zielenią - strefa wypoczynku"
+                aria-label="Powiększ aktualne zdjęcie projektu Organic modern z graficzną zielenią"
+              >
+                <img
+                  src="assets/gallery/organic-sofa.webp"
+                  alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą"
+                  width="1672"
+                  height="941"
+                  loading="lazy"
+                  decoding="async"
+                  data-project-main-image
+                  data-fit="cover"
+                />
+                <span class="project-zoom-hint" aria-hidden="true">Powiększ</span>
+              </button>
+
+              <div class="project-viewer-info">
+                <p class="project-image-caption" data-project-caption>Strefa wypoczynku: miękkie formy i mocny motyw ścienny</p>
+                <div class="project-viewer-toolbar">
+                  <button class="project-nav" type="button" data-project-prev aria-label="Poprzednie zdjęcie projektu Organic modern">←</button>
+                  <span class="project-counter" data-project-counter aria-live="polite">01 / 05</span>
+                  <button class="project-nav" type="button" data-project-next aria-label="Następne zdjęcie projektu Organic modern">→</button>
+                </div>
+              </div>
+
+              <div class="project-thumbnails" data-project-thumbs role="group" aria-label="Miniatury projektu Organic modern">
+                <button class="project-thumbnail is-active" type="button" data-project-thumb data-caption="Strefa wypoczynku: miękkie formy i mocny motyw ścienny" aria-label="Pokaż strefę wypoczynku" aria-pressed="true">
+                  <img src="assets/gallery/organic-sofa.webp" alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Aneks i jadalnia: spójna zabudowa, przechowywanie i miejsce spotkań" aria-label="Pokaż aneks kuchenny i jadalnię" aria-pressed="false">
+                  <img src="assets/gallery/organic-kitchen.webp" alt="Salon z aneksem kuchennym w zielonej zabudowie" width="1184" height="864" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Home office: biurko wpisane w zabudowę RTV i strefę dzienną" aria-label="Pokaż miejsce do pracy" aria-pressed="false">
+                  <img src="assets/gallery/organic-home-office.webp" alt="Zabudowa RTV połączona z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Zamknięta zabudowa RTV: porządek wizualny i miejsce na przechowywanie" aria-label="Pokaż zamkniętą zabudowę RTV" aria-pressed="false">
+                  <img src="assets/gallery/organic-rtv-closed.webp" alt="Zamknięta zabudowa RTV z zielonym akcentem" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Otwarta zabudowa RTV: dostęp do sprzętu i dodatkowej strefy pracy" aria-label="Pokaż otwartą zabudowę RTV" aria-pressed="false">
+                  <img src="assets/gallery/organic-rtv-open.webp" alt="Otwarta zabudowa RTV z wysuwanym miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+              </div>
             </div>
           </article>
 
-          <article class="project-preview-card">
-            <button
-              class="project-preview-image image-open"
-              type="button"
-              data-lightbox-src="assets/gallery/japandi-library.webp"
-              data-lightbox-caption="Japandi z biblioteką - zabudowa na książki"
-              aria-label="Powiększ zdjęcie projektu Japandi z biblioteką"
-            >
-              <img
-                src="assets/gallery/japandi-library.webp"
-                alt="Biblioteka z dekoracyjnymi przesuwnymi panelami"
-                width="1600"
-                height="1200"
-                loading="lazy"
-                decoding="async"
-              />
-            </button>
-            <div class="project-preview-copy">
+          <article class="home-project-showcase" data-project-gallery data-project-name="Japandi z biblioteką">
+            <div class="home-project-copy">
+              <span class="project-number" aria-hidden="true">03</span>
               <p class="project-kicker">Mieszkanie bibliofilów</p>
               <h3>Japandi z biblioteką</h3>
               <p>
                 Zabudowa na książki porządkuje strefę dzienną i staje się częścią jej
                 charakteru, zachowując spokojną paletę oraz wygodne codzienne użytkowanie.
               </p>
+              <p class="project-detail">
+                Naturalne materiały, miękkie światło i powtarzalny rytm zabudowy łączą miejsca
+                do odpoczynku, czytania i przechowywania w jedną spokojną całość.
+              </p>
+            </div>
+
+            <div class="home-project-viewer">
+              <button
+                class="project-main-image image-open"
+                type="button"
+                data-project-main
+                data-lightbox-src="assets/gallery/japandi-library.webp"
+                data-lightbox-caption="Japandi z biblioteką - zabudowa na książki"
+                aria-label="Powiększ aktualne zdjęcie projektu Japandi z biblioteką"
+              >
+                <img
+                  src="assets/gallery/japandi-library.webp"
+                  alt="Biblioteka z dekoracyjnymi przesuwnymi panelami"
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  data-project-main-image
+                  data-fit="cover"
+                />
+                <span class="project-zoom-hint" aria-hidden="true">Powiększ</span>
+              </button>
+
+              <div class="project-viewer-info">
+                <p class="project-image-caption" data-project-caption>Biblioteka: dekoracyjne panele, rytm zabudowy i łatwy dostęp do książek</p>
+                <div class="project-viewer-toolbar">
+                  <button class="project-nav" type="button" data-project-prev aria-label="Poprzednie zdjęcie projektu Japandi">←</button>
+                  <span class="project-counter" data-project-counter aria-live="polite">01 / 10</span>
+                  <button class="project-nav" type="button" data-project-next aria-label="Następne zdjęcie projektu Japandi">→</button>
+                </div>
+              </div>
+
+              <div class="project-thumbnails" data-project-thumbs role="group" aria-label="Miniatury projektu Japandi z biblioteką">
+                <button class="project-thumbnail is-active" type="button" data-project-thumb data-caption="Biblioteka: dekoracyjne panele, rytm zabudowy i łatwy dostęp do książek" aria-label="Pokaż bibliotekę" aria-pressed="true">
+                  <img src="assets/gallery/japandi-library.webp" alt="Biblioteka z dekoracyjnymi przesuwnymi panelami" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa dzienna: czytelne połączenie wypoczynku, jadalni i kuchni" aria-label="Pokaż otwartą strefę dzienną" aria-pressed="false">
+                  <img src="assets/gallery/japandi-open-space.webp" alt="Otwarta strefa dzienna w stylu japandi" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Jadalnia: spokojna paleta i wygodne miejsce codziennych spotkań" aria-label="Pokaż jadalnię" aria-pressed="false">
+                  <img src="assets/gallery/japandi-dining.webp" alt="Jadalnia z drewnianym stołem i naturalnymi materiałami" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Jadalnia i kuchnia: wspólna paleta materiałów porządkuje otwartą przestrzeń" aria-label="Pokaż jadalnię z kuchnią" aria-pressed="false">
+                  <img src="assets/gallery/japandi-dining-kitchen.webp" alt="Jadalnia połączona z kuchnią w stylu japandi" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Kuchnia: funkcjonalna zabudowa i ciepłe wykończenie drewna" aria-label="Pokaż kuchnię" aria-pressed="false">
+                  <img src="assets/gallery/japandi-kitchen.webp" alt="Kuchnia z drewnianą zabudową" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Sypialnia: wyciszona przestrzeń z uporządkowanym przechowywaniem" aria-label="Pokaż sypialnię" aria-pressed="false">
+                  <img src="assets/gallery/japandi-bedroom.webp" alt="Sypialnia w spokojnej palecie naturalnych barw" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Łazienka: naturalne materiały i czytelny podział funkcji" aria-label="Pokaż łazienkę" aria-pressed="false">
+                  <img src="assets/gallery/japandi-bathroom.webp" alt="Łazienka z drewnem i jasną ceramiką" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Moodboard materiałowy: drewno, miękkie tkaniny i graficzny akcent" data-fit="contain" aria-label="Pokaż moodboard materiałowy" aria-pressed="false">
+                  <img src="assets/gallery/japandi-moodboard-3d.webp" alt="Moodboard materiałowy projektu Japandi z biblioteką" width="1800" height="1143" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Kierunek wizualny: naturalne materiały, sztuka i spokojne światło" data-fit="contain" aria-label="Pokaż moodboard inspiracji" aria-pressed="false">
+                  <img src="assets/gallery/japandi-moodboard-2d.webp" alt="Moodboard inspiracji projektu Japandi z biblioteką" width="1240" height="1800" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Układ funkcjonalny: strefa dzienna, sypialnia i uporządkowana komunikacja" data-fit="contain" aria-label="Pokaż układ funkcjonalny mieszkania" aria-pressed="false">
+                  <img src="assets/gallery/japandi-plan.webp" alt="Rzut funkcjonalny mieszkania w projekcie Japandi" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+              </div>
             </div>
           </article>
         </div>
@@ -471,6 +630,6 @@
       </figure>
     </div>
 
-    <script src="script.js?v=20260724-1"></script>
+    <script src="script.js?v=20260729-1"></script>
   </body>
 </html>
