@@ -83,6 +83,12 @@ document.querySelectorAll("[data-project-gallery]").forEach((gallery) => {
       thumbnail.classList.toggle("is-active", isActive);
       thumbnail.setAttribute("aria-pressed", String(isActive));
       thumbnail.tabIndex = isActive ? 0 : -1;
+
+      if (isActive) {
+        thumbnail.setAttribute("aria-current", "true");
+      } else {
+        thumbnail.removeAttribute("aria-current");
+      }
     });
 
     if (revealThumbnail) {

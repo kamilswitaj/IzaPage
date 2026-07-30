@@ -648,17 +648,20 @@ main section[id] {
 
 .home-project-list {
   display: grid;
-  gap: clamp(72px, 10vw, 132px);
+  gap: clamp(56px, 8vw, 104px);
   width: 100%;
   min-width: 0;
 }
 
 .home-project-showcase {
   display: grid;
-  grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
+  grid-template-columns: minmax(280px, 0.42fr) minmax(0, 0.98fr);
   gap: clamp(32px, 5vw, 72px);
   align-items: start;
+  width: 100%;
+  max-width: 1320px;
   min-width: 0;
+  margin-inline: auto;
   padding-top: clamp(28px, 4vw, 46px);
   border-top: 1px solid rgba(16, 36, 63, 0.16);
 }
@@ -712,8 +715,31 @@ main section[id] {
   font-size: 0.93rem;
 }
 
+.project-portfolio-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  margin-top: 24px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(47, 95, 115, 0.38);
+  color: var(--blue);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.project-portfolio-link span {
+  transition: transform 160ms ease;
+}
+
+.project-portfolio-link:hover span {
+  transform: translateX(3px);
+}
+
 .home-project-viewer {
+  width: 100%;
+  max-width: 920px;
   min-width: 0;
+  justify-self: end;
   padding: clamp(10px, 1.4vw, 18px);
   border: 1px solid rgba(16, 36, 63, 0.12);
   border-radius: var(--radius);
@@ -734,7 +760,8 @@ main section[id] {
 
 .project-main-image {
   position: relative;
-  aspect-ratio: 16 / 10;
+  max-height: 560px;
+  aspect-ratio: 16 / 9;
   border-radius: calc(var(--radius) - 2px);
   background: #e5e9e2;
 }
@@ -1199,13 +1226,10 @@ address .button-primary {
     overflow-wrap: anywhere;
   }
 
-  .section h2 {
-    max-width: 12ch;
-  }
-
+  .section h2,
   .section-heading h2,
   .consultation h2 {
-    max-width: 13ch;
+    max-width: 18ch;
   }
 
   .hero-content p:not(.eyebrow) {
@@ -1279,7 +1303,7 @@ address .button-primary {
   }
 
   .home-project-list {
-    gap: 72px;
+    gap: 56px;
   }
 
   .home-project-showcase {
@@ -1291,12 +1315,22 @@ address .button-primary {
     margin-top: 18px;
   }
 
+  .project-number {
+    margin-bottom: 18px;
+    font-size: 2.1rem;
+  }
+
+  .home-project-copy h3 {
+    font-size: clamp(1.65rem, 8vw, 2.15rem);
+  }
+
   .home-project-viewer {
     padding: 8px;
   }
 
   .project-main-image {
-    aspect-ratio: 16 / 11;
+    max-height: none;
+    aspect-ratio: 4 / 3;
   }
 
   .project-zoom-hint {
@@ -1312,7 +1346,9 @@ address .button-primary {
   }
 
   .project-viewer-toolbar {
-    justify-self: end;
+    grid-template-columns: 42px 1fr 42px;
+    width: 100%;
+    justify-self: stretch;
   }
 
   .project-thumbnails {
