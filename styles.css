@@ -735,6 +735,10 @@ main section[id] {
   transform: translateX(3px);
 }
 
+.project-section-portfolio-link {
+  margin-top: 8px;
+}
+
 .home-project-viewer {
   width: 100%;
   max-width: 920px;
@@ -899,6 +903,32 @@ main section[id] {
   padding: 5px;
   object-fit: contain;
   background: #f1efe9;
+}
+
+.project-consultation-cta {
+  width: 100%;
+  max-width: 1320px;
+  margin: clamp(48px, 7vw, 86px) auto 0;
+  padding-top: clamp(22px, 3vw, 32px);
+  border-top: 1px solid rgba(16, 36, 63, 0.18);
+}
+
+.project-consultation-cta p {
+  margin: 0;
+  color: var(--ink-soft);
+  font-family: var(--serif);
+  font-size: clamp(1.18rem, 2vw, 1.65rem);
+  line-height: 1.4;
+}
+
+.project-consultation-cta a {
+  display: inline;
+  padding-bottom: 2px;
+  border-bottom: 1px solid rgba(47, 95, 115, 0.45);
+  color: var(--blue);
+  font-family: var(--sans);
+  font-size: 0.78em;
+  font-weight: 700;
 }
 
 .lightbox {
@@ -1312,7 +1342,7 @@ address .button-primary {
   }
 
   .home-project-copy .project-detail {
-    margin-top: 18px;
+    display: none;
   }
 
   .project-number {

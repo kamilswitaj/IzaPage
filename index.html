@@ -16,7 +16,7 @@
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="styles.css?v=20260730-1" />
+    <link rel="stylesheet" href="styles.css?v=20260730-2" />
   </head>
   <body>
     <header class="site-header" data-header>
@@ -47,7 +47,14 @@
     <main id="start">
       <section class="hero">
         <div class="hero-media" aria-hidden="true">
-          <img src="assets/gallery/diploma-entry-kitchen.webp" alt="" width="1448" height="1086" />
+          <img
+            src="assets/gallery/diploma-entry-kitchen.webp"
+            alt=""
+            width="1448"
+            height="1086"
+            decoding="async"
+            fetchpriority="high"
+          />
         </div>
         <div class="hero-overlay"></div>
         <div class="hero-content">
@@ -82,6 +89,9 @@
             światło, materiały i codzienne korzystanie z wnętrza. Każdy projekt traktuję
             jako punkt wyjścia do rozmowy o realnych potrzebach domowników.
           </p>
+          <a class="project-portfolio-link project-section-portfolio-link" href="/portfolio/">
+            Zobacz pełne portfolio <span aria-hidden="true">→</span>
+          </a>
         </div>
         <div class="home-project-list">
           <article class="home-project-showcase" data-project-gallery data-project-name="Neo modernizm">
@@ -97,9 +107,6 @@
                 W projekcie ważne są wygodna komunikacja, przechowywanie wpisane w architekturę
                 wnętrza oraz spójne rozwiązania dla całego mieszkania.
               </p>
-              <a class="project-portfolio-link" href="/portfolio/">
-                Zobacz pełne portfolio <span aria-hidden="true">→</span>
-              </a>
             </div>
 
             <div class="home-project-viewer">
@@ -193,9 +200,6 @@
                 Graficzny motyw zieleni nadaje wnętrzu charakter, a zamykane elementy zabudowy
                 pozwalają szybko przywrócić wizualny porządek.
               </p>
-              <a class="project-portfolio-link" href="/portfolio/">
-                Zobacz pełne portfolio <span aria-hidden="true">→</span>
-              </a>
             </div>
 
             <div class="home-project-viewer">
@@ -262,9 +266,6 @@
                 Naturalne materiały, miękkie światło i powtarzalny rytm zabudowy łączą miejsca
                 do odpoczynku, czytania i przechowywania w jedną spokojną całość.
               </p>
-              <a class="project-portfolio-link" href="/portfolio/">
-                Zobacz pełne portfolio <span aria-hidden="true">→</span>
-              </a>
             </div>
 
             <div class="home-project-viewer">
@@ -332,6 +333,14 @@
               </div>
             </div>
           </article>
+        </div>
+        <div class="project-consultation-cta">
+          <p>
+            Podoba Ci się taki sposób pracy?
+            <a href="https://cal.eu/izabela-switaj/30min" target="_blank" rel="noopener">
+              Umów bezpłatną konsultację.
+            </a>
+          </p>
         </div>
       </section>
 
@@ -639,6 +648,6 @@
       </figure>
     </div>
 
-    <script src="script.js?v=20260730-1"></script>
+    <script src="script.js?v=20260730-2"></script>
   </body>
 </html>
