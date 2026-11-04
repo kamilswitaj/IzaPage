@@ -35,3 +35,15 @@ Etap 1: stan wyjściowy przed zmianą prezentacji /portfolio/. Etap 2 zmienia ty
 - [ ] Sprawdź linki w istniejących sekcjach oraz /portfolio/.
 - [ ] Zweryfikuj brak regresji na stronie głównej.
 - [ ] Upewnij się, że merge do main jest świadomą decyzją produkcyjną.
+
+## Uzupełnienie weryfikacji lokalnej — 2026-11-04
+- GitHub: dwie gałęzie (`main`, `feature/portfolio-stages-1-2`) i jeden otwarty PR (#1, Draft). Lokalna gałąź PR odpowiada SHA `92bb54a240b1eb52a3b7f3c4ff8c1b499b034142` przed poprawkami.
+- Ponownie sprawdzono 117 odwołań src/href/data-lightbox-src: wszystkie lokalne zasoby i kotwice istnieją.
+- Po dodaniu kart są 53 znaczniki img. Wszystkie obrazy treści mają niepusty alt; jedyny pusty alt należy do początkowo ukrytego obrazu lightboxa, uzupełnianego przez JS.
+- Usunięto dodatkowy scroll-margin-top z artykułów: scroll-padding-top na html już uwzględnia przyklejony nagłówek (84 px, na telefonach 112 px). Oba odstępy wcześniej się sumowały.
+- Podniesiono wersję CSS w HTML, aby przeglądarka pobrała poprawkę.
+- Układ kart według CSS: 1440 px — 3 kolumny, 768 px — 2 kolumny, 390 px — 1 kolumna. To analiza reguł, nie wynik renderowania.
+- Próba otwarcia podglądu przez narzędzie przeglądarkowe została odrzucona przez bramkę uprawnień. Nie wykonano zrzutów, kontroli kadrowania, przepełnienia, konsoli JS ani interakcyjnych testów lightboxa. Lista powyżej pozostaje do sprawdzenia.
+- Repozytorium nie zawiera workflow wdrożenia. CNAME potwierdza nazwę domeny, ale nie dostawcę hostingu; ustawienia GitHub Pages pozostają niezweryfikowane.
+- Zachowano istniejące noindex, follow. Decyzja o indeksowaniu należy do osobnego etapu SEO.
+- Nie zmieniano strony głównej, tekstów projektów, galerii ani JS. Nie rozpoczęto etapu 3 i nie scalono PR.
