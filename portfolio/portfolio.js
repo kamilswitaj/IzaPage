@@ -1,117 +1,89 @@
 (() => {
-  const flowingProjects = document.querySelectorAll(".project--japandi, .project--organic");
-
-  const syncProjectMediaFlow = () => {
-    flowingProjects.forEach((project) => {
-      const story = project.querySelector(".project-story");
-      const media = project.querySelector(".project-media");
-
-      if (!story || !media) {
-        return;
-      }
-
-      story.style.setProperty("--project-media-height", `${media.offsetHeight + 36}px`);
-      story.classList.add("project-story--media-wrap");
-    });
+  // Preserve previously shared links to projects on the overview page.
+  const legacyProjects = {
+    '#projekt-neomodernizm': 'neomodernizm/',
+    '#projekt-japandi': 'japandi/',
+    '#projekt-lesny-rytm': 'lesny-rytm/'
   };
+  const followLegacyLink = () => {
+    if (!document.body.classList.contains('case-page') && legacyProjects[location.hash]) {
+      location.replace(new URL(legacyProjects[location.hash], location.href));
+    }
+  };
+  followLegacyLink();
+  window.addEventListener('hashchange', followLegacyLink);
 
-  syncProjectMediaFlow();
-
-  if ("ResizeObserver" in window) {
-    const mediaObserver = new ResizeObserver(syncProjectMediaFlow);
-    flowingProjects.forEach((project) => {
-      const media = project.querySelector(".project-media");
-      if (media) {
-        mediaObserver.observe(media);
-      }
-    });
-  } else {
-    window.addEventListener("resize", syncProjectMediaFlow);
-  }
-
-  const lightbox = document.querySelector(".portfolio-lightbox");
-
-  if (!lightbox) {
-    return;
-  }
-
-  const image = lightbox.querySelector("img");
-  const caption = lightbox.querySelector("figcaption");
-  const closeButton = lightbox.querySelector(".lightbox-close");
-  const previousButton = lightbox.querySelector(".lightbox-prev");
-  const nextButton = lightbox.querySelector(".lightbox-next");
-  const controls = [closeButton, previousButton, nextButton].filter(Boolean);
+  const lightbox = document.querySelector('.portfolio-lightbox');
+  if (!lightbox) return;
+  const image = lightbox.querySelector('img');
+  const caption = lightbox.querySelector('figcaption');
+  const closeButton = lightbox.querySelector('.lightbox-close');
+  const previousButton = lightbox.querySelector('.lightbox-prev');
+  const nextButton = lightbox.querySelector('.lightbox-next');
+  const controls = [closeButton, previousButton, nextButton];
   let projectImages = [];
   let activeIndex = 0;
-  let opener = null;
+  let opener;
+  let background = [];
 
   const showImage = (index) => {
     activeIndex = (index + projectImages.length) % projectImages.length;
     const button = projectImages[activeIndex];
-    const sourceImage = button.querySelector("img");
-
+    const thumbnail = button.querySelector('img');
+    image.alt = thumbnail.alt;
+    image.width = Number(thumbnail.getAttribute('width'));
+    image.height = Number(thumbnail.getAttribute('height'));
+    caption.textContent = (button.dataset.lightboxCaption || thumbnail.alt) + ' · ' + (activeIndex + 1) + ' / ' + projectImages.length;
     image.src = button.dataset.lightboxSrc;
-    image.alt = sourceImage.alt;
-    image.width = Number(sourceImage.getAttribute("width"));
-    image.height = Number(sourceImage.getAttribute("height"));
-    caption.textContent = button.dataset.lightboxCaption || sourceImage.alt;
-  };
-
-  const openLightbox = (button) => {
-    const gallery = button.closest(".project-gallery-grid");
-    projectImages = Array.from(gallery.querySelectorAll("[data-lightbox-src]"));
-    activeIndex = projectImages.indexOf(button);
-    opener = button;
-    showImage(activeIndex);
-    lightbox.hidden = false;
-    document.body.classList.add("lightbox-open");
-    closeButton.focus();
   };
 
   const closeLightbox = () => {
     lightbox.hidden = true;
-    document.body.classList.remove("lightbox-open");
-    image.removeAttribute("src");
-    image.removeAttribute("width");
-    image.removeAttribute("height");
-    opener?.focus();
+    document.body.classList.remove('lightbox-open');
+    for (const [element, wasInert] of background) element.inert = wasInert;
+    background = [];
+    image.removeAttribute('src');
+    opener?.focus({ preventScroll: true });
   };
 
-  document.querySelectorAll("[data-lightbox-src]").forEach((button) => {
-    button.addEventListener("click", () => openLightbox(button));
+  const openLightbox = (button) => {
+    projectImages = Array.from(button.closest('.project').querySelectorAll('[data-lightbox-src]'));
+    opener = button;
+    lightbox.hidden = false;
+    document.body.classList.add('lightbox-open');
+    background = Array.from(document.body.children)
+      .filter(element => element !== lightbox && element.tagName !== 'SCRIPT')
+      .map(element => [element, element.inert]);
+    for (const [element] of background) element.inert = true;
+    showImage(projectImages.indexOf(button));
+    closeButton.focus();
+  };
+
+  image.addEventListener('error', () => {
+    if (!lightbox.hidden) caption.textContent = 'Nie udało się wczytać obrazu. Wybierz inne zdjęcie lub zamknij podgląd.';
   });
-
-  closeButton.addEventListener("click", closeLightbox);
-  previousButton.addEventListener("click", () => showImage(activeIndex - 1));
-  nextButton.addEventListener("click", () => showImage(activeIndex + 1));
-
-  lightbox.addEventListener("click", (event) => {
-    if (event.target === lightbox) {
-      closeLightbox();
-    }
+  document.querySelectorAll('[data-lightbox-src]').forEach(button => {
+    button.addEventListener('click', () => openLightbox(button));
   });
-
-  document.addEventListener("keydown", (event) => {
-    if (lightbox.hidden) {
-      return;
-    }
-
-    if (event.key === "Escape") {
-      closeLightbox();
-    } else if (event.key === "ArrowLeft") {
-      showImage(activeIndex - 1);
-    } else if (event.key === "ArrowRight") {
-      showImage(activeIndex + 1);
-    } else if (event.key === "Tab") {
+  closeButton.addEventListener('click', closeLightbox);
+  previousButton.addEventListener('click', () => showImage(activeIndex - 1));
+  nextButton.addEventListener('click', () => showImage(activeIndex + 1));
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) closeLightbox();
+  });
+  document.addEventListener('keydown', event => {
+    if (lightbox.hidden) return;
+    if (['Escape', 'ArrowLeft', 'ArrowRight'].includes(event.key)) event.preventDefault();
+    if (event.key === 'Escape') closeLightbox();
+    else if (event.key === 'ArrowLeft') showImage(activeIndex - 1);
+    else if (event.key === 'ArrowRight') showImage(activeIndex + 1);
+    else if (event.key === 'Tab') {
       const first = controls[0];
       const last = controls[controls.length - 1];
-
       if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
+        event.preventDefault(); last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
+        event.preventDefault(); first.focus();
       }
     }
   });
