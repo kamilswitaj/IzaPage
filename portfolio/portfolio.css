@@ -894,3 +894,11 @@ h3 {
 .original-description summary { cursor:pointer; font-weight:600; min-height:44px; display:list-item; padding:8px 0; }
 .reading-copy { max-width:72ch; padding-top:24px; color:var(--ink-soft); }
 @media(max-width:640px) { .case-decisions,.solution-grid { grid-template-columns:1fr; gap:28px; } }
+
+.project-gallery-section h2 { font-size:clamp(1.8rem,3vw,2.8rem); margin-bottom:22px; }
+.gallery-note { max-width:72ch; color:var(--ink-soft); margin-bottom:28px; }
+.case-page .technical-gallery .project-gallery-grid { grid-template-columns:minmax(0,1fr); max-width:900px; }
+.technical-gallery .image-button { aspect-ratio:16/10; }
+.case-page .comparison-gallery .project-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+.comparison-gallery .image-button { aspect-ratio:1672/941; }
+@media(max-width:640px) { .case-page .comparison-gallery .project-gallery-grid { grid-template-columns:1fr; } }
