@@ -861,3 +861,20 @@ h3 {
 @media (max-width: 900px) { .project-overview { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
 @media (max-width: 600px) { .project-overview { grid-template-columns: 1fr; } .overview-image { aspect-ratio: 5 / 3; } .overview-content { padding: 22px; } }
 @media (prefers-reduced-motion: reduce) { .overview-card, .overview-image img { transition: none; } }
+
+/* Separate project pages share the portfolio visual system. */
+.case-cover { padding: 28px clamp(20px,6vw,92px) 0; }
+.case-cover img { width:100%; height:clamp(260px,54vw,650px); object-fit:cover; }
+.case-content { background:var(--paper); padding-top:64px; }
+.case-page .project-story { display:grid; grid-template-columns:1fr; gap:56px; }
+.case-page .project-narrative { float:none; width:100%; max-width:76ch; margin:0; }
+.case-page .project-media { display:block; position:static; width:100%; }
+.case-page .project-gallery-section { display:block; }
+.case-page .project-gallery-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; }
+.case-page .gallery-item { display:block; width:auto; margin:0; }
+.case-page .project-gallery-full { display:contents; }
+.case-page .project-story::before, .case-page .project-story::after { display:none; }
+.case-page h1 { font-size:clamp(2.3rem,4.6vw,4.8rem); }
+.project-pagination { display:flex; justify-content:space-between; gap:28px; padding:40px clamp(20px,6vw,92px); border-top:1px solid var(--line); font-weight:600; }
+@media(max-width:900px) { .case-page .project-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .case-page .project-media { order:0; } }
+@media(max-width:640px) { .case-page .project-gallery-grid { grid-template-columns:1fr; grid-auto-flow:row; padding:0; overflow:visible; } .project-pagination { flex-direction:column; } }
