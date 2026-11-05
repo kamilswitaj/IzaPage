@@ -7,7 +7,8 @@ const files = ['portfolio/index.html', ...['neomodernizm','japandi','lesny-rytm'
 const git = process.env.GIT_BINARY || (process.platform === 'win32' && fs.existsSync('C:/Program Files/Git/cmd/git.exe') ? 'C:/Program Files/Git/cmd/git.exe' : 'git');
 const original = execFileSync(git, ['show','92bb54a240b1eb52a3b7f3c4ff8c1b499b034142:portfolio/index.html'], {cwd: root, encoding:'utf8'});
 const galleryNames = text => [...text.matchAll(/data-lightbox-src="([^"]+)"/g)].map(m=>path.basename(m[1])).sort();
-const expected = galleryNames(original);
+// Original gallery plus the WC render explicitly supplied by the owner.
+const expected = [...galleryNames(original), 'dyplom3D-lazienka i wc p_druk.jpg'].sort();
 const actual = [];
 const httpPaths = new Set();
 let links = 0;
@@ -41,7 +42,7 @@ for (const file of files) {
   httpPaths.add(file);
   actual.push(...galleryNames(html));
 }
-assert.deepEqual(actual.sort(),expected,'All 48 original gallery positions must be retained');
+assert.deepEqual(actual.sort(),expected,'Retain the original gallery and the supplied WC render');
 assert.equal((fs.readFileSync(path.join(root,files[0]),'utf8').match(/class="overview-card"/g)||[]).length,3);
 for (const file of ['index.html','styles.css','script.js']) {
   const baseline = execFileSync(git,['show','38b00bdb80113d5b5d2e893fc2377df2871e2171:'+file],{cwd:root});

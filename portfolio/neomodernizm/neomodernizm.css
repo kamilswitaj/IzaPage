@@ -1,0 +1,177 @@
+/* Room presentation, loaded only by the neomodernizm case study. */
+.project--neo .room-story {
+  gap: 0;
+}
+
+.project--neo .case-brief {
+  max-width: none;
+  margin-bottom: clamp(28px, 3.5vw, 48px);
+}
+
+.project--neo .case-brief > p:last-child {
+  margin-bottom: 0;
+}
+
+.project--neo .case-brief > h2,
+.project--neo .room-plan > h2,
+.project--neo .rooms-heading > h2,
+.technical-documentation .technical-heading > h2 {
+  font-size: clamp(2rem, 3vw, 3rem);
+}
+
+.project--neo .room-heading h3,
+.technical-documentation .technical-group-heading h3 {
+  font-size: clamp(1.65rem, 2.4vw, 2.3rem);
+  line-height: 1.2;
+}
+
+.project--neo .room-presentation-chapter {
+  margin-top: clamp(72px, 9vw, 128px);
+}
+
+.project--neo .apartment-walk {
+  max-width: none;
+  margin-top: 36px;
+  color: var(--ink-soft);
+}
+
+.project--neo .walk-title {
+  font-family: var(--serif);
+  font-size: clamp(1.4rem, 2vw, 1.8rem);
+  color: var(--ink);
+  margin-bottom: 12px;
+}
+
+.project--neo .original-description {
+  margin-top: 20px;
+}
+
+.project--neo .original-description summary:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 5px;
+}
+
+.project--neo .room-section {
+  margin-top: clamp(48px, 6vw, 80px);
+  padding-top: clamp(24px, 3vw, 40px);
+  border-top: 1px solid var(--line);
+}
+
+.project--neo .room-heading,
+.project--neo .room-chapter-heading {
+  max-width: none;
+  margin-bottom: 32px;
+}
+
+.project--neo .room-heading p:not(.eyebrow),
+.project--neo .room-chapter-heading p {
+  color: var(--ink-soft);
+}
+
+.project--neo .room-chapter + .room-chapter {
+  margin-top: clamp(56px, 7vw, 88px);
+}
+
+.project--neo .room-chapter-heading h4 {
+  font-family: var(--serif);
+  font-size: clamp(1.35rem, 1.9vw, 1.8rem);
+  line-height: 1.25;
+  margin: 0 0 14px;
+}
+
+.project--neo .room-presentation,
+.project--neo .room-renders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+}
+
+.project--neo .room-presentation > .room-renders {
+  display: contents;
+}
+
+.project--neo .room-moodboard {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  width: min(100%, clamp(360px, 30vw, 400px));
+  justify-self: center;
+}
+
+.project--neo .room-presentation .room-render:first-child {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: start;
+}
+
+.project--neo .room-presentation .room-render:nth-child(2) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.project--neo .room-section > .room-renders > .room-render:first-child:nth-last-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* Intrinsic image dimensions preserve the complete plans and moodboards. */
+.project--neo .room-story .image-button {
+  height: auto;
+  aspect-ratio: auto;
+  background: var(--white);
+}
+
+.project--neo .room-story .image-button img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .project--neo .room-presentation,
+  .project--neo .room-renders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--neo .room-presentation .gallery-item,
+  .project--neo .room-presentation .room-render:first-child,
+  .project--neo .room-presentation .room-render:nth-child(2) {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .project--neo .room-moodboard {
+    width: min(100%, 320px);
+    margin-bottom: 12px;
+  }
+}
+
+.project--neo .room-wc > .gallery-item { max-width: 900px; }
+
+/* Limit prose itself, so section headings retain the full container width. */
+.project--neo .reading-copy,
+.technical-documentation .technical-heading,
+.technical-documentation .technical-group-heading {
+  max-width: none;
+}
+
+.project--neo .case-brief > p:not(.eyebrow),
+.project--neo .room-heading > p:not(.eyebrow),
+.project--neo .room-chapter-heading > p,
+.project--neo .apartment-walk > p:not(.walk-title),
+.project--neo .reading-copy > p,
+.technical-documentation .technical-heading > p:not(.eyebrow),
+.technical-documentation .technical-group-heading > p {
+  max-width: 80ch;
+}
+
+@media (max-width: 640px) {
+  .project--neo .case-brief > p,
+  .project--neo .room-heading > p,
+  .project--neo .room-chapter-heading > p,
+  .project--neo .apartment-walk > p,
+  .project--neo .reading-copy > p,
+  .technical-documentation .technical-heading > p,
+  .technical-documentation .technical-group-heading > p {
+    max-width: none;
+  }
+}
