@@ -1,0 +1,102 @@
+/* Room presentation, loaded only by the neomodernizm case study. */
+.project--neo .room-story {
+  gap: 0;
+}
+
+.project--neo .case-brief {
+  margin-bottom: clamp(44px, 6vw, 76px);
+}
+
+.project--neo .room-plan h2,
+.project--neo .room-heading h2 {
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+}
+
+.project--neo .room-section {
+  margin-top: clamp(72px, 9vw, 128px);
+  padding-top: clamp(36px, 5vw, 64px);
+  border-top: 1px solid var(--line);
+}
+
+.project--neo .room-heading,
+.project--neo .room-chapter-heading {
+  max-width: 76ch;
+  margin-bottom: 32px;
+}
+
+.project--neo .room-heading p:not(.eyebrow),
+.project--neo .room-chapter-heading p {
+  color: var(--ink-soft);
+}
+
+.project--neo .room-chapter + .room-chapter {
+  margin-top: clamp(56px, 7vw, 88px);
+}
+
+.project--neo .room-chapter-heading h3 {
+  font-size: clamp(1.7rem, 2.5vw, 2.4rem);
+}
+
+.project--neo .room-presentation,
+.project--neo .room-renders {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(20px, 3vw, 36px);
+  align-items: start;
+}
+
+.project--neo .room-presentation > .room-renders {
+  display: contents;
+}
+
+.project--neo .room-moodboard {
+  grid-column: 1;
+  grid-row: 1;
+  width: min(100%, 360px);
+  justify-self: center;
+}
+
+.project--neo .room-presentation .room-render:first-child {
+  grid-column: 2;
+  grid-row: 1;
+  align-self: center;
+}
+
+.project--neo .room-presentation .room-render:nth-child(2):last-child,
+.project--neo .room-presentation .room-render:nth-child(2):nth-last-child(3) {
+  grid-column: 1 / -1;
+}
+
+.project--neo .room-section > .room-renders > .room-render:first-child:nth-last-child(3) {
+  grid-column: 1 / -1;
+}
+
+/* Intrinsic image dimensions preserve the complete plans and moodboards. */
+.project--neo .room-story .image-button {
+  height: auto;
+  aspect-ratio: auto;
+  background: var(--white);
+}
+
+.project--neo .room-story .image-button img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 640px) {
+  .project--neo .room-presentation,
+  .project--neo .room-renders {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .project--neo .room-presentation .gallery-item {
+    grid-column: 1;
+    grid-row: auto;
+  }
+
+  .project--neo .room-moodboard {
+    width: min(100%, 320px);
+    margin-bottom: 12px;
+  }
+}
