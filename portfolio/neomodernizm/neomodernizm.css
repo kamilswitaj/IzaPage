@@ -101,5 +101,4 @@
   }
 }
 
-.project--neo .room-wc { margin-top: clamp(40px, 5vw, 64px); }
 .project--neo .room-wc > .gallery-item { max-width: 900px; }
