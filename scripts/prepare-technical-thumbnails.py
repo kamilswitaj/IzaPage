@@ -28,7 +28,8 @@ for number in range(50, 65):
         thumbnail.save(assets / f'thumbs/arkusz-{number}.webp', 'WEBP', quality=90, method=6)
         pattern = rf'(<img src="../../assets/documentation/neomodernizm/thumbs/arkusz-{number}\.webp"[^>]*?)width="\d+" height="\d+"'
         html, count = re.subn(pattern, rf'\g<1>width="{thumbnail.width}" height="{thumbnail.height}"', html)
-        assert count in (1, 2), (number, count)
+        expected_occurrences = 1 if number in {51, 53, 55, 56, 59, 60, 61, 63} else 0
+        assert count == expected_occurrences, (number, count)
         results.append({'page': number, 'source': [w, h], 'crop': box, 'thumbnail': list(thumbnail.size)})
 page.write_text(html, encoding='utf-8', newline='')
 print(json.dumps(results))

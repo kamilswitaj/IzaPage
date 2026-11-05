@@ -59,7 +59,7 @@ for label in ['01 / Założenia projektowe', '02 / Układ funkcjonalny', '03 / P
     assert html.count(f'<p class="eyebrow">{label}</p>') == 1
 header = r'<header class="project-heading">[\s\S]*?</header>'
 assert re.search(header, html)[0] == re.search(header, historical('fcd4f2b'))[0]
-baseline = historical('4f92d3e')
+baseline = historical('4e1ee37e1b653d5f74e3f8a91fb6a19b85a26bfa')
 rooms = lambda text: text.split('<section class="room-section" id="hol"')[1].split('</article>')[0]
 paragraphs = lambda text: re.findall(r'<p(?: class="(?!eyebrow)[^"]*")?>([\s\S]*?)</p>', text)
 assert paragraphs(rooms(html)) == paragraphs(rooms(baseline))
