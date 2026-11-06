@@ -81,8 +81,9 @@
 
 .project--neo .room-concept {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
-  gap: clamp(24px, 4vw, 56px);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 320px);
+  max-width: 1120px;
+  gap: clamp(24px, 2.2vw, 32px);
   align-items: start;
   margin-bottom: clamp(24px, 3vw, 36px);
 }
