@@ -13,7 +13,27 @@ const omittedNeoViews = [
   'diploma-dining-overview.webp', 'diploma-living-tv.webp'
 ];
 for (const name of omittedNeoViews) assert(fs.existsSync(path.join(root, 'assets/gallery', name)), 'Retain omitted source file: ' + name);
-const expected = [...galleryNames(original), 'dyplom3D-lazienka i wc p_druk.jpg'].filter(name => !omittedNeoViews.includes(name)).sort();
+// Lesny Rytm intentionally reuses AI views in labelled before/after pairs and
+// opens the plan as its full-resolution source sheet. Keep an explicit inventory
+// instead of treating these approved additions as missing historical positions.
+const organicGallery = [
+  'arkusz-2.png', 'organic-rtv-closed.webp', 'organic-home-office.webp',
+  'arkusz-14.png', 'organic-sofa.webp', 'organic-kitchen.webp', 'organic-rtv-open.webp',
+  'organic-original-kitchen.webp', 'organic-kitchen.webp',
+  'organic-original-office.webp', 'organic-rtv-open.webp',
+  'organic-original-sofa.webp', 'organic-sofa.webp'
+];
+const historicalOrganic = galleryNames(original).filter(name => name.startsWith('organic-'));
+for (const name of historicalOrganic) {
+  assert(fs.existsSync(path.join(root, 'assets/gallery', name)), 'Retain organic source file: ' + name);
+}
+const organic = fs.readFileSync(path.join(root, 'portfolio/lesny-rytm/index.html'), 'utf8');
+assert.deepEqual([...organic.matchAll(/data-lightbox-src="([^"]+)"/g)].map(m => path.basename(m[1])), organicGallery, 'Approved organic gallery order and repetitions');
+for (const name of historicalOrganic) assert(organic.includes('/' + name + '"'), 'Display existing organic source: ' + name);
+const expected = [
+  ...galleryNames(original).filter(name => !name.startsWith('organic-')),
+  'dyplom3D-lazienka i wc p_druk.jpg', ...organicGallery
+].filter(name => !omittedNeoViews.includes(name)).sort();
 const actual = [];
 const httpPaths = new Set();
 let links = 0;
