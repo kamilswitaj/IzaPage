@@ -47,7 +47,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   page.on('pageerror', e => errors.push(e.message));
   const url = process.env.PREVIEW_URL || 'http://127.0.0.1:8022/portfolio/japandi/';
   page.on('response', r => { if (new URL(r.url()).origin === new URL(url).origin && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
-  const captures = {plan:'#uklad',living:'#strefa-dzienna',bedroom:'#strefa-prywatna',sanitary:'#strefa-sanitarna',documentation:'#dokumentacja-techniczna'};
+  const captures = {plan:'#uklad',hol:'#hol',living:'#strefa-dzienna',bedroom:'#strefa-prywatna',sanitary:'#strefa-sanitarna',documentation:'#dokumentacja-techniczna',contact:'#kontakt'};
   const widths=[1920,1700,1440,1100,768,390];
   const metrics=[];
   for (const width of widths) {
@@ -67,32 +67,47 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     assert.deepEqual(outline.filter(h=>h.level===2).map(h=>h.text),['Książki wyznaczają rytm wnętrza','Przestrzeń zorganizowana wokół codziennych rytuałów','Prezentacja pomieszczeń','Od koncepcji do szczegółu','Izabela Świtaj']);
     assert.equal(await page.locator('#hol img,#garderoba img').count(),0);
     assert.equal(await page.locator('#wizualizacje-strefy-dziennej .gallery-item').count(),5);
-    assert.equal(await page.locator('#kuchnia img').count(),1,'Existing shared material moodboard beside kitchen concept');
-    assert.equal(await page.locator('#jadalnia img').count(),0,'No invented dining moodboard');
-    assert.equal(await page.locator('#salon img').count(),1,'Only the existing stylistic moodboard');
+    assert.equal(await page.locator('.living-copy img').count(),0,'Approved descriptions form an independent copy stack');
+    assert.equal(await page.locator('.living-moodboards img').count(),2,'Both existing moodboards form the right stack');
+    assert.equal(await page.locator('#kuchnia img,#jadalnia img,#salon img').count(),0);
     const geometry=await page.evaluate(()=>{
       const box=n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
       const gallery=document.querySelector('#wizualizacje-strefy-dziennej .japandi-gallery');
       const root=box(gallery),gap=parseFloat(getComputedStyle(gallery).columnGap),column=(root.width-gap)/2;
-      return {root,gap,column,headings:[...document.querySelectorAll('.project--japandi h1,.project--japandi h2,.project--japandi h3,.project--japandi h4')].map(box),concepts:[...document.querySelectorAll('.room-concept')].map(n=>({root:box(n),copy:box(n.firstElementChild),board:n.querySelector('.room-moodboard')?box(n.querySelector('.room-moodboard')):null})),galleries:[...document.querySelectorAll('.japandi-gallery')].map(n=>({root:box(n),cards:[...n.children].map(box)})),plan:box(document.querySelector('#uklad > figure')),cover:box(document.querySelector('.case-cover img'))};
+      const editorialSelectors=['.project-heading','#zalozenia','#uklad h2','#uklad > p:not(.eyebrow)','.rooms-heading','#materialy','#hol .room-heading','#sypialnia .room-chapter-heading','#garderoba .room-chapter-heading','#strefa-sanitarna .room-heading','.technical-heading','.technical-group-heading','.technical-thesis-card'];
+      return {root,gap,column,headings:[...document.querySelectorAll('.project--japandi h1,.project--japandi h2,.project--japandi h3,.project--japandi h4,.technical-heading h2,.technical-group-heading h3,#kontakt h2')].map(box),editorial:editorialSelectors.map(selector=>({selector,...box(document.querySelector(selector)),display:getComputedStyle(document.querySelector(selector)).display})),concept:box(document.querySelector('.living-concept')),copy:box(document.querySelector('.living-copy')),moodboards:[...document.querySelectorAll('.living-moodboards > figure')].map(box),galleries:[...document.querySelectorAll('.japandi-gallery,.technical-grid')].map(n=>({root:box(n),technical:n.matches('.technical-grid'),cards:[...n.children].map(box)})),plan:box(document.querySelector('#uklad > figure')),cover:box(document.querySelector('.case-cover img')),navigation:box(document.querySelector('.project-pagination > a')),brand:box(document.querySelector('.portfolio-header .brand'))};
     });
     for(const h of geometry.headings) assert(Math.abs(h.x-geometry.root.x)<1,`Shared heading axis at ${width}`);
-    if(width>640){
-      for(const c of geometry.concepts){
-        assert(Math.abs(c.copy.x-geometry.root.x)<1,'Copy on the first column axis');
-        assert(c.copy.width<=geometry.column+1,'Copy stays within the first column');
-        if(c.board){
-          const center=geometry.root.x+geometry.column+geometry.gap+geometry.column/2;
-          assert(Math.abs(c.board.x+c.board.width/2-center)<1,'Moodboard centered on second gallery column');
-        }
-      }
+    assert(geometry.root.width<=1281,'Visual container capped across the complete page');
+    for(const e of geometry.editorial){
+      assert(e.width<=961,`Editorial width: ${e.selector}`);
+      assert(Math.abs(e.x-geometry.root.x)<1,`Editorial axis: ${e.selector}`);
+    }
+    assert.equal(geometry.editorial.find(e=>e.selector==='#zalozenia').display,'block','Editorial content has no empty column');
+    assert(Math.abs(geometry.navigation.x-geometry.root.x)<1,'Final navigation shares the page axis');
+    assert(Math.abs(geometry.brand.x-geometry.root.x)<1,'Top navigation shares the page axis');
+    if(width>900){
+      assert(Math.abs(geometry.copy.x-geometry.root.x)<1,'Living copy starts on common axis');
+      assert(Math.abs(geometry.copy.width-geometry.column)<1,'Equal concept columns');
+      const center=geometry.root.x+geometry.column+geometry.gap+geometry.column/2;
+      for(const board of geometry.moodboards)assert(Math.abs(board.x+board.width/2-center)<1,'Moodboards centered in their independent column');
+      const unchanged=await page.evaluate(()=>{
+        const left=[...document.querySelectorAll('.living-copy > section')],before=left.map(n=>n.getBoundingClientRect().top);
+        const first=document.querySelector('.living-moodboards > figure');
+        first.style.height=(first.getBoundingClientRect().height+240)+'px';
+        const after=left.map(n=>n.getBoundingClientRect().top);first.style.removeProperty('height');
+        return before.every((v,i)=>Math.abs(v-after[i])<.5);
+      });
+      assert(unchanged,'Moodboard height does not control spacing between descriptions');
+    }else{
+      assert(geometry.moodboards[0].y>=geometry.copy.y+geometry.copy.height,'Concept stacks on smaller viewports');
     }
     for(const g of geometry.galleries){
       assert(Math.abs(g.root.x-geometry.root.x)<1 && Math.abs(g.root.width-geometry.root.width)<1,'Shared gallery grid');
       for(let n=0;n<g.cards.length;n++){
         const c=g.cards[n];
         assert(Math.abs(c.width-(width>640?geometry.column:g.root.width))<1,'Gallery image column width');
-        if(width>640 && n===g.cards.length-1 && g.cards.length%2){
+        if(!g.technical && width>640 && n===g.cards.length-1 && g.cards.length%2){
           assert(Math.abs(c.x+c.width/2-(g.root.x+g.root.width/2))<1,'Unpaired image centered');
         }else if(width>640){
           assert(Math.abs(c.x-(g.root.x+(n%2)*(geometry.column+geometry.gap)))<1,'Paired image on its column axis');
@@ -102,7 +117,11 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     }
     assert(geometry.plan.width<=900.5,'Plan capped at 900px');
     assert(Math.abs(geometry.plan.x+geometry.plan.width/2-(geometry.root.x+geometry.root.width/2))<1,'Centered plan');
-    assert(geometry.cover.width<=1000.5,'Opening image capped');
+    assert(geometry.cover.width<=960.5,'Opening image uses editorial maximum');
+    assert(Math.abs(geometry.cover.x+geometry.cover.width/2-(geometry.root.x+geometry.root.width/2))<1,'Opening image centered');
+    const allSections=await page.evaluate(()=>['.project-heading','#zalozenia','#uklad','#prezentacja-pomieszczen','#hol','#strefa-dzienna','#strefa-prywatna','#garderoba','#strefa-sanitarna','#dokumentacja-techniczna','.project-pagination','#kontakt'].filter(s=>document.querySelector(s)).map(selector=>{const n=document.querySelector(selector),r=n.getBoundingClientRect(),s=getComputedStyle(n);return {selector,x:r.x,width:r.width,y:r.y+scrollY,height:r.height,maxWidth:s.maxWidth,margin:s.margin,padding:s.padding}}));
+    geometry.sections=allSections;
+    geometry.transitions=await page.evaluate(()=>[['brief-plan','#zalozenia','#uklad'],['rooms-hol','.rooms-heading','#hol'],['living-private','#strefa-dzienna','#strefa-prywatna'],['private-sanitary','#strefa-prywatna','#strefa-sanitarna'],['technical-footer','#dokumentacja-techniczna','#kontakt']].map(([name,a,b])=>({name,top:document.querySelector(a).getBoundingClientRect().top+scrollY,bottom:document.querySelector(b).getBoundingClientRect().bottom+scrollY})));
     metrics.push({width,...geometry});
     for(const id of ['kuchnia','jadalnia','salon','sypialnia','garderoba','lazienka','dodatkowe-wc']) assert.equal(await page.locator(`#${id} h4`).count(),1);
     assert.equal(await page.locator('#salon h4').evaluate(n=>getComputedStyle(n).fontFamily),await page.locator('#strefa-dzienna h3').evaluate(n=>getComputedStyle(n).fontFamily));
@@ -123,7 +142,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     await page.screenshot({ path: path.join(output, `japandi-${width}.png`), fullPage: true,style:captureStyle });
     for(const [name,selector] of Object.entries(captures)) await page.locator(selector).screenshot({path:path.join(output,`${width}-${name}.png`),style:captureStyle});
     await page.evaluate(()=>window.scrollTo(0,0));
-    const opening=await page.evaluate(()=>{const a=document.querySelector('.case-cover').getBoundingClientRect(),b=document.querySelector('.project-heading').getBoundingClientRect();return {x:0,y:a.y,width:innerWidth,height:b.bottom-a.y+24}});
+    const opening=await page.evaluate(()=>{const a=document.querySelector('.case-cover').getBoundingClientRect(),b=document.querySelector('#zalozenia').getBoundingClientRect();return {x:0,y:a.y,width:innerWidth,height:b.bottom-a.y+24}});
     await page.screenshot({path:path.join(output,`${width}-opening.png`),fullPage:true,clip:opening,style:captureStyle});
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
@@ -174,7 +193,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   await page.locator('#technical-fit').click();
   await page.screenshot({path:path.join(output,'technical-viewer-mobile.png')});
   await page.keyboard.press('Escape');
-  const result = { result:'PASS', widths, gallery:13, livingRenders:5, featuredSheets:8, technicalSheets:13, pdfSha256:pdfHash, checks:['approved descriptions and narrative unchanged','H1–H4 hierarchy','shared left axes and equal gallery columns','moodboards centered on second column','single and odd images centered at one-column width','centered uncropped plan and opening image','keyboard walkthrough','image decoding and proportions','no horizontal overflow','lightbox navigation','Escape and focus restoration','technical gallery unchanged','all technical sheets and full-image links','100% and zoom','mobile viewer and keyboard scrolling','original PDF hash and HTTP link'], browserErrors:errors };
+  const result = { result:'PASS', widths, gallery:13, livingRenders:5, featuredSheets:8, technicalSheets:13, pdfSha256:pdfHash, checks:['approved descriptions and narrative unchanged','H1–H4 hierarchy','1280px visual and 960px editorial containers across the whole page','shared axes from top navigation to contact','independent copy and moodboard stacks','moodboard height does not affect description spacing','equal gallery columns and centered unpaired images','centered uncropped plan and opening image','keyboard walkthrough','image decoding and proportions','no horizontal overflow','lightbox navigation','Escape and focus restoration','technical cards and source documents unchanged','all technical sheets and full-image links','100% and zoom','mobile viewer and keyboard scrolling','original PDF hash and HTTP link'], browserErrors:errors };
   assert.deepEqual(errors, []);
   fs.writeFileSync(path.join(output, 'results.json'), JSON.stringify(result, null, 2));
   fs.writeFileSync(path.join(output, 'metrics.json'), JSON.stringify(metrics, null, 2));
