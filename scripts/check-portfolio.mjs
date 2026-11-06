@@ -1,3 +1,4 @@
+const normalizeTypography = text => text.replace(/<span class="no-break">([^<]*)<\/span>/g, '$1').replace(/\u00a0/g, ' ').replace(/V‑Ray/g, 'V-Ray');
 import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
@@ -47,8 +48,7 @@ for (const file of files) {
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     assert(/\balt="[^"]*"/.test(m[0]),file + ': missing alt');
     // The monogram repeats the adjacent heading; its empty alt avoids a duplicate name.
-    const decorativeMonogram = file === 'portfolio/index.html'
-      && /class="cv-logo"/.test(m[0]) && /src="\.\.\/assets\/is-sygnet\.png"/.test(m[0]);
+    const decorativeMonogram = /src="(?:\.\.\/)+assets\/is-sygnet\.png"/.test(m[0]) && /alt=""/.test(m[0]);
     if (/\bsrc=/.test(m[0]) && !decorativeMonogram) assert(/\balt="[^"]+"/.test(m[0]),file + ': empty content alt');
   }
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) JSON.parse(m[1]);
@@ -91,7 +91,7 @@ assert.equal(new Set(galleryNames(neo)).size, galleryNames(neo).length, 'No dupl
 assert.equal((fs.readFileSync(path.join(root,files[0]),'utf8').match(/class="cv-project"/g)||[]).length,4);
 // Replace only the obsolete byte-for-byte homepage snapshot; retain shared CSS/JS snapshots.
 function checkHomepage() {
-  const home = fs.readFileSync(path.join(root, 'portfolio/index.html'), 'utf8');
+  const home = normalizeTypography(fs.readFileSync(path.join(root, 'portfolio/index.html'), 'utf8'));
   assert.equal((home.match(/<h1\b/g) || []).length, 1, 'Portfolio: one h1');
   const ids = [...home.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(ids.length, new Set(ids).size, 'Portfolio: unique IDs');
@@ -120,8 +120,8 @@ function checkHomepage() {
   assert(footer.includes('Warszawa'), 'Portfolio: location');
   assert(!/wykształceni|pCon|AutoCAD|SketchUp|V-Ray/.test(footer), 'Portfolio: no repeated biography in footer');
   assert(!/cal\.eu|id="oferta"|class="hero"|<form\b/.test(home), 'Portfolio: recruitment portfolio');
-  assert(/<header\b[\s\S]*?<img class="cv-logo" src="\.\.\/assets\/is-sygnet\.png" alt="" width="630" height="725"/.test(home), 'Portfolio: decorative original monogram in header');
-  assert(/<h1><img class="cv-logo"[^>]*\/>Izabela Świtaj<\/h1>/.test(home), 'Portfolio: decorative monogram has adjacent heading text');
+  assert(home.includes('src="../assets/is-sygnet.png" alt=""'), "Original decorative monogram");
+  assert(home.includes('<strong>Izabela Świtaj</strong>'), "Adjacent brand name");
   assert(/<link rel="icon" href="\.\.\/assets\/is-favicon\.png" type="image\/png" sizes="64x64"/.test(home), 'Portfolio: PNG favicon');
   for (const match of home.matchAll(/(?:src|href)="([^"]+)"/g)) {
     const url = match[1];

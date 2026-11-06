@@ -21,7 +21,5 @@
 
 .photo-orientation-groups { display:grid; gap:var(--subsection-space); }
 
-/* Navigation lives inside the shared heading, so it needs no chapter-sized bottom margin. */
-.project-intro > .project-index { margin:24px 0 0; }
 .project-intro > .concept-note { margin-top:16px; }
 .project-heading + .project-story > .room-section:first-child { margin-top:0; }
