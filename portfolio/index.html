@@ -26,13 +26,9 @@
 <meta property="og:image:alt" content="Kuchnia i jadalnia w projekcie Neomodernizm Izabeli Świtaj" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Izabela Świtaj","jobTitle":"Projektantka wnętrz","url":"https://izabelaswitaj.pl/portfolio/","email":"mailto:izabela.switaj@gmail.com","telephone":"+48502272469"}</script>
-<link rel="stylesheet" href="portfolio.css?v=20261104-6" />
+<link rel="stylesheet" href="portfolio.css?v=20261106-unify" />
 <style>
   .cv-container { width:min(1280px,calc(100% - 112px)); margin-inline:auto; }
-  .cv-header { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-block:28px; border-bottom:1px solid var(--line); }
-  .cv-header h1 { position:relative; margin:0; padding-left:34px; font-size:1.4rem; letter-spacing:0; }
-  .cv-logo { position:absolute; left:0; top:50%; transform:translateY(-50%); width:auto; height:28px; }
-  .cv-header p { margin:0; font-size:.85rem; color:var(--ink-soft); }
   .cv-projects { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:40px 28px; padding-block:32px 56px; }
   .cv-project { display:block; min-width:0; }
   .cv-project img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
@@ -41,11 +37,6 @@
   .cv-caption h2 span { margin-left:12px; color:var(--green); font-family:var(--sans); font-size:1rem; }
   .cv-caption p { margin:0; color:var(--ink-soft); font-size:.85rem; }
   .cv-project:hover h2 { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
-  .cv-footer { display:block; border-top:1px solid var(--line); padding-block:28px 40px; font-size:.85rem; color:var(--ink-soft); }
-  .cv-footer p { margin:0; }
-  .cv-footer address { display:flex; flex-wrap:wrap; align-items:center; gap:8px 32px; font-style:normal; }
-  .cv-footer a { display:inline-flex; align-items:center; min-height:32px; }
-  .cv-footer a:hover { text-decoration:underline; text-underline-offset:4px; }
   .cv-about { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; border-top:1px solid var(--line); padding-block:48px 56px; }
   .cv-about h2 { max-width:18ch; margin-bottom:0; font-size:clamp(1.8rem,3vw,2.7rem); }
   .cv-about-copy { max-width:64ch; color:var(--ink-soft); font-size:.95rem; }
@@ -53,16 +44,14 @@
   .cv-about-copy p:last-child { margin-bottom:0; }
   @media(max-width:700px) { .cv-about { grid-template-columns:1fr; padding-block:36px; } }
   @media(max-width:900px) { .cv-container { width:calc(100% - 64px); } .cv-caption { flex-direction:column; gap:8px; } }
-  @media(max-width:560px) { .cv-container { width:calc(100% - 40px); } .cv-header { padding-block:22px; } .cv-header h1 { font-size:1.25rem; } .cv-projects { grid-template-columns:1fr; gap:36px; padding-block:24px 36px; } .cv-footer { grid-template-columns:1fr; gap:20px; } .cv-footer a { min-height:44px; } }
+  @media(max-width:560px) { .cv-container { width:calc(100% - 40px); } .cv-projects { grid-template-columns:1fr; gap:36px; padding-block:24px 36px; } }
 </style>
 </head>
 <body>
   <a class="skip-link" href="#projekty">Przejdź do projektów</a>
-  <header class="cv-header cv-container">
-    <h1><img class="cv-logo" src="../assets/is-sygnet.png" alt="" width="630" height="725" />Izabela Świtaj</h1>
-    <p>— projektantka wnętrz</p>
-  </header>
+  <header class="portfolio-header"><a class="brand" href="/portfolio/"><img src="../assets/is-sygnet.png" alt="" width="630" height="725" /><strong>Izabela Świtaj</strong><span>— projektantka wnętrz</span></a><nav aria-label="Nawigacja portfolio"><a href="#projekty">Projekty</a><a href="#o-mnie">O mnie</a><a href="#kontakt">Kontakt</a></nav></header>
   <main>
+<h1 class="visually-hidden">Portfolio Izabeli Świtaj</h1>
   <section id="projekty" class="cv-projects cv-container" tabindex="-1" aria-label="Wybrane projekty wnętrz">
     <a class="cv-project" href="/portfolio/neomodernizm/" aria-labelledby="project-1">
       <img src="../assets/gallery/diploma-kitchen-dining-1.webp" srcset="../assets/gallery/previews/diploma-kitchen-dining-1.webp 640w, ../assets/gallery/diploma-kitchen-dining-1.webp 1800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Jasna kuchnia i jadalnia z drewnianym stołem" width="1800" height="1013" fetchpriority="high" decoding="async" />
@@ -82,32 +71,26 @@
       <img src="../assets/gallery/organic-rtv-open.webp" srcset="../assets/gallery/previews/organic-rtv-open.webp 640w, ../assets/gallery/organic-rtv-open.webp 1672w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Zielona zabudowa RTV z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
       <div class="cv-caption">
         <h2 id="project-3">Leśny rytm<span aria-hidden="true">↗</span></h2>
-        <p>Koncepcja wnętrza · salon i home office</p>
+        <p>Koncepcja wnętrza · salon i home office</p>
       </div>
     </a>
     <a class="cv-project" href="/portfolio/domek-babci/" aria-labelledby="project-4">
       <img src="../assets/gallery/domek-babci/kuchnia-ogolny.webp" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Wizualizacja kuchni z kremową zabudową i szałwiowymi płytkami" width="1670" height="942" loading="lazy" decoding="async" />
       <div class="cv-caption">
-        <h2 id="project-4">Metamorfoza domu z historią<span aria-hidden="true">↗</span></h2>
-        <p>Przytulny domek babci — metamorfoza domu po dziadkach. Realizacja w toku.</p>
+        <h2 id="project-4">Metamorfoza domu z historią<span aria-hidden="true">↗</span></h2>
+        <p>Przytulny domek babci — metamorfoza domu po dziadkach. Realizacja w toku.</p>
       </div>
     </a>
   </section>
-  <section class="cv-about cv-container" aria-labelledby="about-title">
-    <div><p class="eyebrow">O MNIE</p><h2 id="about-title">Od funkcji do atmosfery wnętrza</h2></div>
+  <section id="o-mnie" class="cv-about cv-container" aria-labelledby="about-title">
+    <div><p class="eyebrow">O MNIE</p><h2 id="about-title">Od funkcji do atmosfery wnętrza</h2></div>
     <div class="cv-about-copy">
-      <p>Jestem projektantką wnętrz z wykształceniem inżynierskim. W projektowaniu łączę analityczne podejście do przestrzeni z wrażliwością na kolor, materiały i detale.</p>
-      <p>Szczególną uwagę poświęcam układom funkcjonalnym, ergonomii i rozwiązaniom dopasowanym do potrzeb użytkowników. Lubię szukać pomysłów, które nie tylko dobrze wyglądają, ale mają również praktyczne uzasadnienie.</p>
-      <p>W swojej pracy wykorzystuję pCon.planner, AutoCAD, SketchUp i V-Ray. Rozwijam umiejętności w zakresie projektowania koncepcyjnego, wizualizacji oraz dokumentacji technicznej.</p>
+      <p>Jestem projektantką wnętrz z wykształceniem inżynierskim. W projektowaniu łączę analityczne podejście do przestrzeni z wrażliwością na kolor, materiały i detale.</p>
+      <p>Szczególną uwagę poświęcam układom funkcjonalnym, ergonomii i rozwiązaniom dopasowanym do potrzeb użytkowników. Lubię szukać pomysłów, które nie tylko dobrze wyglądają, ale mają również praktyczne uzasadnienie.</p>
+      <p>W swojej pracy wykorzystuję <span class="no-break">pCon.planner</span>, AutoCAD, <span class="no-break">SketchUp</span> i V‑Ray. Rozwijam umiejętności w zakresie projektowania koncepcyjnego, wizualizacji oraz dokumentacji technicznej.</p>
     </div>
   </section>
   </main>
-  <footer class="cv-footer cv-container">
-    <address aria-label="Kontakt">
-      <a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a>
-      <a href="tel:+48502272469">502 272 469</a>
-      <span>Warszawa</span>
-    </address>
-  </footer>
+  <footer id="kontakt" class="contact" aria-labelledby="contact-title"><div><p class="eyebrow">Kontakt</p><h2 id="contact-title">Izabela Świtaj</h2></div><address><a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a><a href="tel:+48502272469">502 272 469</a><span>Warszawa</span></address></footer>
 </body>
 </html>

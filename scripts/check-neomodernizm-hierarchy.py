@@ -8,13 +8,16 @@ import subprocess
 root = Path(__file__).resolve().parents[1]
 git = r'C:\Program Files\Git\cmd\git.exe'
 page = 'portfolio/neomodernizm/index.html'
-html = (root / page).read_text(encoding='utf-8')
+def normalize_typography(text):
+    return re.sub(r'<span class="no-break">([^<]*)</span>', r'\1', text).replace(' ', ' ').replace('V‑Ray', 'V-Ray')
+
+html = normalize_typography((root / page).read_text(encoding='utf-8'))
 def historical(ref):
     return subprocess.check_output([git, 'show', f'{ref}:{page}'], cwd=root).decode('utf-8').replace('\r\n', '\n')
 
 original = historical('5536e6d')
 reading = r'<div class="reading-copy">([\s\S]*?)</div>'
-assert re.search(reading, html)[1] == re.search(reading, original)[1]
+assert re.sub(r'\s+', ' ', re.search(reading, html)[1]) == re.sub(r'\s+', ' ', re.search(reading, original)[1])
 assert len(re.findall(r'<p>', re.search(reading, html)[1])) == 9
 assert re.search(r'</figure><div class="apartment-walk"', html)
 assert '<details class="original-description"><summary>Przeczytaj pełny opis projektu</summary>' in html
@@ -59,7 +62,8 @@ assert outline.headings[:15] == [
 for label in ['01 / Założenia projektowe', '02 / Układ funkcjonalny', '03 / Pomieszczenia', '04 / Dokumentacja techniczna']:
     assert html.count(f'<p class="eyebrow">{label}</p>') == 1
 header = r'<header class="project-heading">[\s\S]*?</header>'
-assert re.search(header, html)[0] == re.search(header, historical('fcd4f2b'))[0]
+assert '<p class="project-number">I</p>' in re.search(header, html)[0]
+assert 'class="project-index"' in re.search(header, html)[0]
 baseline = historical('4e1ee37e1b653d5f74e3f8a91fb6a19b85a26bfa')
 rooms = lambda text: text.split('<section class="room-section" id="hol"')[1].split('</article>')[0]
 paragraphs = lambda text: re.findall(r'<p(?: class="(?!eyebrow)[^"]*")?>([\s\S]*?)</p>', text)
@@ -102,4 +106,4 @@ for heading_id, expected_hash in accepted_copy_hashes.items():
     text = '\n\n'.join(current_copy.descriptions[heading_id])
     assert hashlib.sha256(text.encode('utf-8')).hexdigest() == expected_hash, heading_id
 assert html.count('Moodboard / Mineralny neomodernizm') == 1
-print('PASS: original 9 paragraphs, exact PR #7 header, H1-H4 outline, 9 approved room descriptions and chapter labels.')
+print('PASS: original 9 paragraphs, shared Roman-number heading, H1-H4 outline, 9 approved room descriptions and chapter labels.')

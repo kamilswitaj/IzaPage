@@ -1,3 +1,4 @@
+const normalizeTypography = text => text.replace(/<span class="no-break">([^<]*)<\/span>/g, '$1').replace(/\u00a0/g, ' ').replace(/V‑Ray/g, 'V-Ray');
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFileSync, readdirSync } from 'node:fs';
@@ -7,7 +8,7 @@ import { execFileSync } from 'node:child_process';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const pagePath = 'portfolio/neomodernizm/index.html';
-const html = readFileSync(resolve(root, pagePath), 'utf8');
+const html = normalizeTypography(readFileSync(resolve(root, pagePath), 'utf8'));
 const sheets = JSON.parse(html.match(/<script type="application\/json" id="technical-sheet-data">([\s\S]*?)<\/script>/)[1]);
 const pages = Array.from({ length: 15 }, (_, i) => i + 50);
 assert.deepEqual(sheets.map(s => s.page), pages);
@@ -45,7 +46,7 @@ for (const [folder, ext] of [['details', '.png'], ['thumbs', '.webp']]) {
 }
 const git = process.env.GIT_EXECUTABLE || 'C:/Program Files/Git/cmd/git.exe';
 const baseline = execFileSync(git, ['show', '4e1ee37e1b653d5f74e3f8a91fb6a19b85a26bfa:'+pagePath], { cwd: root, encoding: 'utf8' });
-const galleries = text => [...text.matchAll(/<button[^>]*data-lightbox-src[^>]*>[\s\S]*?<\/button>/g)].map(m => m[0].replace(/\r\n/g, '\n'));
+const galleries = text => [...text.matchAll(/<button[^>]*data-lightbox-src[^>]*>[\s\S]*?<\/button>/g)].map(m => normalizeTypography(m[0]).replace(/\r\n/g, '\n'));
 // The living-zone gallery is curated separately; retained image controls stay unchanged.
 const omittedViews = ['diploma-kitchen-second-view.webp', 'diploma-kitchen-dining-1.webp', 'diploma-dining-overview.webp', 'diploma-living-tv.webp'];
 assert.deepEqual(galleries(html).sort(), galleries(baseline).filter(button => !omittedViews.some(name => button.includes('/' + name + '"'))).sort());
