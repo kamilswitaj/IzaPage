@@ -1,5 +1,6 @@
 /* Three local composition types: editorial copy, independent concepts, visual galleries. */
 .japandi-page {
+  --hero-inset:clamp(20px,6vw,92px);
   --page-width:1280px;
   --editorial-width:960px;
   --page-gutter:clamp(20px,4vw,48px);
@@ -8,13 +9,13 @@
   --section-space:clamp(56px,5vw,80px);
   --subsection-space:clamp(28px,3vw,40px);
 }
-.japandi-page :is(.portfolio-header,.case-cover,.case-content,.technical-documentation,.project-pagination,.contact) { padding-inline:var(--page-inset); }
-.japandi-page .case-cover { padding-top:32px; }
-.japandi-page .case-cover img { width:min(100%,var(--editorial-width)); height:auto; margin-inline:0; }
-.japandi-page .case-content { padding-block:40px var(--section-space); }
-.japandi-page .project-heading { display:block; max-width:var(--editorial-width); margin-bottom:40px; }
-.japandi-page .project-number { margin:0 0 16px; }
-.japandi-page h1 { margin:0 0 16px; font-size:clamp(2.1rem,3.6vw,3.75rem); line-height:1.12; }
+.japandi-page :is(.portfolio-header,.case-content,.technical-documentation,.project-pagination,.contact) { padding-inline:var(--page-inset); }
+.japandi-page .case-cover { padding:28px var(--hero-inset) 0; }
+.japandi-page .case-cover img { width:100%; height:clamp(260px,47vw,650px); object-fit:cover; }
+.japandi-page .case-content { padding-block:56px var(--section-space); }
+.japandi-page .project-heading { display:grid; grid-template-columns:minmax(150px,.28fr) minmax(0,1fr); gap:clamp(24px,4vw,64px); width:calc(100vw - 2 * var(--hero-inset)); max-width:none; margin:0 calc(var(--hero-inset) - max(var(--page-gutter),calc((100vw - var(--page-width)) / 2))) 56px; }
+.japandi-page .project-heading .project-number { margin:10px 0 0; }
+.japandi-page h1 { margin:0 0 10px; font-size:clamp(2.3rem,4.5vw,4.8rem); line-height:1.12; }
 .japandi-page :is(.case-brief,.reading-copy,.rooms-heading,.room-heading,.room-chapter-heading,.editorial-copy,.apartment-walk,.technical-heading,.technical-group-heading) { max-width:var(--editorial-width); }
 .japandi-page :is(.project--japandi p,.technical-heading p,.technical-group-heading p) { max-width:none; margin:0 0 16px; }
 .japandi-page :is(.case-brief,.room-plan,.room-heading,.room-chapter-heading,.editorial-copy,.reading-copy,.technical-heading,.technical-group-heading) > p:last-child { margin-bottom:0; }
@@ -23,9 +24,9 @@
 .japandi-page .room-chapter-heading h4 { margin:0 0 12px; font:clamp(1.25rem,1.5vw,1.6rem)/1.25 var(--serif); }
 .japandi-page :is(.case-brief,.room-plan,.room-heading,.room-chapter-heading,.editorial-copy,.apartment-walk,.reading-copy) { color:var(--ink-soft); }
 .japandi-page :is(h1,h2,h3,h4,.walk-title) { color:var(--ink); }
-.japandi-page .project-style { margin-top:16px; }
-.japandi-page .project-software { margin-top:4px; }
-.japandi-page .project-tags { margin-top:16px; }
+.japandi-page .project-intro .project-style { margin:14px 0 0; }
+.japandi-page .project-intro .project-software { margin:4px 0 0; }
+.japandi-page .project-tags { margin-top:18px; }
 .japandi-page .japandi-story { display:block; }
 .japandi-index { display:flex; flex-wrap:wrap; gap:8px 24px; max-width:var(--editorial-width); padding:12px 0; margin-bottom:var(--section-space); border-block:1px solid var(--line); font-size:.85rem; font-weight:600; }
 .japandi-index a { display:inline-flex; align-items:center; min-height:44px; }
@@ -62,11 +63,14 @@
 .japandi-page .contact { grid-template-columns:repeat(2,minmax(0,1fr)); gap:var(--japandi-gap); padding-block:var(--section-space); }
 .japandi-page .contact h2 { color:var(--white); margin-bottom:0; }
 @media(max-width:900px) {
+  .japandi-page .project-heading { grid-template-columns:1fr; gap:20px; }
   .japandi-page .living-concept { grid-template-columns:minmax(0,1fr); gap:var(--subsection-space); }
 }
 @media(max-width:640px) {
-  .japandi-page .case-cover { padding-top:24px; }
-  .japandi-page .case-content { padding-top:32px; }
+  .japandi-page .case-cover { padding-top:20px; }
+  .japandi-page .case-cover img { height:auto; }
+  .japandi-page h1 { font-size:clamp(2.1rem,9vw,3rem); }
+  .japandi-page .case-content { padding-top:36px; }
   .japandi-page :is(.japandi-gallery,.technical-grid,.contact) { grid-template-columns:minmax(0,1fr); }
   .japandi-page .japandi-gallery > .gallery-item:last-child:nth-child(odd) { width:100%; }
   .japandi-page .living-moodboards > .room-moodboard { width:min(100%,280px); }
