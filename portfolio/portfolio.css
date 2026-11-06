@@ -47,16 +47,7 @@ h3 { margin-bottom:14px; }
 .overview-content h3 { margin:12px 0; font-size:clamp(1.45rem,2vw,2rem); }
 .overview-content p { margin:0 0 22px; color:var(--ink-soft); font-size:.9rem; }
 .overview-link { display:flex; justify-content:space-between; gap:12px; margin-top:auto; padding-top:14px; border-top:1px solid var(--line); color:var(--green); font-size:.85rem; font-weight:700; }
-.case-cover { padding:28px clamp(20px,6vw,92px) 0; }
-.case-cover img { width:100%; height:clamp(260px,47vw,650px); object-fit:cover; }
-.case-content { background:var(--paper); padding-top:56px; }
-.project-heading { display:grid; grid-template-columns:minmax(150px,.28fr) minmax(0,1fr); gap:clamp(24px,4vw,64px); margin-bottom:56px; }
-.project-number { margin:10px 0 0; }
-.case-page h1 { font-size:clamp(2.3rem,4.5vw,4.8rem); }
-.project-style { margin:14px 0 0; color:var(--ink-soft); font-weight:700; }
-.project-software { margin:4px 0 0; color:var(--ink-soft); font-size:.86rem; }
 .no-break { white-space:nowrap; }
-.project-tags { display:flex; flex-wrap:wrap; gap:8px 16px; margin:18px 0 0; padding:0; list-style:none; color:var(--ink-soft); font-size:.72rem; font-weight:700; text-transform:uppercase; }
 .project-story { display:grid; grid-template-columns:minmax(0,1fr); gap:64px; }
 .case-story,.project-media { min-width:0; }
 .case-brief { max-width:72ch; margin-bottom:42px; }
@@ -111,7 +102,6 @@ h3 { margin-bottom:14px; }
   .about-copy { max-width:720px; }
   .about-image img { max-height:480px; object-fit:cover; }
   .project-overview,.project-gallery-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
-  .project-heading { grid-template-columns:1fr; gap:20px; }
   .case-decisions { gap:24px; }
 }
 @media(max-width:640px) {
@@ -127,10 +117,6 @@ h3 { margin-bottom:14px; }
   .project-overview,.project-gallery-grid,.comparison-gallery .project-gallery-grid,.case-decisions,.solution-grid,.contact { grid-template-columns:1fr; }
   .overview-image { aspect-ratio:5/3; }
   .overview-content { padding:22px; }
-  .case-cover { padding-top:20px; }
-  .case-cover img { height:auto; }
-  .case-page h1 { font-size:clamp(2.1rem,9vw,3rem); }
-  .case-content { padding-top:36px; }
   .case-decisions { gap:28px; }
   .no-break { white-space:normal; }
   .project-pagination { flex-direction:column; gap:16px; }
