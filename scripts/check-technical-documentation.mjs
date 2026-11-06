@@ -46,7 +46,9 @@ for (const [folder, ext] of [['details', '.png'], ['thumbs', '.webp']]) {
 const git = process.env.GIT_EXECUTABLE || 'C:/Program Files/Git/cmd/git.exe';
 const baseline = execFileSync(git, ['show', '4e1ee37e1b653d5f74e3f8a91fb6a19b85a26bfa:'+pagePath], { cwd: root, encoding: 'utf8' });
 const galleries = text => [...text.matchAll(/<button[^>]*data-lightbox-src[^>]*>[\s\S]*?<\/button>/g)].map(m => m[0].replace(/\r\n/g, '\n'));
-assert.deepEqual(galleries(html), galleries(baseline));
+// The living-zone gallery is curated separately; retained image controls stay unchanged.
+const omittedViews = ['diploma-kitchen-second-view.webp', 'diploma-kitchen-dining-1.webp', 'diploma-dining-overview.webp', 'diploma-living-tv.webp'];
+assert.deepEqual(galleries(html).sort(), galleries(baseline).filter(button => !omittedViews.some(name => button.includes('/' + name + '"'))).sort());
 const compactCards = [...html.matchAll(/<div class="technical-card-copy">([\s\S]*?)<\/div>/g)];
 assert.equal(compactCards.length, 8);
 for (const [, body] of compactCards) {

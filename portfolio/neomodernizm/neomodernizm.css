@@ -79,7 +79,23 @@
   margin: 0 0 14px;
 }
 
-.project--neo .room-presentation,
+.project--neo .room-concept {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 280px);
+  gap: clamp(24px, 4vw, 56px);
+  align-items: start;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+
+.project--neo .room-concept > header {
+  margin-bottom: 0;
+}
+
+.project--neo .room-concept .room-moodboard {
+  width: 100%;
+  margin: 0;
+}
+
 .project--neo .room-renders {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -87,88 +103,25 @@
   align-items: start;
 }
 
-@media (min-width: 641px) {
-  /* The board shares only the first row; remaining views fill complete rows. */
-  .project--neo .room-presentation {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
-    column-gap: 0;
-  }
-
-  .project--neo .room-presentation > .room-renders {
-    display: contents;
-  }
-
-  .project--neo .room-moodboard {
-    grid-column: span 4;
-    margin-right: clamp(20px, 3vw, 36px);
-  }
-
-  .project--neo .room-presentation > .room-renders > .gallery-item {
-    grid-column: span 6;
-  }
-
-  .project--neo .room-presentation > .room-renders > .gallery-item:first-child {
-    grid-column: span 8;
-  }
-
-  .project--neo .room-presentation > .room-renders > .gallery-item:nth-child(2) {
-    margin-right: clamp(10px, 1.5vw, 18px);
-  }
-
-  .project--neo .room-presentation > .room-renders > .gallery-item:nth-child(3) {
-    margin-left: clamp(10px, 1.5vw, 18px);
-  }
-
-  /* Four views leave three images below the board/first-view pair. */
-  .project--neo .room-presentation:has(.room-renders > :nth-child(4):last-child) > .room-renders > .gallery-item:not(:first-child) {
-    grid-column: span 4;
-    margin: 0;
-  }
-
-  .project--neo .room-presentation:has(.room-renders > :nth-child(4):last-child) > .room-renders > .gallery-item:nth-child(3) {
-    margin-inline: clamp(6.667px, 1vw, 12px);
-  }
-
-  .project--neo .room-presentation:has(.room-renders > :nth-child(4):last-child) > .room-renders > .gallery-item:nth-child(2) {
-    margin-right: clamp(13.333px, 2vw, 24px);
-  }
-
-  .project--neo .room-presentation:has(.room-renders > :nth-child(4):last-child) > .room-renders > .gallery-item:nth-child(4) {
-    margin-left: clamp(13.333px, 2vw, 24px);
-  }
-
-  /* Two views form one independent stack alongside the portrait board. */
-  .project--neo .room-presentation:has(.room-renders > :nth-child(2):last-child) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    column-gap: clamp(20px, 3vw, 36px);
-  }
-
-  .project--neo .room-presentation:has(.room-renders > :nth-child(2):last-child) > .room-renders {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .project--neo .room-presentation:has(.room-renders > :nth-child(2):last-child) .gallery-item {
-    grid-column: auto;
-    margin: 0;
-  }
-
-  .project--neo .room-presentation:not(:has(> .room-moodboard)) {
-    grid-template-columns: minmax(0, 1fr);
-  }
-
-  .project--neo .room-presentation:not(:has(> .room-moodboard)) > .room-renders {
-    display: grid;
-  }
-
-  .project--neo .room-presentation:not(:has(> .room-moodboard)) > .room-renders > .gallery-item {
-    grid-column: auto;
-    margin: 0;
-  }
+/* An odd gallery starts with a complete view, followed by paired details. */
+.project--neo .room-renders > .gallery-item:first-child:nth-last-child(odd) {
+  grid-column: 1 / -1;
 }
 
-.project--neo .room-section > .room-renders > .room-render:first-child:nth-last-child(3) {
-  grid-column: 1 / -1;
+/* Pair the bathroom's 4:3 and 16:9 views without cropping or fixed heights. */
+@media (min-width: 641px) {
+  .project--neo [aria-labelledby="lazienka-podpunkt-title"] > .room-renders {
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+  }
+
+  .project--neo [aria-labelledby="lazienka-podpunkt-title"] > .room-renders > .gallery-item {
+    grid-column: span 4;
+  }
+
+  .project--neo [aria-labelledby="lazienka-podpunkt-title"] > .room-renders > .gallery-item:first-child,
+  .project--neo [aria-labelledby="lazienka-podpunkt-title"] > .room-renders > .gallery-item:last-child {
+    grid-column: span 3;
+  }
 }
 
 /* Intrinsic image dimensions preserve the complete plans and moodboards. */
@@ -184,18 +137,20 @@
   object-fit: contain;
 }
 
+@media (max-width: 900px) {
+  .project--neo .room-concept {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 240px);
+  }
+}
+
 @media (max-width: 640px) {
-  .project--neo .room-presentation,
+  .project--neo .room-concept,
   .project--neo .room-renders {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  .project--neo .room-presentation > .room-renders {
-    display: grid;
-  }
-
-  .project--neo .room-moodboard {
-    width: 100%;
+  .project--neo .room-concept .room-moodboard {
+    width: min(100%, 280px);
   }
 }
 
