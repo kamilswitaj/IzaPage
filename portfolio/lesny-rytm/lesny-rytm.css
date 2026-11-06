@@ -1,0 +1,30 @@
+/* Local case-study layout; shared typography, gallery and reader stay reusable. */
+.project--organic .organic-story { gap:clamp(48px,6vw,80px); }
+.organic-index { display:flex; flex-wrap:wrap; gap:8px 24px; padding:16px 0; border-block:1px solid var(--line); font-size:.85rem; font-weight:600; }
+.organic-index a { display:inline-flex; align-items:center; min-height:44px; }
+.organic-index a:hover { text-decoration:underline; text-underline-offset:5px; }
+.organic-section > h2 { font-size:clamp(2rem,3vw,3rem); }
+.organic-section > p:not(.eyebrow),.organic-copy { max-width:80ch; color:var(--ink-soft); }
+.organic-section > .organic-copy { margin-bottom:28px; }
+.organic-story .case-brief { max-width:none; margin-bottom:0; }
+.organic-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(20px,3vw,36px); align-items:start; }
+.organic-story .image-button { height:auto; aspect-ratio:auto; background:white; }
+.organic-story .image-button img { width:100%; height:auto; object-fit:contain; }
+.organic-plan { max-width:1000px; }
+.organic-detail { margin-top:32px; max-width:900px; }
+.organic-detail figcaption { max-width:80ch; }
+.organic-renders { margin-top:28px; }
+.organic-renders > :first-child { grid-column:1 / -1; }
+.organic-ai { margin-top:clamp(40px,5vw,64px); padding-top:32px; border-top:1px solid var(--line); }
+.organic-ai h3 { font-size:clamp(1.65rem,2.4vw,2.3rem); }
+.organic-comparison { margin-top:36px; }
+.organic-comparison h4 { font-family:var(--serif); font-size:1.35rem; margin:0 0 18px; }
+.organic-comparison figcaption { font-size:.78rem; }
+.organic-documentation { margin-top:48px; padding-top:36px; border-top:1px solid var(--line); }
+.organic-documentation h3 { font-size:clamp(1.65rem,2.4vw,2.3rem); }
+.organic-documentation h4 { font-family:var(--serif); font-size:1.25rem; margin:0; }
+@media(max-width:640px) {
+  .organic-grid { grid-template-columns:minmax(0,1fr); gap:24px; }
+  .organic-index { gap:4px 18px; }
+}
+@media(prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
