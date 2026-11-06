@@ -9,7 +9,7 @@
     />
 <link rel="canonical" href="https://izabelaswitaj.pl/" />
 <title>Izabela Świtaj — projektantka wnętrz | Portfolio</title>
-<link rel="icon" href="assets/logo.jpeg" type="image/jpeg" />
+<link rel="icon" href="assets/is-favicon.png" type="image/png" sizes="64x64" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link
@@ -30,7 +30,8 @@
 <style>
   .cv-container { width:min(1280px,calc(100% - 112px)); margin-inline:auto; }
   .cv-header { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-block:28px; border-bottom:1px solid var(--line); }
-  .cv-header h1 { margin:0; font-size:1.4rem; letter-spacing:0; }
+  .cv-header h1 { position:relative; margin:0; padding-left:34px; font-size:1.4rem; letter-spacing:0; }
+  .cv-logo { position:absolute; left:0; top:50%; transform:translateY(-50%); width:auto; height:28px; }
   .cv-header p { margin:0; font-size:.85rem; color:var(--ink-soft); }
   .cv-projects { display:grid; gap:56px; padding-block:32px 56px; }
   .cv-project { display:block; min-width:0; }
@@ -52,7 +53,7 @@
 <body>
   <a class="skip-link" href="#projekty">Przejdź do projektów</a>
   <header class="cv-header cv-container">
-    <h1>Izabela Świtaj</h1>
+    <h1><img class="cv-logo" src="assets/is-sygnet.png" alt="" width="630" height="725" />Izabela Świtaj</h1>
     <p>— projektantka wnętrz</p>
   </header>
   <main id="projekty" class="cv-projects cv-container" tabindex="-1" aria-label="Wybrane projekty wnętrz">
