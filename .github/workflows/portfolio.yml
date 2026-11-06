@@ -20,4 +20,6 @@ jobs:
       - name: Portfolio including every project hero
         run: node scripts/check-portfolio.mjs
       - name: Preserve technical documentation
+        env:
+          GIT_EXECUTABLE: git
         run: node scripts/check-technical-documentation.mjs
