@@ -33,21 +33,27 @@
   .cv-header h1 { position:relative; margin:0; padding-left:34px; font-size:1.4rem; letter-spacing:0; }
   .cv-logo { position:absolute; left:0; top:50%; transform:translateY(-50%); width:auto; height:28px; }
   .cv-header p { margin:0; font-size:.85rem; color:var(--ink-soft); }
-  .cv-projects { display:grid; gap:56px; padding-block:32px 56px; }
+  .cv-projects { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:40px 28px; padding-block:32px 56px; }
   .cv-project { display:block; min-width:0; }
-  .cv-project img { width:100%; height:auto; }
-  .cv-caption { display:flex; justify-content:space-between; align-items:baseline; gap:12px 32px; padding-top:16px; }
+  .cv-project img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
+  .cv-caption { display:flex; flex-direction:column; gap:8px; padding-top:16px; }
   .cv-caption h2 { margin:0; font-size:clamp(1.5rem,2.4vw,2.2rem); }
   .cv-caption h2 span { margin-left:12px; color:var(--green); font-family:var(--sans); font-size:1rem; }
   .cv-caption p { margin:0; color:var(--ink-soft); font-size:.85rem; }
   .cv-project:hover h2 { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
-  .cv-footer { display:grid; grid-template-columns:1fr auto; gap:24px 48px; border-top:1px solid var(--line); padding-block:28px 40px; font-size:.85rem; color:var(--ink-soft); }
+  .cv-footer { display:block; border-top:1px solid var(--line); padding-block:28px 40px; font-size:.85rem; color:var(--ink-soft); }
   .cv-footer p { margin:0; }
-  .cv-footer address { display:flex; flex-direction:column; align-items:start; gap:4px; font-style:normal; }
+  .cv-footer address { display:flex; flex-wrap:wrap; align-items:center; gap:8px 32px; font-style:normal; }
   .cv-footer a { display:inline-flex; align-items:center; min-height:32px; }
   .cv-footer a:hover { text-decoration:underline; text-underline-offset:4px; }
+  .cv-about { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; border-top:1px solid var(--line); padding-block:48px 56px; }
+  .cv-about h2 { max-width:18ch; margin-bottom:0; font-size:clamp(1.8rem,3vw,2.7rem); }
+  .cv-about-copy { max-width:64ch; color:var(--ink-soft); font-size:.95rem; }
+  .cv-about-copy p { margin-bottom:18px; }
+  .cv-about-copy p:last-child { margin-bottom:0; }
+  @media(max-width:700px) { .cv-about { grid-template-columns:1fr; padding-block:36px; } }
   @media(max-width:900px) { .cv-container { width:calc(100% - 64px); } .cv-caption { flex-direction:column; gap:8px; } }
-  @media(max-width:560px) { .cv-container { width:calc(100% - 40px); } .cv-header { padding-block:22px; } .cv-header h1 { font-size:1.25rem; } .cv-projects { gap:36px; padding-block:24px 36px; } .cv-footer { grid-template-columns:1fr; gap:20px; } .cv-footer a { min-height:44px; } }
+  @media(max-width:560px) { .cv-container { width:calc(100% - 40px); } .cv-header { padding-block:22px; } .cv-header h1 { font-size:1.25rem; } .cv-projects { grid-template-columns:1fr; gap:36px; padding-block:24px 36px; } .cv-footer { grid-template-columns:1fr; gap:20px; } .cv-footer a { min-height:44px; } }
 </style>
 </head>
 <body>
@@ -56,34 +62,40 @@
     <h1><img class="cv-logo" src="assets/is-sygnet.png" alt="" width="630" height="725" />Izabela Świtaj</h1>
     <p>— projektantka wnętrz</p>
   </header>
-  <main id="projekty" class="cv-projects cv-container" tabindex="-1" aria-label="Wybrane projekty wnętrz">
+  <main>
+  <section id="projekty" class="cv-projects cv-container" tabindex="-1" aria-label="Wybrane projekty wnętrz">
     <a class="cv-project" href="/portfolio/neomodernizm/" aria-labelledby="project-1">
-      <img src="assets/gallery/diploma-kitchen-dining-1.webp" srcset="assets/gallery/previews/diploma-kitchen-dining-1.webp 640w, assets/gallery/diploma-kitchen-dining-1.webp 1800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 64px), (max-width: 1392px) calc(100vw - 112px), 1280px" alt="Jasna kuchnia i jadalnia z drewnianym stołem" width="1800" height="1013" fetchpriority="high" decoding="async" />
+      <img src="assets/gallery/diploma-kitchen-dining-1.webp" srcset="assets/gallery/previews/diploma-kitchen-dining-1.webp 640w, assets/gallery/diploma-kitchen-dining-1.webp 1800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Jasna kuchnia i jadalnia z drewnianym stołem" width="1800" height="1013" fetchpriority="high" decoding="async" />
       <div class="cv-caption">
         <h2 id="project-1">Neomodernizm<span aria-hidden="true">↗</span></h2>
         <p>Projekt dyplomowy · mieszkanie dla rodziny 2+2</p>
       </div>
     </a>
     <a class="cv-project" href="/portfolio/japandi/" aria-labelledby="project-2">
-      <img src="assets/gallery/japandi-library.webp" srcset="assets/gallery/previews/japandi-library.webp 640w, assets/gallery/japandi-library.webp 1600w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 64px), (max-width: 1392px) calc(100vw - 112px), 1280px" alt="Salon z biblioteką i przesuwnymi panelami" width="1600" height="1200" loading="lazy" decoding="async" />
+      <img src="assets/gallery/japandi-library.webp" srcset="assets/gallery/previews/japandi-library.webp 640w, assets/gallery/japandi-library.webp 1600w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Salon z biblioteką i przesuwnymi panelami" width="1600" height="1200" loading="lazy" decoding="async" />
       <div class="cv-caption">
         <h2 id="project-2">Japandi<span aria-hidden="true">↗</span></h2>
         <p>Koncepcja wnętrza · mieszkanie bibliofilów</p>
       </div>
     </a>
     <a class="cv-project" href="/portfolio/lesny-rytm/" aria-labelledby="project-3">
-      <img src="assets/gallery/organic-rtv-open.webp" srcset="assets/gallery/previews/organic-rtv-open.webp 640w, assets/gallery/organic-rtv-open.webp 1672w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 64px), (max-width: 1392px) calc(100vw - 112px), 1280px" alt="Zielona zabudowa RTV z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
+      <img src="assets/gallery/organic-rtv-open.webp" srcset="assets/gallery/previews/organic-rtv-open.webp 640w, assets/gallery/organic-rtv-open.webp 1672w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Zielona zabudowa RTV z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
       <div class="cv-caption">
         <h2 id="project-3">Leśny rytm<span aria-hidden="true">↗</span></h2>
         <p>Koncepcja wnętrza · salon i home office</p>
       </div>
     </a>
+  </section>
+  <section class="cv-about cv-container" aria-labelledby="about-title">
+    <div><p class="eyebrow">O MNIE</p><h2 id="about-title">Od funkcji do atmosfery wnętrza</h2></div>
+    <div class="cv-about-copy">
+      <p>Jestem projektantką wnętrz z wykształceniem inżynierskim. W projektowaniu łączę analityczne podejście do przestrzeni z wrażliwością na kolor, materiały i detale.</p>
+      <p>Szczególną uwagę poświęcam układom funkcjonalnym, ergonomii i rozwiązaniom dopasowanym do potrzeb użytkowników. Lubię szukać pomysłów, które nie tylko dobrze wyglądają, ale mają również praktyczne uzasadnienie.</p>
+      <p>W swojej pracy wykorzystuję pCon.planner, AutoCAD, SketchUp i V-Ray. Rozwijam umiejętności w zakresie projektowania koncepcyjnego, wizualizacji oraz dokumentacji technicznej.</p>
+    </div>
+  </section>
   </main>
   <footer class="cv-footer cv-container">
-    <div>
-      <p>Projektantka wnętrz z wykształceniem inżynierskim.</p>
-      <p>Oprogramowanie: pCon.planner, AutoCAD, SketchUp, V-Ray.</p>
-    </div>
     <address aria-label="Kontakt">
       <a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a>
       <a href="tel:+48502272469">502 272 469</a>
