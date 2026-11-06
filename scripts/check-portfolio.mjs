@@ -4,7 +4,7 @@ import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
 import { inflateSync } from 'node:zlib';
 const root = path.resolve(import.meta.dirname, '..');
-const files = ['portfolio/index.html', ...['neomodernizm','japandi','lesny-rytm'].map(s => 'portfolio/' + s + '/index.html')];
+const files = ['portfolio/index.html', ...['neomodernizm','japandi','lesny-rytm','domek-babci'].map(s => 'portfolio/' + s + '/index.html')];
 const git = process.env.GIT_BINARY || (process.platform === 'win32' && fs.existsSync('C:/Program Files/Git/cmd/git.exe') ? 'C:/Program Files/Git/cmd/git.exe' : 'git');
 const original = execFileSync(git, ['show','92bb54a240b1eb52a3b7f3c4ff8c1b499b034142:portfolio/index.html'], {cwd: root, encoding:'utf8'});
 const galleryNames = text => [...text.matchAll(/data-lightbox-src="([^"]+)"/g)].map(m=>path.basename(m[1])).sort();
@@ -46,13 +46,17 @@ for (const file of files) {
   assert.equal(ids.length,new Set(ids).size,file + ': duplicate IDs');
   for (const m of html.matchAll(/<img\b[^>]*>/g)) {
     assert(/\balt="[^"]*"/.test(m[0]),file + ': missing alt');
-    if (/\bsrc=/.test(m[0])) assert(/\balt="[^"]+"/.test(m[0]),file + ': empty content alt');
+    // The monogram repeats the adjacent heading; its empty alt avoids a duplicate name.
+    const decorativeMonogram = file === 'portfolio/index.html'
+      && /class="cv-logo"/.test(m[0]) && /src="\.\.\/assets\/is-sygnet\.png"/.test(m[0]);
+    if (/\bsrc=/.test(m[0]) && !decorativeMonogram) assert(/\balt="[^"]+"/.test(m[0]),file + ': empty content alt');
   }
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) JSON.parse(m[1]);
   for (const m of html.matchAll(/(?:src|href|data-lightbox-src)="([^"]+)"/g)) {
     if (/^(https?:|mailto:|tel:)/.test(m[1])) continue;
     const [resource,fragment] = m[1].split('#');
-    let target = path.resolve(root,path.dirname(file),resource.split('?')[0] || path.basename(file));
+    const refPath = resource.split('?')[0];
+    let target = refPath.startsWith('/') ? path.join(root, refPath.slice(1)) : path.resolve(root,path.dirname(file),refPath || path.basename(file));
     if (!resource) target=path.join(root,file);
     assert(fs.existsSync(target),file + ': missing ' + m[1]);
     if(fs.statSync(target).isDirectory()) target=path.join(target,'index.html');
@@ -66,9 +70,15 @@ for (const file of files) {
     httpPaths.add(path.relative(root,target).split(path.sep).join('/'));
   }
   httpPaths.add(file);
-  actual.push(...galleryNames(html));
+  if (file !== 'portfolio/domek-babci/index.html') actual.push(...galleryNames(html));
 }
 assert.deepEqual(actual.sort(),expected,'Retain the curated gallery and the supplied WC render');
+const domek = fs.readFileSync(path.join(root, 'portfolio/domek-babci/index.html'), 'utf8');
+assert.deepEqual(galleryNames(domek), [
+  'stan-wyjsciowy.webp', 'stan-salon.webp', 'remont-kuchnia.webp', 'remont-sciana.webp', 'stan-kuchnia.webp',
+  'moodboard-kuchnia.webp', 'moodboard-stol-kredens.webp', 'moodboard-salon.webp',
+  'kuchnia-ogolny.webp', 'kuchnia-okno.webp', 'kuchnia-piecyk.webp', 'kuchnia-stol.webp', 'salon.webp'
+].sort(), 'Domek: approved photos, moodboards and visualizations, no duplicates');
 const neo = fs.readFileSync(path.join(root, 'portfolio/neomodernizm/index.html'), 'utf8');
 const livingGallery = neo.match(/<section class="room-chapter room-visualizations"[\s\S]*?<\/section>/)?.[0];
 assert(livingGallery, 'One shared living-zone gallery');
@@ -78,7 +88,7 @@ assert.deepEqual([...livingGallery.matchAll(/data-lightbox-src="[^"]+\/([^/"]+)"
 ], 'Living-zone narrative order');
 assert.equal((neo.match(/class="room-concept"/g) || []).length, 6, 'Six separate concept blocks');
 assert.equal(new Set(galleryNames(neo)).size, galleryNames(neo).length, 'No duplicate lightbox images');
-assert.equal((fs.readFileSync(path.join(root,files[0]),'utf8').match(/class="cv-project"/g)||[]).length,3);
+assert.equal((fs.readFileSync(path.join(root,files[0]),'utf8').match(/class="cv-project"/g)||[]).length,4);
 // Replace only the obsolete byte-for-byte homepage snapshot; retain shared CSS/JS snapshots.
 function checkHomepage() {
   const home = fs.readFileSync(path.join(root, 'portfolio/index.html'), 'utf8');
@@ -86,8 +96,8 @@ function checkHomepage() {
   const ids = [...home.matchAll(/\bid="([^"]+)"/g)].map(m => m[1]);
   assert.equal(ids.length, new Set(ids).size, 'Portfolio: unique IDs');
   const cards = [...home.matchAll(/<a\b[^>]*class="cv-project"[^>]*>([\s\S]*?)<\/a>/g)];
-  assert.equal(cards.length, 3, 'Portfolio: three project cards');
-  const destinations = ['/portfolio/neomodernizm/', '/portfolio/japandi/', '/portfolio/lesny-rytm/'];
+  assert.equal(cards.length, 4, 'Portfolio: four project cards');
+  const destinations = ['/portfolio/neomodernizm/', '/portfolio/japandi/', '/portfolio/lesny-rytm/', '/portfolio/domek-babci/'];
   cards.forEach((card, i) => {
     assert.equal(card[0].match(/\bhref="([^"]+)"/)?.[1], destinations[i], 'Portfolio: project destination');
     assert(/<h2\b[^>]*>[\s\S]*?\S[\s\S]*?<\/h2>/.test(card[1]), 'Portfolio: project title');
@@ -111,6 +121,7 @@ function checkHomepage() {
   assert(!/wykształceni|pCon|AutoCAD|SketchUp|V-Ray/.test(footer), 'Portfolio: no repeated biography in footer');
   assert(!/cal\.eu|id="oferta"|class="hero"|<form\b/.test(home), 'Portfolio: recruitment portfolio');
   assert(/<header\b[\s\S]*?<img class="cv-logo" src="\.\.\/assets\/is-sygnet\.png" alt="" width="630" height="725"/.test(home), 'Portfolio: decorative original monogram in header');
+  assert(/<h1><img class="cv-logo"[^>]*\/>Izabela Świtaj<\/h1>/.test(home), 'Portfolio: decorative monogram has adjacent heading text');
   assert(/<link rel="icon" href="\.\.\/assets\/is-favicon\.png" type="image\/png" sizes="64x64"/.test(home), 'Portfolio: PNG favicon');
   for (const match of home.matchAll(/(?:src|href)="([^"]+)"/g)) {
     const url = match[1];
@@ -204,12 +215,17 @@ for (const file of ['index.html','styles.css','script.js']) {
 }
 if (process.argv[2]) {
   const base = process.argv[2];
-  const responses = await Promise.all([...httpPaths].map(async file => {
-    const response = await fetch(new URL(file, base));
-    assert.equal(response.status, 200, 'HTTP: ' + file);
-    await response.arrayBuffer();
-    return file;
-  }));
+  // Bound concurrent requests so local preview servers are not flooded by the resource inventory.
+  const resources = [...httpPaths];
+  const responses = [];
+  for (let i = 0; i < resources.length; i += 4) {
+    responses.push(...await Promise.all(resources.slice(i, i + 4).map(async file => {
+      const response = await fetch(new URL(file, base));
+      assert.equal(response.status, 200, 'HTTP: ' + file);
+      await response.arrayBuffer();
+      return file;
+    })));
+  }
   console.log('HTTP 200: ' + responses.length + ' unique page/resource URLs');
 }
 console.log(JSON.stringify({pages:files.length,localReferences:links,galleryPositions:actual.length,homepage:'studio restored; recruitment portfolio at /portfolio/ verified',result:'PASS'},null,2));
