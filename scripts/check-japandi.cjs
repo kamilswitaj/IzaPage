@@ -11,18 +11,19 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   fs.mkdirSync(output, { recursive: true });
   const html = fs.readFileSync(path.join(root,'portfolio/japandi/index.html'),'utf8').replace(/\r\n/g,'\n');
   const git = process.env.GIT_BINARY || 'C:/Program Files/Git/cmd/git.exe';
-  const original = execFileSync(git,['show','e79fe962503432e584c2e1cff93a311b97a67b72:portfolio/japandi/index.html'],{cwd:root,encoding:'utf8'});
   const prose = text => text.match(/<div class="reading-copy">([\s\S]*?)<\/div>/)[1].replace(/\s+/g,' ').trim();
+  const approved = execFileSync(git,['show','b787876db3dbcb4ca25b822ceead73db2d056961:portfolio/japandi/index.html'],{cwd:root,encoding:'utf8'});
   const walkthrough=prose(html);
+  assert.equal(walkthrough,prose(approved),'Approved narrative walkthrough unchanged');
   assert.equal((walkthrough.match(/<p>/g)||[]).length,23,'Retain all supplied paragraphs and subheadings');
   assert.equal((walkthrough.match(/<p><strong>/g)||[]).length,7,'Retain the seven bold subheadings');
   assert(!/panel\w*\s+sufit|szynoprzew|podział\w*\s+sufit/i.test(html),'No obsolete ceiling descriptions');
   assert(!/organicz\w*\s+(?:wyprofilowan\w*\s+)?przejści/i.test(html),'Vanity has a mirror, not a passage');
   assert(/Tylna ściana szafy garderobianej/.test(walkthrough),'Correct vanity mounting');
   assert(/Organiczny kształt lustra/.test(walkthrough),'Correct vanity description');
-  const tags=text=>[...text.matchAll(/<\/?(?:section|article|header|nav|figure|details|summary)\b[^>]*>/g)].map(m=>m[0]);
+  const paragraphs=text=>[...text.matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)].map(m=>m[1].replace(/\s+/g,' ').trim()).sort();
+  assert.deepEqual(paragraphs(html),paragraphs(approved),'All approved descriptions unchanged');
   const lastLayout=execFileSync(git,['show','4c5f656712375f841393420b9737159559e52ff1:portfolio/japandi/index.html'],{cwd:root,encoding:'utf8'});
-  assert.deepEqual(tags(html),tags(lastLayout),'Section, gallery and walkthrough structure unchanged');
   const technicalCards=text=>[...text.matchAll(/<article class="technical-card">[\s\S]*?<\/article>/g)].map(m=>m[0]);
   assert.deepEqual(technicalCards(html),technicalCards(lastLayout),'Technical gallery unchanged');
   const pdf = path.join(root,'assets/documentation/japandi/projekt-b-izabela-switaj.pdf');
@@ -41,12 +42,15 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   }
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   const page = await browser.newPage();
+  await page.emulateMedia({reducedMotion:'reduce'});
   const errors = [];
   page.on('pageerror', e => errors.push(e.message));
   const url = process.env.PREVIEW_URL || 'http://127.0.0.1:8022/portfolio/japandi/';
   page.on('response', r => { if (new URL(r.url()).origin === new URL(url).origin && r.status() >= 400) errors.push(`${r.status()} ${r.url()}`); });
-  const captures = {header:'.project-heading',brief:'#zalozenia',plan:'#uklad',library:'#salon',kitchen:'#kuchnia',dining:'#jadalnia',bedroom:'#strefa-prywatna',sanitary:'#strefa-sanitarna',documentation:'#dokumentacja-techniczna',pdf:'#pelne-opracowanie'};
-  for (const width of [1440, 1024, 768, 390, 320]) {
+  const captures = {plan:'#uklad',living:'#strefa-dzienna',bedroom:'#strefa-prywatna',sanitary:'#strefa-sanitarna',documentation:'#dokumentacja-techniczna'};
+  const widths=[1920,1700,1440,1100,768,390];
+  const metrics=[];
+  for (const width of widths) {
     await page.setViewportSize({ width, height: 960 });
     await page.goto(url);
     await page.evaluate(async () => {
@@ -62,8 +66,44 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     for(let i=1;i<outline.length;i++) assert(outline[i].level<=outline[i-1].level+1,`heading skip: ${outline[i].text}`);
     assert.deepEqual(outline.filter(h=>h.level===2).map(h=>h.text),['Książki wyznaczają rytm wnętrza','Przestrzeń zorganizowana wokół codziennych rytuałów','Prezentacja pomieszczeń','Od koncepcji do szczegółu','Izabela Świtaj']);
     assert.equal(await page.locator('#hol img,#garderoba img').count(),0);
-    const libraryTops=await page.locator('.library-presentation > figure').evaluateAll(nodes=>nodes.map(n=>n.getBoundingClientRect().top));
-    if(width>640) assert(Math.abs(libraryTops[0]-libraryTops[1])<1,'Moodboard/render top alignment');
+    assert.equal(await page.locator('#wizualizacje-strefy-dziennej .gallery-item').count(),5);
+    assert.equal(await page.locator('#kuchnia img').count(),1,'Existing shared material moodboard beside kitchen concept');
+    assert.equal(await page.locator('#jadalnia img').count(),0,'No invented dining moodboard');
+    assert.equal(await page.locator('#salon img').count(),1,'Only the existing stylistic moodboard');
+    const geometry=await page.evaluate(()=>{
+      const box=n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
+      const gallery=document.querySelector('#wizualizacje-strefy-dziennej .japandi-gallery');
+      const root=box(gallery),gap=parseFloat(getComputedStyle(gallery).columnGap),column=(root.width-gap)/2;
+      return {root,gap,column,headings:[...document.querySelectorAll('.project--japandi h1,.project--japandi h2,.project--japandi h3,.project--japandi h4')].map(box),concepts:[...document.querySelectorAll('.room-concept')].map(n=>({root:box(n),copy:box(n.firstElementChild),board:n.querySelector('.room-moodboard')?box(n.querySelector('.room-moodboard')):null})),galleries:[...document.querySelectorAll('.japandi-gallery')].map(n=>({root:box(n),cards:[...n.children].map(box)})),plan:box(document.querySelector('#uklad > figure')),cover:box(document.querySelector('.case-cover img'))};
+    });
+    for(const h of geometry.headings) assert(Math.abs(h.x-geometry.root.x)<1,`Shared heading axis at ${width}`);
+    if(width>640){
+      for(const c of geometry.concepts){
+        assert(Math.abs(c.copy.x-geometry.root.x)<1,'Copy on the first column axis');
+        assert(c.copy.width<=geometry.column+1,'Copy stays within the first column');
+        if(c.board){
+          const center=geometry.root.x+geometry.column+geometry.gap+geometry.column/2;
+          assert(Math.abs(c.board.x+c.board.width/2-center)<1,'Moodboard centered on second gallery column');
+        }
+      }
+    }
+    for(const g of geometry.galleries){
+      assert(Math.abs(g.root.x-geometry.root.x)<1 && Math.abs(g.root.width-geometry.root.width)<1,'Shared gallery grid');
+      for(let n=0;n<g.cards.length;n++){
+        const c=g.cards[n];
+        assert(Math.abs(c.width-(width>640?geometry.column:g.root.width))<1,'Gallery image column width');
+        if(width>640 && n===g.cards.length-1 && g.cards.length%2){
+          assert(Math.abs(c.x+c.width/2-(g.root.x+g.root.width/2))<1,'Unpaired image centered');
+        }else if(width>640){
+          assert(Math.abs(c.x-(g.root.x+(n%2)*(geometry.column+geometry.gap)))<1,'Paired image on its column axis');
+          if(n%2)assert(Math.abs(c.y-g.cards[n-1].y)<1,'Paired image row top');
+        }
+      }
+    }
+    assert(geometry.plan.width<=900.5,'Plan capped at 900px');
+    assert(Math.abs(geometry.plan.x+geometry.plan.width/2-(geometry.root.x+geometry.root.width/2))<1,'Centered plan');
+    assert(geometry.cover.width<=1000.5,'Opening image capped');
+    metrics.push({width,...geometry});
     for(const id of ['kuchnia','jadalnia','salon','sypialnia','garderoba','lazienka','dodatkowe-wc']) assert.equal(await page.locator(`#${id} h4`).count(),1);
     assert.equal(await page.locator('#salon h4').evaluate(n=>getComputedStyle(n).fontFamily),await page.locator('#strefa-dzienna h3').evaluate(n=>getComputedStyle(n).fontFamily));
     const ratios=await page.locator('.japandi-story .image-button img').evaluateAll(nodes=>nodes.map(n=>Math.abs(n.width/n.height-n.naturalWidth/n.naturalHeight)));
@@ -82,6 +122,9 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
     const captureStyle='.portfolio-header,.skip-link { visibility:hidden !important; }';
     await page.screenshot({ path: path.join(output, `japandi-${width}.png`), fullPage: true,style:captureStyle });
     for(const [name,selector] of Object.entries(captures)) await page.locator(selector).screenshot({path:path.join(output,`${width}-${name}.png`),style:captureStyle});
+    await page.evaluate(()=>window.scrollTo(0,0));
+    const opening=await page.evaluate(()=>{const a=document.querySelector('.case-cover').getBoundingClientRect(),b=document.querySelector('.project-heading').getBoundingClientRect();return {x:0,y:a.y,width:innerWidth,height:b.bottom-a.y+24}});
+    await page.screenshot({path:path.join(output,`${width}-opening.png`),fullPage:true,clip:opening,style:captureStyle});
   }
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto(url);
@@ -131,9 +174,10 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
   await page.locator('#technical-fit').click();
   await page.screenshot({path:path.join(output,'technical-viewer-mobile.png')});
   await page.keyboard.press('Escape');
-  const result = { result:'PASS', widths:[1440,1024,768,390,320], gallery:13, featuredSheets:8, technicalSheets:13, pdfSha256:pdfHash, checks:['H1–H4 hierarchy','supplied walkthrough: 16 narrative paragraphs and 7 bold subheadings','correct mirror and vanity mounting descriptions','section structure and technical gallery unchanged','keyboard walkthrough','image decoding','no horizontal overflow','moodboard alignment','lightbox navigation','Escape and focus restoration','all technical sheets and full-image links','100% and zoom','mobile viewer and keyboard scrolling','original PDF hash and HTTP link'], browserErrors:errors };
+  const result = { result:'PASS', widths, gallery:13, livingRenders:5, featuredSheets:8, technicalSheets:13, pdfSha256:pdfHash, checks:['approved descriptions and narrative unchanged','H1–H4 hierarchy','shared left axes and equal gallery columns','moodboards centered on second column','single and odd images centered at one-column width','centered uncropped plan and opening image','keyboard walkthrough','image decoding and proportions','no horizontal overflow','lightbox navigation','Escape and focus restoration','technical gallery unchanged','all technical sheets and full-image links','100% and zoom','mobile viewer and keyboard scrolling','original PDF hash and HTTP link'], browserErrors:errors };
   assert.deepEqual(errors, []);
   fs.writeFileSync(path.join(output, 'results.json'), JSON.stringify(result, null, 2));
+  fs.writeFileSync(path.join(output, 'metrics.json'), JSON.stringify(metrics, null, 2));
   console.log(JSON.stringify(result, null, 2));
   await browser.close();
 })().catch(e => { console.error(e); process.exit(1); });
