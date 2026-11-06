@@ -10,7 +10,7 @@
 }
 .japandi-page :is(.portfolio-header,.case-cover,.case-content,.technical-documentation,.project-pagination,.contact) { padding-inline:var(--page-inset); }
 .japandi-page .case-cover { padding-top:32px; }
-.japandi-page .case-cover img { width:min(100%,960px); height:auto; margin-inline:auto; }
+.japandi-page .case-cover img { width:min(100%,var(--editorial-width)); height:auto; margin-inline:0; }
 .japandi-page .case-content { padding-block:40px var(--section-space); }
 .japandi-page .project-heading { display:block; max-width:var(--editorial-width); margin-bottom:40px; }
 .japandi-page .project-number { margin:0 0 16px; }
