@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta
       name="description"
-      content="Projektowanie wnętrz i konsultacje wnętrzarskie online, w Warszawie i okolicach. Układy funkcjonalne, kuchnie, łazienki i pomoc przed remontem."
+      content="Portfolio projektowe Izabeli Świtaj, projektantki wnętrz z wykształceniem inżynierskim. Neomodernizm, Japandi i Leśny rytm — koncepcje, układy i wizualizacje."
     />
 <link rel="canonical" href="https://izabelaswitaj.pl/" />
-<title>Izabela Świtaj | Projektantka wnętrz — Warszawa i online</title>
+<title>Izabela Świtaj — projektantka wnętrz | Portfolio</title>
 <link rel="icon" href="assets/logo.jpeg" type="image/jpeg" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -19,596 +19,75 @@
 <meta name="theme-color" content="#f7f5ef" />
 <meta property="og:type" content="website" />
 <meta property="og:locale" content="pl_PL" />
-<meta property="og:title" content="Izabela Świtaj — wnętrza tworzone z myślą o życiu" />
-<meta property="og:description" content="Projektowanie wnętrz i konsultacje. Zobacz wybrane projekty i porozmawiajmy o Twojej przestrzeni." />
+<meta property="og:title" content="Izabela Świtaj — portfolio projektowe" />
+<meta property="og:description" content="Trzy wybrane projekty wnętrz: Neomodernizm, Japandi i Leśny rytm. Koncepcje, układy funkcjonalne i wizualizacje." />
 <meta property="og:url" content="https://izabelaswitaj.pl/" />
-<meta property="og:image" content="https://izabelaswitaj.pl/assets/gallery/diploma-entry-kitchen.webp" />
-<meta property="og:image:alt" content="Hol i kuchnia w autorskim projekcie Izabeli Świtaj" />
+<meta property="og:image" content="https://izabelaswitaj.pl/assets/gallery/diploma-kitchen-dining-1.webp" />
+<meta property="og:image:alt" content="Kuchnia i jadalnia w projekcie Neomodernizm Izabeli Świtaj" />
 <meta name="twitter:card" content="summary_large_image" />
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Izabela Świtaj","jobTitle":"Projektantka wnętrz","url":"https://izabelaswitaj.pl/","email":"mailto:izabela.switaj@gmail.com","telephone":"+48502272469"}</script>
+<link rel="stylesheet" href="portfolio/portfolio.css?v=20261104-6" />
 <style>
-    :root{
-      --paper:#f7f5ef;
-      --white:#fffdf8;
-      --ink:#10243f;
-      --muted:#44566a;
-      --green:#0f6a52;
-      --line:rgba(16,36,63,.16)
-    }
-    .sr-only{
-      position:absolute;
-      width:1px;
-      height:1px;
-      padding:0;
-      margin:-1px;
-      overflow:hidden;
-      clip-path:inset(50%);
-      white-space:nowrap;
-      border:0
-    }
-    *{
-      box-sizing:border-box
-    }
-    html{
-      scroll-padding-top:110px
-    }
-    body{
-      margin:0;
-      background:var(--paper);
-      color:var(--ink);
-      font-family:Inter,Arial,sans-serif;
-      line-height:1.65
-    }
-    img{
-      display:block;
-      max-width:100%;
-      height:auto
-    }
-    a{
-      color:inherit;
-      text-decoration:none
-    }
-    a:focus-visible{
-      outline:3px solid var(--green);
-      outline-offset:5px
-    }
-    h1,h2,h3{
-      font-family:"Playfair Display",Georgia,serif;
-      line-height:1.15;
-      font-weight:600
-    }
-    h1,h2,h3,p{
-      margin:0;
-      overflow-wrap:break-word
-    }
-    h1{
-      font-size:clamp(2.7rem,4.1vw,4.5rem);
-      letter-spacing:-.035em
-    }
-    h2{
-      font-size:clamp(2rem,3.1vw,3.2rem);
-      letter-spacing:-.025em
-    }
-    p{
-      color:var(--muted)
-    }
-    .container{
-      width:min(1440px,calc(100% - 112px));
-      margin-inline:auto
-    }
-    .skip-link{
-      position:fixed;
-      top:8px;
-      left:8px;
-      z-index:30;
-      padding:12px;
-      background:var(--ink);
-      color:white;
-      transform:translateY(-180%)
-    }
-    .skip-link:focus{
-      transform:none
-    }
-    .site-header{
-      position:sticky;
-      top:0;
-      z-index:20;
-      background:var(--paper);
-      border-bottom:1px solid var(--line)
-    }
-    .header-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:24px;
-      min-height:88px
-    }
-    .brand strong{
-      display:block;
-      font-family:"Playfair Display",Georgia,serif;
-      font-size:1.35rem;
-      font-weight:600
-    }
-    .brand span{
-      display:block;
-      font-size:.7rem;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:var(--green)
-    }
-    nav{
-      display:flex;
-      gap:30px;
-      font-size:.85rem;
-      font-weight:600
-    }
-    nav a{
-      display:inline-flex;
-      align-items:center;
-      min-height:44px
-    }
-    nav a:hover,.text-link:hover,address>a:hover{
-      text-decoration:underline;
-      text-underline-offset:5px
-    }
-    .eyebrow{
-      color:var(--green);
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      font-weight:600;
-      font-size:.72rem;
-      margin-bottom:18px
-    }
-    .hero{
-      display:grid;
-      grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);
-      align-items:center;
-      gap:64px;
-      padding-block:64px 80px
-    }
-    .hero-copy>p:not(.eyebrow){
-      max-width:47ch;
-      margin-top:24px
-    }
-    .hero-image{
-      margin:0
-    }
-    .hero-image img{
-      width:100%;
-      aspect-ratio:1.14;
-      object-fit:cover
-    }
-    .hero-image figcaption{
-      font-size:.72rem;
-      color:var(--muted);
-      padding-top:12px
-    }
-    .actions{
-      display:flex;
-      flex-wrap:wrap;
-      gap:12px;
-      margin-top:30px
-    }
-    .button{
-      display:inline-flex;
-      justify-content:center;
-      align-items:center;
-      min-height:48px;
-      padding:13px 20px;
-      font-size:.81rem;
-      font-weight:600;
-      border:1px solid var(--green);
-      color:var(--green)
-    }
-    .button-primary{
-      background:var(--green);
-      color:white
-    }
-    .button:hover{
-      background:var(--ink);
-      border-color:var(--ink);
-      color:white
-    }
-    .section{
-      padding-block:80px
-    }
-    .projects{
-      background:var(--white)
-    }
-    .section-heading{
-      display:flex;
-      align-items:end;
-      justify-content:space-between;
-      gap:24px;
-      margin-bottom:36px
-    }
-    .text-link{
-      display:inline-flex;
-      gap:20px;
-      align-items:center;
-      min-height:44px;
-      color:var(--green);
-      font-size:.85rem;
-      font-weight:600
-    }
-    .project-grid{
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      gap:28px
-    }
-    .project-card{
-      display:flex;
-      flex-direction:column;
-      border-bottom:1px solid var(--line);
-      padding-bottom:20px;
-      min-width:0
-    }
-    .project-card img{
-      width:100%;
-      aspect-ratio:4/3;
-      object-fit:cover
-    }
-    .project-card .eyebrow{
-      margin:22px 0 10px;
-      font-size:.66rem
-    }
-    .project-card h3{
-      font-size:clamp(1.45rem,1.8vw,1.8rem);
-      margin-bottom:14px
-    }
-    .project-card .text-link{
-      margin-top:auto;
-      justify-content:space-between
-    }
-    .project-card:hover h3{
-      text-decoration:underline;
-      text-decoration-thickness:1px;
-      text-underline-offset:5px
-    }
-    .service-intro{
-      max-width:58ch;
-      margin-top:20px
-    }
-    .service-grid{
-      display:grid;
-      grid-template-columns:repeat(4,minmax(0,1fr));
-      gap:32px;
-      margin-top:40px
-    }
-    .service-grid article{
-      border-top:1px solid var(--line);
-      padding-top:20px
-    }
-    .service-grid .eyebrow{
-      margin-bottom:20px
-    }
-    .service-grid h3{
-      font-size:1.35rem;
-      margin-bottom:14px
-    }
-    .service-grid p:last-child{
-      font-size:.9rem
-    }
-    .about{
-      border-block:1px solid var(--line)
-    }
-    .about-inner{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:80px;
-      align-items:start
-    }
-    .about-copy{
-      max-width:58ch
-    }
-    .about-copy p+p{
-      margin-top:18px
-    }
-    .contact{
-      background:#e8ede4
-    }
-    .contact-inner{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:80px
-    }
-    .contact-copy>p:last-child{
-      margin-top:24px;
-      max-width:48ch
-    }
-    address{
-      display:flex;
-      align-items:start;
-      flex-direction:column;
-      gap:12px;
-      font-style:normal
-    }
-    address .button{
-      margin-bottom:10px
-    }
-    address>a:not(.button){
-      font-size:clamp(1rem,1.4vw,1.25rem)
-    }
-    address small{
-      color:var(--muted);
-      font-size:.8rem
-    }
-    .site-footer{
-      display:flex;
-      justify-content:space-between;
-      gap:20px;
-      padding-block:24px;
-      font-size:.75rem;
-      color:var(--muted)
-    }
-    @media(min-width:1600px){
-      .hero{
-        gap:88px
-      }
-    }
-    @media(max-width:1000px){
-      .container{
-        width:calc(100% - 64px)
-      }
-      .hero{
-        gap:32px
-      }
-      .actions{
-        flex-direction:column;
-        align-items:start
-      }
-      .service-grid{
-        grid-template-columns:repeat(2,minmax(0,1fr))
-      }
-      .project-grid{
-        gap:20px
-      }
-      .about-inner,.contact-inner{
-        gap:40px
-      }
-      nav{
-        gap:20px
-      }
-    }
-    @media(max-width:800px){
-      .hero{
-        grid-template-columns:1fr;
-        padding-block:40px 56px;
-        gap:32px
-      }
-      .hero-copy{
-        max-width:600px
-      }
-      .hero h1{
-        max-width:17ch
-      }
-      .hero-image img{
-        aspect-ratio:16/10
-      }
-      .actions{
-        flex-direction:row
-      }
-      .section{
-        padding-block:56px
-      }
-      .project-grid{
-        grid-template-columns:1fr
-      }
-      .project-card{
-        display:grid;
-        grid-template-columns:1fr 1fr;
-        column-gap:24px
-      }
-      .project-card img{
-        grid-row:1/4
-      }
-      .project-card .eyebrow{
-        margin-top:0
-      }
-      .project-card h3{
-        align-self:start
-      }
-      .project-card .text-link{
-        align-self:end
-      }
-      .about-inner,.contact-inner{
-        grid-template-columns:1fr;
-        gap:28px
-      }
-    }
-    @media(max-width:560px){
-      html{
-        scroll-padding-top:140px
-      }
-      .container{
-        width:calc(100% - 40px)
-      }
-      .header-inner{
-        flex-direction:column;
-        align-items:start;
-        gap:8px;
-        padding-block:14px
-      }
-      .brand strong{
-        font-size:1.15rem
-      }
-      .brand span{
-        font-size:.61rem
-      }
-      nav{
-        width:100%;
-        justify-content:space-between;
-        gap:12px;
-        font-size:.78rem
-      }
-      .hero{
-        padding-top:32px
-      }
-      h1{
-        font-size:2.7rem
-      }
-      .actions{
-        flex-direction:column;
-        align-items:stretch
-      }
-      .section-heading{
-        display:block
-      }
-      .section-heading>.text-link{
-        margin-top:16px
-      }
-      .project-card{
-        display:flex
-      }
-      .project-card .text-link{
-        align-self:stretch
-      }
-      .project-card .eyebrow{
-        margin-top:20px
-      }
-      .service-grid{
-        grid-template-columns:1fr;
-        gap:28px
-      }
-      .service-grid .eyebrow{
-        margin-bottom:10px
-      }
-      .service-grid h3{
-        margin-bottom:10px
-      }
-      .site-footer{
-        flex-direction:column;
-        gap:4px
-      }
-    }
+  .cv-container { width:min(1280px,calc(100% - 112px)); margin-inline:auto; }
+  .cv-header { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-block:28px; border-bottom:1px solid var(--line); }
+  .cv-header h1 { margin:0; font-size:1.4rem; letter-spacing:0; }
+  .cv-header p { margin:0; font-size:.85rem; color:var(--ink-soft); }
+  .cv-projects { display:grid; gap:56px; padding-block:32px 56px; }
+  .cv-project { display:block; min-width:0; }
+  .cv-project img { width:100%; height:auto; }
+  .cv-caption { display:flex; justify-content:space-between; align-items:baseline; gap:12px 32px; padding-top:16px; }
+  .cv-caption h2 { margin:0; font-size:clamp(1.5rem,2.4vw,2.2rem); }
+  .cv-caption h2 span { margin-left:12px; color:var(--green); font-family:var(--sans); font-size:1rem; }
+  .cv-caption p { margin:0; color:var(--ink-soft); font-size:.85rem; }
+  .cv-project:hover h2 { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
+  .cv-footer { display:grid; grid-template-columns:1fr auto; gap:24px 48px; border-top:1px solid var(--line); padding-block:28px 40px; font-size:.85rem; color:var(--ink-soft); }
+  .cv-footer p { margin:0; }
+  .cv-footer address { display:flex; flex-direction:column; align-items:start; gap:4px; font-style:normal; }
+  .cv-footer a { display:inline-flex; align-items:center; min-height:32px; }
+  .cv-footer a:hover { text-decoration:underline; text-underline-offset:4px; }
+  @media(max-width:900px) { .cv-container { width:calc(100% - 64px); } .cv-caption { flex-direction:column; gap:8px; } }
+  @media(max-width:560px) { .cv-container { width:calc(100% - 40px); } .cv-header { padding-block:22px; } .cv-header h1 { font-size:1.25rem; } .cv-projects { gap:36px; padding-block:24px 36px; } .cv-footer { grid-template-columns:1fr; gap:20px; } .cv-footer a { min-height:44px; } }
 </style>
 </head>
 <body>
-<a class="skip-link" href="#start">Przejdź do treści</a>
-<header class="site-header">
-<div class="container header-inner">
-<a class="brand" href="#start" aria-label="Izabela Świtaj — strona główna">
-<strong>Izabela Świtaj</strong>
-<span>projektantka wnętrz</span>
-</a>
-<nav aria-label="Główna nawigacja">
-<a href="#projekty">Projekty</a>
-<a href="#oferta">Oferta</a>
-<a href="#o-mnie">O mnie</a>
-<a href="#kontakt">Kontakt</a>
-</nav>
-</div>
-</header>
-<main id="start" tabindex="-1">
-<section class="container hero" aria-labelledby="hero-title">
-<div class="hero-copy">
-<p class="eyebrow">Izabela Świtaj · projektantka wnętrz</p>
-<h1 id="hero-title">Wnętrza tworzone z myślą o życiu</h1>
-<p>Pomagam zaplanować wygodną, spójną przestrzeń — od konsultacji i układu funkcjonalnego po koncepcję wnętrza. W Warszawie i okolicach oraz online.</p>
-<div class="actions">
-<a class="button button-primary" href="/portfolio/">Zobacz projekty</a>
-<a class="button" href="#kontakt">Porozmawiajmy o projekcie</a>
-</div>
-</div>
-<figure class="hero-image">
-<img src="assets/gallery/diploma-entry-kitchen.webp" srcset="assets/gallery/previews/diploma-entry-kitchen.webp 640w, assets/gallery/diploma-entry-kitchen.webp 1448w" sizes="(max-width: 800px) calc(100vw - 40px), 50vw" alt="Hol z widokiem na jasną kuchnię i drewnianą zabudowę w autorskim projekcie Izabeli Świtaj" width="1448" height="1086" fetchpriority="high" decoding="async" />
-<figcaption>Przytulny neomodernizm · projekt autorski</figcaption>
-</figure>
-</section>
-<section id="projekty" class="section projects" aria-labelledby="projects-title">
-<div class="container">
-<div class="section-heading">
-<div>
-<p class="eyebrow">Wybrane projekty</p>
-<h2 id="projects-title">Różne wnętrza. Twój sposób życia.</h2>
-</div>
-<a class="text-link" href="/portfolio/">Pełne portfolio <span aria-hidden="true">↗</span>
-</a>
-</div>
-<div class="project-grid">
-<a class="project-card" href="/portfolio/neomodernizm/">
-<img src="assets/gallery/diploma-kitchen-dining-1.webp" srcset="assets/gallery/previews/diploma-kitchen-dining-1.webp 640w, assets/gallery/diploma-kitchen-dining-1.webp 1800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 800px) 45vw, 30vw" alt="Jasna kuchnia i jadalnia z drewnianym stołem" width="1800" height="1013" loading="lazy" decoding="async" />
-<p class="eyebrow">01 / Rodzina 2+2</p>
-<h3>Przytulny neomodernizm</h3>
-<span class="text-link">Zobacz projekt <span aria-hidden="true">↗</span>
-</span>
-</a>
-<a class="project-card" href="/portfolio/japandi/">
-<img src="assets/gallery/japandi-library.webp" srcset="assets/gallery/previews/japandi-library.webp 640w, assets/gallery/japandi-library.webp 1600w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 800px) 45vw, 30vw" alt="Salon z biblioteką i naturalnymi materiałami" width="1600" height="1200" loading="lazy" decoding="async" />
-<p class="eyebrow">02 / Mieszkanie bibliofilów</p>
-<h3>Japońska harmonia</h3>
-<span class="text-link">Zobacz projekt <span aria-hidden="true">↗</span>
-</span>
-</a>
-<a class="project-card" href="/portfolio/lesny-rytm/">
-<img src="assets/gallery/organic-rtv-open.webp" srcset="assets/gallery/previews/organic-rtv-open.webp 640w, assets/gallery/organic-rtv-open.webp 1672w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 800px) 45vw, 30vw" alt="Zielona zabudowa RTV z ukrytym miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
-<p class="eyebrow">03 / Salon i home office</p>
-<h3>Leśny rytm codzienności</h3>
-<span class="text-link">Zobacz projekt <span aria-hidden="true">↗</span>
-</span>
-</a>
-</div>
-</div>
-</section>
-<section id="oferta" class="section container" aria-labelledby="services-title">
-<p class="eyebrow">Zakres współpracy</p>
-<h2 id="services-title">W czym mogę pomóc?</h2>
-<p class="service-intro">Możemy zacząć od jednej decyzji lub przyjrzeć się całemu wnętrzu. Zakres współpracy ustalamy po rozmowie o Twoich potrzebach, budżecie i etapie prac.</p>
-<div class="service-grid">
-<article>
-<p class="eyebrow">01</p>
-<h3>Konsultacje</h3>
-<p>Uporządkowanie pomysłów i omówienie problemów przed remontem lub zmianą aranżacji.</p>
-</article>
-<article>
-<p class="eyebrow">02</p>
-<h3>Układy funkcjonalne</h3>
-<p>Rozmieszczenie mebli, stref i przechowywania, które ułatwia codzienne korzystanie z przestrzeni.</p>
-</article>
-<article>
-<p class="eyebrow">03</p>
-<h3>Koncepcje wnętrz</h3>
-<p>Spójny kierunek dla kolorów, materiałów i wyposażenia oraz wizualizacje wnętrza.</p>
-</article>
-<article>
-<p class="eyebrow">04</p>
-<h3>Wsparcie w decyzjach</h3>
-<p>Pomoc w doborze mebli, oświetlenia i wykończenia, zanim zdecydujesz się na zakupy.</p>
-</article>
-</div>
-</section>
-<section id="o-mnie" class="section about" aria-labelledby="about-title">
-<div class="container about-inner">
-<div>
-<p class="eyebrow">O mnie</p>
-<h2 id="about-title">Przemyślana funkcja.<br>Wrażliwość na detal.</h2>
-</div>
-<div class="about-copy">
-<p>Cześć, jestem Iza — projektantka wnętrz z wykształceniem inżynierskim. Łączę techniczne, uporządkowane podejście z wrażliwością na proporcje, światło i materiały.</p>
-<p>Punktem wyjścia jest dla mnie codzienność domowników. Zwracam uwagę na ergonomię, przechowywanie i rozwiązania, które dobrze wyglądają i sprawdzają się w użytkowaniu.</p>
-</div>
-</div>
-</section>
-<section id="kontakt" class="section contact" aria-labelledby="contact-title">
-<div class="container contact-inner">
-<div class="contact-copy">
-<p class="eyebrow">Zacznijmy od rozmowy</p>
-<h2 id="contact-title">Porozmawiajmy<br>o Twoim wnętrzu.</h2>
-<p>Opowiedz, co planujesz i na jakim etapie jesteś. Podczas bezpłatnej, 30-minutowej konsultacji omówimy potrzeby i możliwy zakres współpracy. Możesz też napisać lub zadzwonić.</p>
-</div>
-<address>
-<a class="button button-primary" href="https://cal.eu/izabela-switaj/30min" target="_blank" rel="noopener">Umów bezpłatną konsultację <span class="sr-only">(nowa karta)</span>
-</a>
-<a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a>
-<a href="tel:+48502272469">502 272 469</a>
-<small>Warszawa i okolice · współpraca online</small>
-</address>
-</div>
-</section>
-</main>
-<footer class="container site-footer">
-<span>Izabela Świtaj · projektantka wnętrz</span>
-<a href="#start">Wróć na górę ↑</a>
-</footer>
+  <a class="skip-link" href="#projekty">Przejdź do projektów</a>
+  <header class="cv-header cv-container">
+    <h1>Izabela Świtaj</h1>
+    <p>— projektantka wnętrz</p>
+  </header>
+  <main id="projekty" class="cv-projects cv-container" tabindex="-1" aria-label="Wybrane projekty wnętrz">
+    <a class="cv-project" href="/portfolio/neomodernizm/" aria-labelledby="project-1">
+      <img src="assets/gallery/diploma-kitchen-dining-1.webp" srcset="assets/gallery/previews/diploma-kitchen-dining-1.webp 640w, assets/gallery/diploma-kitchen-dining-1.webp 1800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 64px), (max-width: 1392px) calc(100vw - 112px), 1280px" alt="Jasna kuchnia i jadalnia z drewnianym stołem" width="1800" height="1013" fetchpriority="high" decoding="async" />
+      <div class="cv-caption">
+        <h2 id="project-1">Neomodernizm<span aria-hidden="true">↗</span></h2>
+        <p>Projekt dyplomowy · mieszkanie dla rodziny 2+2</p>
+      </div>
+    </a>
+    <a class="cv-project" href="/portfolio/japandi/" aria-labelledby="project-2">
+      <img src="assets/gallery/japandi-library.webp" srcset="assets/gallery/previews/japandi-library.webp 640w, assets/gallery/japandi-library.webp 1600w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 64px), (max-width: 1392px) calc(100vw - 112px), 1280px" alt="Salon z biblioteką i przesuwnymi panelami" width="1600" height="1200" loading="lazy" decoding="async" />
+      <div class="cv-caption">
+        <h2 id="project-2">Japandi<span aria-hidden="true">↗</span></h2>
+        <p>Koncepcja wnętrza · mieszkanie bibliofilów</p>
+      </div>
+    </a>
+    <a class="cv-project" href="/portfolio/lesny-rytm/" aria-labelledby="project-3">
+      <img src="assets/gallery/organic-rtv-open.webp" srcset="assets/gallery/previews/organic-rtv-open.webp 640w, assets/gallery/organic-rtv-open.webp 1672w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc(100vw - 64px), (max-width: 1392px) calc(100vw - 112px), 1280px" alt="Zielona zabudowa RTV z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
+      <div class="cv-caption">
+        <h2 id="project-3">Leśny rytm<span aria-hidden="true">↗</span></h2>
+        <p>Koncepcja wnętrza · salon i home office</p>
+      </div>
+    </a>
+  </main>
+  <footer class="cv-footer cv-container">
+    <div>
+      <p>Projektantka wnętrz z wykształceniem inżynierskim.</p>
+      <p>Oprogramowanie: pCon.planner, AutoCAD, SketchUp, V-Ray.</p>
+    </div>
+    <address aria-label="Kontakt">
+      <a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a>
+      <a href="tel:+48502272469">502 272 469</a>
+      <span>Warszawa</span>
+    </address>
+  </footer>
 </body>
 </html>
