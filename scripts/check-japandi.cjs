@@ -74,7 +74,7 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       const box=n=>{const r=n.getBoundingClientRect();return {x:r.x,y:r.y,width:r.width,height:r.height}};
       const gallery=document.querySelector('#wizualizacje-strefy-dziennej .japandi-gallery');
       const root=box(gallery),gap=parseFloat(getComputedStyle(gallery).columnGap),column=(root.width-gap)/2;
-      const editorialSelectors=['.project-heading','#zalozenia','#uklad h2','#uklad > p:not(.eyebrow)','.rooms-heading','#materialy','#hol .room-heading','#sypialnia .room-chapter-heading','#garderoba .room-chapter-heading','#strefa-sanitarna .room-heading','.technical-heading','.technical-group-heading','.technical-thesis-card'];
+      const editorialSelectors=['.project-heading','#zalozenia','#uklad h2','#uklad > .editorial-copy','.rooms-heading','#materialy','#hol .room-heading','#sypialnia .room-chapter-heading','#garderoba .room-chapter-heading','#strefa-sanitarna .room-heading','.technical-heading','.technical-group-heading','.technical-thesis-card'];
       return {root,gap,column,headings:[...document.querySelectorAll('.project--japandi h1,.project--japandi h2,.project--japandi h3,.project--japandi h4,.technical-heading h2,.technical-group-heading h3,#kontakt h2')].map(box),editorial:editorialSelectors.map(selector=>({selector,...box(document.querySelector(selector)),display:getComputedStyle(document.querySelector(selector)).display})),concept:box(document.querySelector('.living-concept')),copy:box(document.querySelector('.living-copy')),moodboards:[...document.querySelectorAll('.living-moodboards > figure')].map(box),galleries:[...document.querySelectorAll('.japandi-gallery,.technical-grid')].map(n=>({root:box(n),technical:n.matches('.technical-grid'),cards:[...n.children].map(box)})),plan:box(document.querySelector('#uklad > figure')),cover:box(document.querySelector('.case-cover img')),navigation:box(document.querySelector('.project-pagination > a')),brand:box(document.querySelector('.portfolio-header .brand'))};
     });
     for(const h of geometry.headings) assert(Math.abs(h.x-geometry.root.x)<1,`Shared heading axis at ${width}`);
@@ -83,6 +83,8 @@ const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
       assert(e.width<=961,`Editorial width: ${e.selector}`);
       assert(Math.abs(e.x-geometry.root.x)<1,`Editorial axis: ${e.selector}`);
     }
+    const proseWidths=await page.evaluate(()=>[...document.querySelectorAll('.project-heading,.case-brief,.editorial-copy,.rooms-heading,.room-heading,.room-chapter-heading,.apartment-walk,.technical-heading,.technical-group-heading')].flatMap(n=>[...n.children].filter(c=>c.matches('p,h1,h2,h3,h4')).map(c=>({text:c.textContent.slice(0,50),container:n.getBoundingClientRect().width,width:c.getBoundingClientRect().width,align:getComputedStyle(c).textAlign}))));
+    for(const p of proseWidths){assert(Math.abs(p.container-p.width)<1,'Shared editorial width: '+p.text);assert.notEqual(p.align,'justify');}
     assert.equal(geometry.editorial.find(e=>e.selector==='#zalozenia').display,'block','Editorial content has no empty column');
     assert(Math.abs(geometry.navigation.x-geometry.root.x)<1,'Final navigation shares the page axis');
     assert(Math.abs(geometry.brand.x-geometry.root.x)<1,'Top navigation shares the page axis');

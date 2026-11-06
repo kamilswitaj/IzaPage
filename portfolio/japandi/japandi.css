@@ -2,7 +2,6 @@
 .japandi-page {
   --page-width:1280px;
   --editorial-width:960px;
-  --copy-width:68ch;
   --page-gutter:clamp(20px,4vw,48px);
   --page-inset:max(var(--page-gutter),calc((100% - var(--page-width)) / 2));
   --japandi-gap:clamp(24px,3vw,36px);
@@ -15,9 +14,9 @@
 .japandi-page .case-content { padding-block:40px var(--section-space); }
 .japandi-page .project-heading { display:block; max-width:var(--editorial-width); margin-bottom:40px; }
 .japandi-page .project-number { margin:0 0 16px; }
-.japandi-page h1 { max-width:24ch; margin:0 0 16px; font-size:clamp(2.1rem,3.6vw,3.75rem); line-height:1.12; }
-.japandi-page :is(.case-brief,.room-plan,.rooms-heading,.room-heading,.room-chapter-heading,.editorial-copy,.apartment-walk,.technical-heading,.technical-group-heading) { max-width:var(--editorial-width); }
-.japandi-page :is(.project--japandi p,.technical-heading p,.technical-group-heading p) { max-width:var(--copy-width); margin:0 0 16px; }
+.japandi-page h1 { margin:0 0 16px; font-size:clamp(2.1rem,3.6vw,3.75rem); line-height:1.12; }
+.japandi-page :is(.case-brief,.reading-copy,.rooms-heading,.room-heading,.room-chapter-heading,.editorial-copy,.apartment-walk,.technical-heading,.technical-group-heading) { max-width:var(--editorial-width); }
+.japandi-page :is(.project--japandi p,.technical-heading p,.technical-group-heading p) { max-width:none; margin:0 0 16px; }
 .japandi-page :is(.case-brief,.room-plan,.room-heading,.room-chapter-heading,.editorial-copy,.reading-copy,.technical-heading,.technical-group-heading) > p:last-child { margin-bottom:0; }
 .japandi-page :is(.case-brief,.room-plan,.rooms-heading,.technical-heading,.contact) h2 { margin:0 0 16px; font-size:clamp(1.85rem,2.3vw,2.6rem); line-height:1.18; }
 .japandi-page :is(.room-heading,.technical-group-heading) h3 { margin:0 0 16px; font-size:clamp(1.5rem,1.9vw,2rem); line-height:1.2; }
@@ -32,14 +31,11 @@
 .japandi-index a { display:inline-flex; align-items:center; min-height:44px; }
 .japandi-index a:hover { text-decoration:underline; text-underline-offset:5px; }
 .japandi-page .case-brief { margin-bottom:var(--section-space); }
-.japandi-page .room-plan { max-width:none; }
-.japandi-page .room-plan > :is(h2,p) { max-width:var(--editorial-width); }
-.japandi-page .room-plan > p:not(.eyebrow) { max-width:var(--copy-width); }
 .japandi-page .room-plan > .gallery-item { width:min(100%,900px); margin:var(--subsection-space) auto; }
 .japandi-page .apartment-walk { margin-top:var(--subsection-space); }
 .japandi-page .walk-title { font:clamp(1.4rem,2vw,1.8rem)/1.25 var(--serif); }
 .japandi-page .original-description { margin-top:24px; padding-block:12px; }
-.japandi-page .reading-copy { max-width:var(--copy-width); padding-top:24px; }
+.japandi-page .reading-copy { padding-top:24px; }
 .japandi-page .room-presentation-chapter { margin-top:var(--section-space); }
 .japandi-page .rooms-heading { margin-bottom:24px; }
 .japandi-page .room-section { margin-top:var(--section-space); padding-top:0; border:0; }
