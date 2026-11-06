@@ -6,8 +6,7 @@
   align-items:start;
   margin-bottom:clamp(24px,3vw,36px);
 }
-.domek-room .room-moodboards { display:grid; gap:32px; justify-items:center; }
-.domek-room .room-moodboard { width:min(100%,clamp(300px,22vw,340px)); }
+.domek-room .room-moodboard { width:min(100%,600px); justify-self:center; }
 .domek-room .room-concept > .room-heading { margin-bottom:0; }
 .domek-room .room-renders { --render-gap:clamp(20px,3vw,36px); gap:var(--render-gap); }
 .japandi-page .domek-room .room-renders > .gallery-item:last-child:nth-child(odd) {
@@ -15,9 +14,9 @@
   width:calc((100% - var(--render-gap)) / 2);
   justify-self:center;
 }
-@media(max-width:900px) { .domek-room .room-moodboard { width:min(100%,240px); } }
 @media(max-width:640px) {
   .domek-room .room-concept { grid-template-columns:minmax(0,1fr); }
-  .domek-room .room-moodboard { width:min(100%,280px); }
   .japandi-page .domek-room .room-renders > .gallery-item:last-child:nth-child(odd) { width:100%; }
 }
+
+.photo-orientation-groups { display:grid; gap:var(--subsection-space); }
