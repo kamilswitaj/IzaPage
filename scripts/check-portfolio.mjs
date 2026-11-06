@@ -2,8 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import assert from 'node:assert/strict';
 import { execFileSync } from 'node:child_process';
+import { checkProjectTemplates } from './check-project-template.mjs';
 const root = path.resolve(import.meta.dirname, '..');
-const files = ['portfolio/index.html', ...['neomodernizm','japandi','lesny-rytm'].map(s => 'portfolio/' + s + '/index.html')];
+const files = ['portfolio/index.html', ...checkProjectTemplates(root).map(file => path.relative(root, file))];
+const curatedProjects = new Set(['neomodernizm','japandi','lesny-rytm']);
 const git = process.env.GIT_BINARY || (process.platform === 'win32' && fs.existsSync('C:/Program Files/Git/cmd/git.exe') ? 'C:/Program Files/Git/cmd/git.exe' : 'git');
 const original = execFileSync(git, ['show','92bb54a240b1eb52a3b7f3c4ff8c1b499b034142:portfolio/index.html'], {cwd: root, encoding:'utf8'});
 const galleryNames = text => [...text.matchAll(/data-lightbox-src="([^"]+)"/g)].map(m=>path.basename(m[1])).sort();
@@ -45,7 +47,8 @@ for (const file of files) {
     httpPaths.add(path.relative(root,target).split(path.sep).join('/'));
   }
   httpPaths.add(file);
-  actual.push(...galleryNames(html));
+  // The historical gallery snapshot applies only to the original curated projects.
+  if (curatedProjects.has(path.basename(path.dirname(file)))) actual.push(...galleryNames(html));
 }
 assert.deepEqual(actual.sort(),expected,'Retain the curated gallery and the supplied WC render');
 const neo = fs.readFileSync(path.join(root, 'portfolio/neomodernizm/index.html'), 'utf8');
@@ -57,7 +60,7 @@ assert.deepEqual([...livingGallery.matchAll(/data-lightbox-src="[^"]+\/([^/"]+)"
 ], 'Living-zone narrative order');
 assert.equal((neo.match(/class="room-concept"/g) || []).length, 6, 'Six separate concept blocks');
 assert.equal(new Set(galleryNames(neo)).size, galleryNames(neo).length, 'No duplicate lightbox images');
-assert.equal((fs.readFileSync(path.join(root,files[0]),'utf8').match(/class="overview-card"/g)||[]).length,3);
+assert((fs.readFileSync(path.join(root,files[0]),'utf8').match(/class="overview-card"/g)||[]).length >= 3);
 for (const file of ['index.html','styles.css','script.js']) {
   const baseline = execFileSync(git,['show','38b00bdb80113d5b5d2e893fc2377df2871e2171:'+file],{cwd:root});
   const normalize = value => value.toString().replace(/\r\n/g,'\n');

@@ -2,6 +2,58 @@
 
 Statyczna strona HTML/CSS/JS dla projektantki wnętrz. Nie wymaga backendu ani płatnego silnika.
 
+## Nowy projekt portfolio
+
+Wymagany jest Node.js 22 lub nowszy. Bez instalowania pakietów i bez procesu budowania strony.
+Wspólny szablon znajduje się w `templates/portfolio-project/index.html`, a układ otwarcia w `portfolio/project-heading.css`.
+Reguły pracy Codexa zapisano w `AGENTS.md`.
+
+Przygotuj `dane.json` (przykładowe dane; obraz musi już istnieć w `assets/`, a wymiary odpowiadać plikowi):
+
+```json
+{
+  "slug": "nazwa-projektu",
+  "title": "Tytuł projektu",
+  "description": "Krótki opis projektu do wyników wyszukiwania.",
+  "number": "04",
+  "label": "Projekt wnętrza",
+  "style": "Styl projektu",
+  "software": "Oprogramowanie użyte w projekcie",
+  "image": {
+    "path": "assets/gallery/obraz-otwierajacy.webp",
+    "alt": "Opis tego, co przedstawia obraz",
+    "width": 1600,
+    "height": 900
+  },
+  "tags": ["Dom jednorodzinny", "Koncepcja wnętrz"],
+  "sections": [
+    { "id": "zalozenia", "title": "Założenia projektowe" },
+    { "id": "pomieszczenia", "title": "Pomieszczenia" }
+  ]
+}
+```
+
+```sh
+node scripts/create-project.mjs dane.json --check
+node scripts/create-project.mjs dane.json
+```
+
+Pierwsza komenda sprawdza dane bez zapisywania plików. Druga tworzy wyłącznie `portfolio/<slug>/index.html` i odmawia nadpisania istniejącego projektu. Generator nie dodaje karty do portfolio, linków między projektami ani wpisu w sitemapie.
+
+Automatycznie otrzymujesz wspólny obraz otwierający, kolumny etykiety i tytułu, typografię, wyrównanie metadanych, nawigację pod metadanymi oraz układ mobilny. Nie powstaje osobny CSS hero. Obraz wyświetla się zgodnie ze wspólnym CSS (na telefonie 16:9); generator nie przetwarza pliku źródłowego. Nawigacja i puste sekcje z nagłówkami powstają z tej samej listy `sections`.
+
+Indywidualnie przygotuj dane projektu, zaakceptowane teksty, zoptymalizowane zdjęcia, galerie, moodboardy i ewentualną dokumentację. Sekcje wygenerowane jako szkic trzeba wypełnić. Jeśli dodajesz galerię z lightboxem, zastosuj istniejący wzorzec galerii i `portfolio.js`. Dla obrazu z wariantami `srcset` zachowaj `sizes` zgodne ze wspólnym kontenerem. Nowy projekt nie wymaga dopisywania go do listy testów.
+
+```sh
+node --test scripts/project-template.test.mjs
+node scripts/check-portfolio.mjs
+node scripts/check-technical-documentation.mjs
+```
+
+`check-portfolio.mjs` uruchamia kontrolę wspólnego wzorca dla wszystkich wykrytych `portfolio/**/index.html`, oprócz indeksu portfolio. Kontrola sprawdza strukturę i klasy, kolejność CSS, metadane, obraz, położenie i cele nawigacji oraz brak stylów inline i wymuszonych podziałów tytułu. Nowe projekty wymagają nawigacji i tagów; zachowano tylko istniejące wyjątki Neomodernizmu i Leśnego rytmu.
+
+Kontrole te działają w GitHub Actions (`.github/workflows/portfolio.yml`). Do porównania wizualnego po dodaniu projektu lub zmianie hero uruchom również `node scripts/check-project-headings.cjs` przy dostępnym Playwright i Chrome. Skrypt automatycznie obejmuje nowe projekty przy 1700, 1440, 768 i 390px; `PLAYWRIGHT_MODULE` pozwala wskazać istniejącą instalację, a `REVIEW_OUTPUT` katalog zrzutów. Nie są to zależności strony ani generatora.
+
 ## Pliki
 
 - `index.html` - treść i struktura strony
