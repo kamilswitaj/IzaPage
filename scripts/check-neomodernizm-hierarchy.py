@@ -2,6 +2,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 import re
+import hashlib
 import subprocess
 
 root = Path(__file__).resolve().parents[1]
@@ -48,11 +49,11 @@ previous = 0
 for level, title in outline.headings:
     assert level <= previous + 1, f'Skipped heading level: {title}'
     previous = level
-assert outline.headings[:14] == [
+assert outline.headings[:15] == [
     (1, 'Przytulny neomodernizm dla rodziny'), (2, 'Funkcja prowadzi projekt'),
     (2, 'Przestrzeń dopasowana do życia rodziny'), (2, 'Prezentacja pomieszczeń'),
     (3, 'Hol i strefa wejściowa'), (3, 'Strefa dzienna'), (4, 'Kuchnia'),
-    (4, 'Jadalnia'), (4, 'Salon'), (3, 'Pokój dziewczynek'),
+    (4, 'Jadalnia'), (4, 'Salon'), (4, 'Wizualizacje strefy dziennej'), (3, 'Pokój dziewczynek'),
     (3, 'Sypialnia rodziców'), (3, 'Strefa sanitarna'),
     (4, 'Łazienka'), (4, 'Dodatkowe WC')]
 for label in ['01 / Założenia projektowe', '02 / Układ funkcjonalny', '03 / Pomieszczenia', '04 / Dokumentacja techniczna']:
@@ -62,6 +63,43 @@ assert re.search(header, html)[0] == re.search(header, historical('fcd4f2b'))[0]
 baseline = historical('4e1ee37e1b653d5f74e3f8a91fb6a19b85a26bfa')
 rooms = lambda text: text.split('<section class="room-section" id="hol"')[1].split('</article>')[0]
 paragraphs = lambda text: re.findall(r'<p(?: class="(?!eyebrow)[^"]*")?>([\s\S]*?)</p>', text)
-assert paragraphs(rooms(html)) == paragraphs(rooms(baseline))
+# Final copy approved by the owner; verify exact paragraphs in the correct headers.
+class RoomDescriptions(HTMLParser):
+    def __init__(self):
+        super().__init__(); self.in_header = False; self.in_paragraph = False
+        self.current_id = None; self.current_text = ''; self.descriptions = {}
+    def handle_starttag(self, tag, attrs):
+        attrs = dict(attrs)
+        if tag == 'header' and attrs.get('class') in {'room-heading', 'room-chapter-heading'}:
+            self.in_header = True; self.current_id = None
+        if self.in_header and tag in {'h2', 'h3', 'h4'}:
+            self.current_id = attrs.get('id'); self.descriptions[self.current_id] = []
+        if self.in_header and self.current_id and tag == 'p' and attrs.get('class') != 'eyebrow':
+            self.in_paragraph = True; self.current_text = ''
+    def handle_data(self, text):
+        if self.in_paragraph: self.current_text += text
+    def handle_endtag(self, tag):
+        if tag == 'p' and self.in_paragraph:
+            self.descriptions[self.current_id].append(self.current_text)
+            self.in_paragraph = False
+        if tag == 'header': self.in_header = False
+
+current_copy = RoomDescriptions(); current_copy.feed(html)
+original_copy = RoomDescriptions(); original_copy.feed(baseline)
+assert current_copy.descriptions['hol-title'] == original_copy.descriptions['hol-title']
+accepted_copy_hashes = {
+    "strefa-dzienna-title": "c73c5f7c82ddccd5a015543c9dec028674e9eab51ede470b984bcbd7e59012ee",
+    "kuchnia-title": "f99925ee7a110958b0261ee41c57835bafd343803e6e64ebdd1284797c84773d",
+    "jadalnia-title": "e5db7a1862ad209e3251f75b2c8f5e46d9b098f5a0d16e47891bd274dad26cf7",
+    "salon-title": "d4b190c7ac63173504cbac2216eee01d7bc2d0563d9e3b06b1f897670484c78b",
+    "pokoj-dzieci-title": "83e65f36ef6137ca1e22b628818dd1e730fa978a3e1155025bba98041a515787",
+    "sypialnia-rodzicow-title": "4b2e34d4acb518889c4a8183c8eb3b26c1d6e87c2cb7d93b230177d6b2850d90",
+    "lazienka-title": "ca28ffd08871d0b9acc8f0a25cb5875232f19eed4918a1e3b0b3e56de7fc7b47",
+    "lazienka-podpunkt-title": "d72de374acf7bd7b35cc57d15b36bdae181f72ac78e398625f5a336f3e1f68ad",
+    "dodatkowe-wc-title": "736051a510e5adabce03fc6532678cd75f96d1b20379e15956d19051936200c7"
+}
+for heading_id, expected_hash in accepted_copy_hashes.items():
+    text = '\n\n'.join(current_copy.descriptions[heading_id])
+    assert hashlib.sha256(text.encode('utf-8')).hexdigest() == expected_hash, heading_id
 assert html.count('Moodboard / Mineralny neomodernizm') == 1
-print('PASS: original 9 paragraphs, exact PR #7 header, H1-H4 outline, room descriptions and chapter labels.')
+print('PASS: original 9 paragraphs, exact PR #7 header, H1-H4 outline, 9 approved room descriptions and chapter labels.')
