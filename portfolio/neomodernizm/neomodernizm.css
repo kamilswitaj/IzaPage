@@ -107,6 +107,8 @@
 /* An odd gallery starts with a complete view, followed by paired details. */
 .project--neo .room-renders > .gallery-item:first-child:nth-last-child(odd) {
   grid-column: 1 / -1;
+  width: min(100%, 960px);
+  justify-self: center;
 }
 
 /* Pair the bathroom's 4:3 and 16:9 views without cropping or fixed heights. */
