@@ -11,7 +11,11 @@ const approvedRef = '7b778cd8a4f06e5a8bd0658f9ebd4afbcb381497';
 const historical = file => execFileSync(git, ['show', approvedRef + ':' + file], { cwd: root, encoding: 'utf8' }).replace(/\r\n/g, '\n');
 const approved = historical('portfolio/lesny-rytm/index.html');
 const oldCSS = historical('portfolio/lesny-rytm/lesny-rytm.css');
-const current = fs.readFileSync(path.join(root, 'portfolio/lesny-rytm/index.html'), 'utf8');
+const currentHTML = fs.readFileSync(path.join(root, 'portfolio/lesny-rytm/index.html'), 'utf8');
+assert.equal((currentHTML.match(/V\u2011Ray/g) || []).length, 14, 'All V-Ray names use a nonbreaking hyphen');
+assert(!currentHTML.includes('V-Ray'), 'No breakable V-Ray names remain');
+// Treat only the approved nonbreaking hyphen as equivalent in preserved-copy checks.
+const current = currentHTML.replace(/V\u2011Ray/g, 'V-Ray');
 const figures = text => [...text.replace(/\r\n/g, '\n').matchAll(/<figure\b[\s\S]*?<\/figure>/g)].map(m => m[0]);
 assert.deepEqual(figures(current), figures(approved), 'Every image, caption and source stays unchanged');
 const cards = text => [...text.replace(/\r\n/g, '\n').matchAll(/<article class="technical-card">[\s\S]*?<\/article>/g)].map(m => m[0]);
@@ -42,7 +46,7 @@ const heroGeometry = page => page.evaluate(() => ['.case-cover img', '.project-h
     await Promise.all([page, reference, before].map(p => p.evaluate(() => document.fonts.ready)));
     assert(await page.evaluate(html => {
       const old = new DOMParser().parseFromString(html, 'text/html');
-      const copy = d => [...d.querySelectorAll('.organic-story h2,.organic-story h3,.organic-story h4,.organic-story p,.organic-story figcaption')].map(e => e.textContent.trim());
+      const copy = d => [...d.querySelectorAll('.organic-story h2,.organic-story h3,.organic-story h4,.organic-story p,.organic-story figcaption')].map(e => e.textContent.trim().replace(/V\u2011Ray/g, 'V-Ray'));
       return JSON.stringify(copy(document)) === JSON.stringify(copy(old));
     }, approved), 'All approved text unchanged');
     const measurements = [];
