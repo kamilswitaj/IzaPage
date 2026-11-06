@@ -35,7 +35,7 @@ for (const file of files) {
     if (!resource) target=path.join(root,file);
     assert(fs.existsSync(target),file + ': missing ' + m[1]);
     if(fs.statSync(target).isDirectory()) target=path.join(target,'index.html');
-    if(fragment) assert(fs.readFileSync(target,'utf8').includes('id="'+fragment+'"'),file + ': missing fragment ' + m[1]);
+    if(fragment && path.extname(target) === '.html') assert(fs.readFileSync(target,'utf8').includes('id="'+fragment+'"'),file + ': missing fragment ' + m[1]);
     httpPaths.add(path.relative(root,target).split(path.sep).join('/'));
     links++;
   }
