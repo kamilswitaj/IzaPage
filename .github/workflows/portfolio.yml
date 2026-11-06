@@ -1,0 +1,23 @@
+name: Portfolio verification
+on:
+  pull_request:
+  push:
+    branches: [main]
+permissions:
+  contents: read
+jobs:
+  portfolio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Template generator and negative regression cases
+        run: node --test scripts/project-template.test.mjs
+      - name: Portfolio including every project hero
+        run: node scripts/check-portfolio.mjs
+      - name: Preserve technical documentation
+        run: node scripts/check-technical-documentation.mjs

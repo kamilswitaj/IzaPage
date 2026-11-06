@@ -6,12 +6,12 @@ const { execFileSync } = require('node:child_process');
 const { chromium } = require(process.env.PLAYWRIGHT_MODULE || 'playwright');
 const root = path.resolve(__dirname, '..');
 const output = path.resolve(process.env.REVIEW_OUTPUT || path.join(root, 'tmp/project-headings-review'));
-const projects = ['neomodernizm', 'japandi', 'lesny-rytm'];
+const preservedProjects = ['neomodernizm', 'japandi', 'lesny-rytm'];
 const git = process.env.GIT_BINARY || (process.platform === 'win32' ? 'C:/Program Files/Git/cmd/git.exe' : 'git');
 fs.mkdirSync(output, { recursive: true });
 
 // Opening changes must leave the approved narrative and galleries intact.
-for (const slug of projects) {
+for (const slug of preservedProjects) {
   const file = 'portfolio/' + slug + '/index.html';
   const before = execFileSync(git, ['show', 'b44cc3f:' + file], { cwd: root, encoding: 'utf8' });
   const after = fs.readFileSync(path.join(root, file), 'utf8');
@@ -31,6 +31,8 @@ const server = http.createServer((req, res) => {
 });
 
 (async () => {
+  const { checkProjectTemplates } = await import('./check-project-template.mjs');
+  const projects = checkProjectTemplates(root).map(file => path.relative(path.join(root, 'portfolio'), path.dirname(file)).split(path.sep).join('/'));
   await new Promise(resolve => server.listen(0, '127.0.0.1', resolve));
   const browser = await chromium.launch({ channel: 'chrome', headless: true });
   const metrics = [];
@@ -82,17 +84,17 @@ const server = http.createServer((req, res) => {
         assert.equal(m.font, group[0].font);
       }
       metrics.push(...group);
-      const comparison = await browser.newPage({ viewport: { width: Math.min(width, 640) * 3, height: 1600 } });
+      const comparison = await browser.newPage({ viewport: { width: Math.min(width, 640) * projects.length, height: 1600 } });
       const images = projects.map(slug => {
         const image = fs.readFileSync(path.join(output, slug + '-' + width + '.png')).toString('base64');
         return '<figure><figcaption>' + slug + ' / ' + width + ' px</figcaption><img src="data:image/png;base64,' + image + '"></figure>';
       }).join('');
-      await comparison.setContent('<style>body{margin:0;display:flex;background:#ddd;font:16px Arial}figure{margin:0;width:33.333%}figcaption{padding:12px}img{width:100%;display:block}</style>' + images);
+      await comparison.setContent('<style>body{margin:0;display:flex;background:#ddd;font:16px Arial}figure{margin:0;flex:1;min-width:0}figcaption{padding:12px}img{width:100%;display:block}</style>' + images);
       await comparison.locator('img').evaluateAll(images => Promise.all(images.map(img => img.decode())));
       await comparison.screenshot({ path: path.join(output, 'comparison-' + width + '.png'), fullPage: true });
       await comparison.close();
     }
     fs.writeFileSync(path.join(output, 'metrics.json'), JSON.stringify(metrics, null, 2));
-    console.log('PASS: 12 opening layouts; matching axes, spacing, fonts, responsive columns, no overflow; narratives and galleries unchanged.');
+    console.log('PASS: ' + projects.length * 4 + ' opening layouts; matching axes, spacing, fonts, responsive columns, no overflow; original narratives and galleries unchanged.');
   } finally { await browser.close(); server.close(); }
 })().catch(error => { console.error(error); server.close(); process.exitCode = 1; });
