@@ -1,5 +1,8 @@
 # Japandi — prezentacja projektu B
 
+Raport historyczny pierwszego etapu. Aktualne porównanie ze specyfikacją i wyniki:
+[japandi-spec-review-2026-11-06.md](japandi-spec-review-2026-11-06.md).
+
 Worktree: `C:/dev/IzaPage-japandi`. Gałąź: `codex/japandi-complete-presentation`.
 Baza: `origin/main`, `3c1ef63` (scalony PR #8).
 

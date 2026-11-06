@@ -9,7 +9,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-34.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-34.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 35,
@@ -21,7 +22,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-35.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-35.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 36,
@@ -33,7 +35,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-36.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-36.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 37,
@@ -45,7 +48,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-37.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-37.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 38,
@@ -57,7 +61,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-38.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-38.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": false
   },
   {
     "page": 39,
@@ -69,7 +74,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-39.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-39.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 40,
@@ -81,7 +87,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-40.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-40.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 41,
@@ -93,7 +100,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-41.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-41.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": false
   },
   {
     "page": 42,
@@ -105,7 +113,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-42.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-42.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 43,
@@ -117,7 +126,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-43.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-43.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": false
   },
   {
     "page": 44,
@@ -129,7 +139,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-44.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-44.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": false
   },
   {
     "page": 45,
@@ -141,7 +152,8 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-45.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-45.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": true
   },
   {
     "page": 46,
@@ -153,6 +165,7 @@
     "thumbnail": "../../assets/documentation/japandi/thumbs/arkusz-46.webp",
     "detail": "../../assets/documentation/japandi/details/arkusz-46.png",
     "tw": 960,
-    "th": 679
+    "th": 679,
+    "featured": false
   }
 ]
