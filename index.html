@@ -1,106 +1,653 @@
 <!doctype html>
 <html lang="pl">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<meta
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
       name="description"
-      content="Portfolio projektowe Izabeli Świtaj, projektantki wnętrz z wykształceniem inżynierskim. Neomodernizm, Japandi i Leśny rytm — koncepcje, układy i wizualizacje."
+      content="Projektowanie wnętrz i konsultacje wnętrzarskie online, w Warszawie i okolicach. Układy funkcjonalne, kuchnie, łazienki i pomoc przed remontem."
     />
-<link rel="canonical" href="https://izabelaswitaj.pl/" />
-<title>Izabela Świtaj — projektantka wnętrz | Portfolio</title>
-<link rel="icon" href="assets/is-favicon.png" type="image/png" sizes="64x64" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
+    <link rel="canonical" href="https://izabelaswitaj.pl/" />
+    <title>Iza Świtaj | Projektantka wnętrz</title>
+    <link rel="icon" href="assets/logo.jpeg" type="image/jpeg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
       rel="stylesheet"
     />
-<meta name="theme-color" content="#f7f5ef" />
-<meta property="og:type" content="website" />
-<meta property="og:locale" content="pl_PL" />
-<meta property="og:title" content="Izabela Świtaj — portfolio projektowe" />
-<meta property="og:description" content="Trzy wybrane projekty wnętrz: Neomodernizm, Japandi i Leśny rytm. Koncepcje, układy funkcjonalne i wizualizacje." />
-<meta property="og:url" content="https://izabelaswitaj.pl/" />
-<meta property="og:image" content="https://izabelaswitaj.pl/assets/gallery/diploma-kitchen-dining-1.webp" />
-<meta property="og:image:alt" content="Kuchnia i jadalnia w projekcie Neomodernizm Izabeli Świtaj" />
-<meta name="twitter:card" content="summary_large_image" />
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Izabela Świtaj","jobTitle":"Projektantka wnętrz","url":"https://izabelaswitaj.pl/","email":"mailto:izabela.switaj@gmail.com","telephone":"+48502272469"}</script>
-<link rel="stylesheet" href="portfolio/portfolio.css?v=20261104-6" />
-<style>
-  .cv-container { width:min(1280px,calc(100% - 112px)); margin-inline:auto; }
-  .cv-header { display:flex; flex-wrap:wrap; align-items:baseline; gap:8px 16px; padding-block:28px; border-bottom:1px solid var(--line); }
-  .cv-header h1 { position:relative; margin:0; padding-left:34px; font-size:1.4rem; letter-spacing:0; }
-  .cv-logo { position:absolute; left:0; top:50%; transform:translateY(-50%); width:auto; height:28px; }
-  .cv-header p { margin:0; font-size:.85rem; color:var(--ink-soft); }
-  .cv-projects { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:40px 28px; padding-block:32px 56px; }
-  .cv-project { display:block; min-width:0; }
-  .cv-project img { width:100%; height:auto; aspect-ratio:4/3; object-fit:cover; }
-  .cv-caption { display:flex; flex-direction:column; gap:8px; padding-top:16px; }
-  .cv-caption h2 { margin:0; font-size:clamp(1.5rem,2.4vw,2.2rem); }
-  .cv-caption h2 span { margin-left:12px; color:var(--green); font-family:var(--sans); font-size:1rem; }
-  .cv-caption p { margin:0; color:var(--ink-soft); font-size:.85rem; }
-  .cv-project:hover h2 { text-decoration:underline; text-decoration-thickness:1px; text-underline-offset:5px; }
-  .cv-footer { display:block; border-top:1px solid var(--line); padding-block:28px 40px; font-size:.85rem; color:var(--ink-soft); }
-  .cv-footer p { margin:0; }
-  .cv-footer address { display:flex; flex-wrap:wrap; align-items:center; gap:8px 32px; font-style:normal; }
-  .cv-footer a { display:inline-flex; align-items:center; min-height:32px; }
-  .cv-footer a:hover { text-decoration:underline; text-underline-offset:4px; }
-  .cv-about { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); gap:28px; border-top:1px solid var(--line); padding-block:48px 56px; }
-  .cv-about h2 { max-width:18ch; margin-bottom:0; font-size:clamp(1.8rem,3vw,2.7rem); }
-  .cv-about-copy { max-width:64ch; color:var(--ink-soft); font-size:.95rem; }
-  .cv-about-copy p { margin-bottom:18px; }
-  .cv-about-copy p:last-child { margin-bottom:0; }
-  @media(max-width:700px) { .cv-about { grid-template-columns:1fr; padding-block:36px; } }
-  @media(max-width:900px) { .cv-container { width:calc(100% - 64px); } .cv-caption { flex-direction:column; gap:8px; } }
-  @media(max-width:560px) { .cv-container { width:calc(100% - 40px); } .cv-header { padding-block:22px; } .cv-header h1 { font-size:1.25rem; } .cv-projects { grid-template-columns:1fr; gap:36px; padding-block:24px 36px; } .cv-footer { grid-template-columns:1fr; gap:20px; } .cv-footer a { min-height:44px; } }
-</style>
-</head>
-<body>
-  <a class="skip-link" href="#projekty">Przejdź do projektów</a>
-  <header class="cv-header cv-container">
-    <h1><img class="cv-logo" src="assets/is-sygnet.png" alt="" width="630" height="725" />Izabela Świtaj</h1>
-    <p>— projektantka wnętrz</p>
-  </header>
-  <main>
-  <section id="projekty" class="cv-projects cv-container" tabindex="-1" aria-label="Wybrane projekty wnętrz">
-    <a class="cv-project" href="/portfolio/neomodernizm/" aria-labelledby="project-1">
-      <img src="assets/gallery/diploma-kitchen-dining-1.webp" srcset="assets/gallery/previews/diploma-kitchen-dining-1.webp 640w, assets/gallery/diploma-kitchen-dining-1.webp 1800w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Jasna kuchnia i jadalnia z drewnianym stołem" width="1800" height="1013" fetchpriority="high" decoding="async" />
-      <div class="cv-caption">
-        <h2 id="project-1">Neomodernizm<span aria-hidden="true">↗</span></h2>
-        <p>Projekt dyplomowy · mieszkanie dla rodziny 2+2</p>
-      </div>
-    </a>
-    <a class="cv-project" href="/portfolio/japandi/" aria-labelledby="project-2">
-      <img src="assets/gallery/japandi-library.webp" srcset="assets/gallery/previews/japandi-library.webp 640w, assets/gallery/japandi-library.webp 1600w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Salon z biblioteką i przesuwnymi panelami" width="1600" height="1200" loading="lazy" decoding="async" />
-      <div class="cv-caption">
-        <h2 id="project-2">Japandi<span aria-hidden="true">↗</span></h2>
-        <p>Koncepcja wnętrza · mieszkanie bibliofilów</p>
-      </div>
-    </a>
-    <a class="cv-project" href="/portfolio/lesny-rytm/" aria-labelledby="project-3">
-      <img src="assets/gallery/organic-rtv-open.webp" srcset="assets/gallery/previews/organic-rtv-open.webp 640w, assets/gallery/organic-rtv-open.webp 1672w" sizes="(max-width: 560px) calc(100vw - 40px), (max-width: 900px) calc((100vw - 92px) / 2), (max-width: 1392px) calc((100vw - 140px) / 2), 626px" alt="Zielona zabudowa RTV z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
-      <div class="cv-caption">
-        <h2 id="project-3">Leśny rytm<span aria-hidden="true">↗</span></h2>
-        <p>Koncepcja wnętrza · salon i home office</p>
-      </div>
-    </a>
-  </section>
-  <section class="cv-about cv-container" aria-labelledby="about-title">
-    <div><p class="eyebrow">O MNIE</p><h2 id="about-title">Od funkcji do atmosfery wnętrza</h2></div>
-    <div class="cv-about-copy">
-      <p>Jestem projektantką wnętrz z wykształceniem inżynierskim. W projektowaniu łączę analityczne podejście do przestrzeni z wrażliwością na kolor, materiały i detale.</p>
-      <p>Szczególną uwagę poświęcam układom funkcjonalnym, ergonomii i rozwiązaniom dopasowanym do potrzeb użytkowników. Lubię szukać pomysłów, które nie tylko dobrze wyglądają, ale mają również praktyczne uzasadnienie.</p>
-      <p>W swojej pracy wykorzystuję pCon.planner, AutoCAD, SketchUp i V-Ray. Rozwijam umiejętności w zakresie projektowania koncepcyjnego, wizualizacji oraz dokumentacji technicznej.</p>
+    <link rel="stylesheet" href="styles.css?v=20260730-2" />
+  </head>
+  <body>
+    <header class="site-header" data-header>
+      <a class="brand" href="#start" aria-label="Iza Świtaj - strona główna">
+        <span class="brand-mark">
+          <img src="assets/logo.jpeg" alt="" width="512" height="512" />
+        </span>
+        <span>
+          <strong>Iza Świtaj</strong>
+          <small>projektantka wnętrz</small>
+        </span>
+      </a>
+      <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav" aria-label="Otwórz menu" data-nav-toggle>
+        <span></span>
+        <span></span>
+      </button>
+      <nav id="nav" class="site-nav" data-nav aria-label="Główna nawigacja">
+        <a href="#projekty">Projekty</a>
+        <a href="#dla-kogo">Dla kogo</a>
+        <a href="#oferta">Oferta</a>
+        <a href="#konsultacja">Konsultacja</a>
+        <a href="#proces">Proces</a>
+        <a href="#faq">FAQ</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+    </header>
+
+    <main id="start">
+      <section class="hero">
+        <div class="hero-media" aria-hidden="true">
+          <img
+            src="assets/gallery/diploma-entry-kitchen.webp"
+            alt=""
+            width="1448"
+            height="1086"
+            decoding="async"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+          <p class="eyebrow">Projektowanie wnętrz online i stacjonarnie</p>
+          <h1>Wnętrza zaprojektowane pod codzienne życie.</h1>
+          <p>
+            Pomagam uporządkować pomysły, zaplanować funkcjonalny układ i podjąć dobre
+            decyzje przed remontem, zakupami lub zmianą aranżacji. Możemy zacząć od
+            konsultacji, a jeśli zakres tego wymaga - przejść do pełniejszej koncepcji
+            wnętrza.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button button-primary"
+              href="https://cal.eu/izabela-switaj/30min"
+              target="_blank"
+              rel="noopener"
+            >
+              Umów bezpłatną konsultację
+            </a>
+            <a class="button button-ghost" href="#oferta">Zobacz, w czym mogę pomóc</a>
+          </div>
+        </div>
+      </section>
+
+      <section id="projekty" class="section portfolio-section" aria-labelledby="projects-title">
+        <div class="section-heading">
+          <p class="eyebrow">Wybrane projekty</p>
+          <h2 id="projects-title">Przestrzenie i rozwiązania</h2>
+          <p>
+            Przykłady koncepcji pokazują, jak można uporządkować układ, przechowywanie,
+            światło, materiały i codzienne korzystanie z wnętrza. Każdy projekt traktuję
+            jako punkt wyjścia do rozmowy o realnych potrzebach domowników.
+          </p>
+          <a class="project-portfolio-link project-section-portfolio-link" href="/portfolio/">
+            Zobacz pełne portfolio <span aria-hidden="true">→</span>
+          </a>
+        </div>
+        <div class="home-project-list">
+          <article class="home-project-showcase" data-project-gallery data-project-name="Neo modernizm">
+            <div class="home-project-copy">
+              <span class="project-number" aria-hidden="true">01</span>
+              <p class="project-kicker">Mieszkanie z kuchnią i łazienką</p>
+              <h3>Neo modernizm</h3>
+              <p>
+                Proste linie, pojemna zabudowa i czytelny podział stref pomagają zachować
+                porządek bez rezygnowania z ciepła drewna i naturalnej zieleni.
+              </p>
+              <p class="project-detail">
+                W projekcie ważne są wygodna komunikacja, przechowywanie wpisane w architekturę
+                wnętrza oraz spójne rozwiązania dla całego mieszkania.
+              </p>
+            </div>
+
+            <div class="home-project-viewer">
+              <button
+                class="project-main-image image-open"
+                type="button"
+                data-project-main
+                data-lightbox-src="assets/gallery/diploma-living-room.webp"
+                data-lightbox-caption="Neo modernizm - strefa dzienna"
+                aria-label="Powiększ aktualne zdjęcie projektu Neo modernizm"
+              >
+                <img
+                  src="assets/gallery/diploma-living-room.webp"
+                  alt="Strefa dzienna z sofą i uporządkowaną zabudową RTV"
+                  width="1672"
+                  height="941"
+                  loading="lazy"
+                  decoding="async"
+                  data-project-main-image
+                  data-fit="cover"
+                />
+                <span class="project-zoom-hint" aria-hidden="true">Powiększ</span>
+              </button>
+
+              <div class="project-viewer-info">
+                <p class="project-image-caption" data-project-caption>Strefa dzienna: wypoczynek, światło i spokojna zabudowa</p>
+                <div class="project-viewer-toolbar">
+                  <button class="project-nav" type="button" data-project-prev aria-label="Poprzednie zdjęcie projektu Neo modernizm">←</button>
+                  <span class="project-counter" data-project-counter aria-live="polite">01 / 14</span>
+                  <button class="project-nav" type="button" data-project-next aria-label="Następne zdjęcie projektu Neo modernizm">→</button>
+                </div>
+              </div>
+
+              <div class="project-thumbnails" data-project-thumbs role="group" aria-label="Miniatury projektu Neo modernizm">
+                <button class="project-thumbnail is-active" type="button" data-project-thumb data-caption="Strefa dzienna: wypoczynek, światło i spokojna zabudowa" aria-label="Pokaż strefę dzienną" aria-pressed="true" aria-current="true">
+                  <img src="assets/gallery/diploma-living-room.webp" alt="Strefa dzienna z sofą i uporządkowaną zabudową RTV" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Zabudowa RTV: przechowywanie i uporządkowana kompozycja" aria-label="Pokaż zabudowę RTV" aria-pressed="false">
+                  <img src="assets/gallery/diploma-living-tv.webp" alt="Zabudowa RTV z zielonymi frontami" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Hol i kuchnia: czytelne wejście oraz zabudowa porządkująca przestrzeń" aria-label="Pokaż hol i kuchnię" aria-pressed="false">
+                  <img src="assets/gallery/diploma-entry-kitchen.webp" alt="Hol z widokiem na kuchnię" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Pokój dzieci: wygodna strefa snu i zabudowa na małym metrażu" aria-label="Pokaż strefę snu w pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-bed.webp" alt="Pokój dzieci z łóżkiem i zabudową" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Schody i przechowywanie: dodatkowa funkcja w zwartej zabudowie" aria-label="Pokaż schody i przechowywanie w pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-bunk.webp" alt="Pokój dzieci ze schodami do łóżka i schowkami" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa nauki: dwa miejsca do pracy i dostępne przechowywanie" aria-label="Pokaż strefę nauki w pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-desk.webp" alt="Pokój dzieci z dwoma miejscami do nauki" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Zabudowa pokoju: porządek, półki i miejsce na codzienne rzeczy" aria-label="Pokaż zabudowę pokoju dzieci" aria-pressed="false">
+                  <img src="assets/gallery/diploma-child-storage.webp" alt="Pokój dzieci z wysoką zabudową i półkami" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Łazienka: strefy sanitarne, pranie i przechowywanie w jednej zabudowie" aria-label="Pokaż widok łazienki" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-overview.webp" alt="Łazienka z prysznicem, zabudową i pralką" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa wanny: jasne materiały i wygodne codzienne użytkowanie" aria-label="Pokaż strefę wanny" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-bath.webp" alt="Wanna z parawanem i jasną okładziną" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa umywalki: lekka szafka, lustro i praktyczne światło" aria-label="Pokaż strefę umywalki" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-vanity.webp" alt="Umywalka z drewnianą szafką i okrągłym lustrem" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Detal łazienki: spójność drewna, ceramiki i jasnej bazy" aria-label="Pokaż detal łazienki" aria-pressed="false">
+                  <img src="assets/gallery/diploma-bathroom-detail.webp" alt="Detal umywalki i szafki w łazience" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Hol: podręczna konsola i lustro przy strefie wejściowej" aria-label="Pokaż konsolę w holu" aria-pressed="false">
+                  <img src="assets/gallery/diploma-hall-console.webp" alt="Drewniana konsola i lustro w holu" width="1447" height="1087" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Komunikacja: jasna przestrzeń i dyskretne miejsce odkładcze" aria-label="Pokaż komunikację i hol" aria-pressed="false">
+                  <img src="assets/gallery/diploma-hall.webp" alt="Jasny hol z drewnianą konsolą" width="1448" height="1086" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Układ funkcjonalny: podział stref i logika codziennego użytkowania" data-fit="contain" aria-label="Pokaż układ funkcjonalny" aria-pressed="false">
+                  <img src="assets/gallery/diploma-plan.webp" alt="Rzut funkcjonalny mieszkania" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="home-project-showcase" data-project-gallery data-project-name="Organic modern z graficzną zielenią">
+            <div class="home-project-copy">
+              <span class="project-number" aria-hidden="true">02</span>
+              <p class="project-kicker">Salon z aneksem i home office</p>
+              <h3>Organic modern z graficzną zielenią</h3>
+              <p>
+                Aneks kuchenny, wypoczynek i miejsce do pracy tworzą jedną spójną przestrzeń,
+                a przemyślana zabudowa pozwala wygodnie zmieniać jej funkcję w ciągu dnia.
+              </p>
+              <p class="project-detail">
+                Graficzny motyw zieleni nadaje wnętrzu charakter, a zamykane elementy zabudowy
+                pozwalają szybko przywrócić wizualny porządek.
+              </p>
+            </div>
+
+            <div class="home-project-viewer">
+              <button
+                class="project-main-image image-open"
+                type="button"
+                data-project-main
+                data-lightbox-src="assets/gallery/organic-sofa.webp"
+                data-lightbox-caption="Organic modern z graficzną zielenią - strefa wypoczynku"
+                aria-label="Powiększ aktualne zdjęcie projektu Organic modern z graficzną zielenią"
+              >
+                <img
+                  src="assets/gallery/organic-sofa.webp"
+                  alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą"
+                  width="1672"
+                  height="941"
+                  loading="lazy"
+                  decoding="async"
+                  data-project-main-image
+                  data-fit="cover"
+                />
+                <span class="project-zoom-hint" aria-hidden="true">Powiększ</span>
+              </button>
+
+              <div class="project-viewer-info">
+                <p class="project-image-caption" data-project-caption>Strefa wypoczynku: miękkie formy i mocny motyw ścienny</p>
+                <div class="project-viewer-toolbar">
+                  <button class="project-nav" type="button" data-project-prev aria-label="Poprzednie zdjęcie projektu Organic modern">←</button>
+                  <span class="project-counter" data-project-counter aria-live="polite">01 / 05</span>
+                  <button class="project-nav" type="button" data-project-next aria-label="Następne zdjęcie projektu Organic modern">→</button>
+                </div>
+              </div>
+
+              <div class="project-thumbnails" data-project-thumbs role="group" aria-label="Miniatury projektu Organic modern">
+                <button class="project-thumbnail is-active" type="button" data-project-thumb data-caption="Strefa wypoczynku: miękkie formy i mocny motyw ścienny" aria-label="Pokaż strefę wypoczynku" aria-pressed="true" aria-current="true">
+                  <img src="assets/gallery/organic-sofa.webp" alt="Salon z sofą, zielonymi akcentami i dekoracyjną ścianą" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Aneks i jadalnia: spójna zabudowa, przechowywanie i miejsce spotkań" aria-label="Pokaż aneks kuchenny i jadalnię" aria-pressed="false">
+                  <img src="assets/gallery/organic-kitchen.webp" alt="Salon z aneksem kuchennym w zielonej zabudowie" width="1184" height="864" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Home office: biurko wpisane w zabudowę RTV i strefę dzienną" aria-label="Pokaż miejsce do pracy" aria-pressed="false">
+                  <img src="assets/gallery/organic-home-office.webp" alt="Zabudowa RTV połączona z miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Zamknięta zabudowa RTV: porządek wizualny i miejsce na przechowywanie" aria-label="Pokaż zamkniętą zabudowę RTV" aria-pressed="false">
+                  <img src="assets/gallery/organic-rtv-closed.webp" alt="Zamknięta zabudowa RTV z zielonym akcentem" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Otwarta zabudowa RTV: dostęp do sprzętu i dodatkowej strefy pracy" aria-label="Pokaż otwartą zabudowę RTV" aria-pressed="false">
+                  <img src="assets/gallery/organic-rtv-open.webp" alt="Otwarta zabudowa RTV z wysuwanym miejscem do pracy" width="1672" height="941" loading="lazy" decoding="async" />
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <article class="home-project-showcase" data-project-gallery data-project-name="Japandi z biblioteką">
+            <div class="home-project-copy">
+              <span class="project-number" aria-hidden="true">03</span>
+              <p class="project-kicker">Mieszkanie bibliofilów</p>
+              <h3>Japandi z biblioteką</h3>
+              <p>
+                Zabudowa na książki porządkuje strefę dzienną i staje się częścią jej
+                charakteru, zachowując spokojną paletę oraz wygodne codzienne użytkowanie.
+              </p>
+              <p class="project-detail">
+                Naturalne materiały, miękkie światło i powtarzalny rytm zabudowy łączą miejsca
+                do odpoczynku, czytania i przechowywania w jedną spokojną całość.
+              </p>
+            </div>
+
+            <div class="home-project-viewer">
+              <button
+                class="project-main-image image-open"
+                type="button"
+                data-project-main
+                data-lightbox-src="assets/gallery/japandi-library.webp"
+                data-lightbox-caption="Japandi z biblioteką - zabudowa na książki"
+                aria-label="Powiększ aktualne zdjęcie projektu Japandi z biblioteką"
+              >
+                <img
+                  src="assets/gallery/japandi-library.webp"
+                  alt="Biblioteka z dekoracyjnymi przesuwnymi panelami"
+                  width="1600"
+                  height="1200"
+                  loading="lazy"
+                  decoding="async"
+                  data-project-main-image
+                  data-fit="cover"
+                />
+                <span class="project-zoom-hint" aria-hidden="true">Powiększ</span>
+              </button>
+
+              <div class="project-viewer-info">
+                <p class="project-image-caption" data-project-caption>Biblioteka: dekoracyjne panele, rytm zabudowy i łatwy dostęp do książek</p>
+                <div class="project-viewer-toolbar">
+                  <button class="project-nav" type="button" data-project-prev aria-label="Poprzednie zdjęcie projektu Japandi">←</button>
+                  <span class="project-counter" data-project-counter aria-live="polite">01 / 10</span>
+                  <button class="project-nav" type="button" data-project-next aria-label="Następne zdjęcie projektu Japandi">→</button>
+                </div>
+              </div>
+
+              <div class="project-thumbnails" data-project-thumbs role="group" aria-label="Miniatury projektu Japandi z biblioteką">
+                <button class="project-thumbnail is-active" type="button" data-project-thumb data-caption="Biblioteka: dekoracyjne panele, rytm zabudowy i łatwy dostęp do książek" aria-label="Pokaż bibliotekę" aria-pressed="true" aria-current="true">
+                  <img src="assets/gallery/japandi-library.webp" alt="Biblioteka z dekoracyjnymi przesuwnymi panelami" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Strefa dzienna: czytelne połączenie wypoczynku, jadalni i kuchni" aria-label="Pokaż otwartą strefę dzienną" aria-pressed="false">
+                  <img src="assets/gallery/japandi-open-space.webp" alt="Otwarta strefa dzienna w stylu japandi" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Jadalnia: spokojna paleta i wygodne miejsce codziennych spotkań" aria-label="Pokaż jadalnię" aria-pressed="false">
+                  <img src="assets/gallery/japandi-dining.webp" alt="Jadalnia z drewnianym stołem i naturalnymi materiałami" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Jadalnia i kuchnia: wspólna paleta materiałów porządkuje otwartą przestrzeń" aria-label="Pokaż jadalnię z kuchnią" aria-pressed="false">
+                  <img src="assets/gallery/japandi-dining-kitchen.webp" alt="Jadalnia połączona z kuchnią w stylu japandi" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Kuchnia: funkcjonalna zabudowa i ciepłe wykończenie drewna" aria-label="Pokaż kuchnię" aria-pressed="false">
+                  <img src="assets/gallery/japandi-kitchen.webp" alt="Kuchnia z drewnianą zabudową" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Sypialnia: wyciszona przestrzeń z uporządkowanym przechowywaniem" aria-label="Pokaż sypialnię" aria-pressed="false">
+                  <img src="assets/gallery/japandi-bedroom.webp" alt="Sypialnia w spokojnej palecie naturalnych barw" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Łazienka: naturalne materiały i czytelny podział funkcji" aria-label="Pokaż łazienkę" aria-pressed="false">
+                  <img src="assets/gallery/japandi-bathroom.webp" alt="Łazienka z drewnem i jasną ceramiką" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Moodboard materiałowy: drewno, miękkie tkaniny i graficzny akcent" data-fit="contain" aria-label="Pokaż moodboard materiałowy" aria-pressed="false">
+                  <img src="assets/gallery/japandi-moodboard-3d.webp" alt="Moodboard materiałowy projektu Japandi z biblioteką" width="1800" height="1143" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Kierunek wizualny: naturalne materiały, sztuka i spokojne światło" data-fit="contain" aria-label="Pokaż moodboard inspiracji" aria-pressed="false">
+                  <img src="assets/gallery/japandi-moodboard-2d.webp" alt="Moodboard inspiracji projektu Japandi z biblioteką" width="1240" height="1800" loading="lazy" decoding="async" />
+                </button>
+                <button class="project-thumbnail" type="button" data-project-thumb data-caption="Układ funkcjonalny: strefa dzienna, sypialnia i uporządkowana komunikacja" data-fit="contain" aria-label="Pokaż układ funkcjonalny mieszkania" aria-pressed="false">
+                  <img src="assets/gallery/japandi-plan.webp" alt="Rzut funkcjonalny mieszkania w projekcie Japandi" width="1600" height="1200" loading="lazy" decoding="async" />
+                </button>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="project-consultation-cta">
+          <p>
+            Podoba Ci się taki sposób pracy?
+            <a href="https://cal.eu/izabela-switaj/30min" target="_blank" rel="noopener">
+              Umów bezpłatną konsultację.
+            </a>
+          </p>
+        </div>
+      </section>
+
+      <section class="intro section" aria-labelledby="intro-title">
+        <div class="section-label">O pracowni</div>
+        <div>
+          <h2 id="intro-title">Projekt zaczynam od tego, jak przestrzeń ma działać dla Ciebie.</h2>
+          <p>
+            Jestem projektantką wnętrz po mocnym przygotowaniu dyplomowym i latach
+            zainteresowania aranżacją. W pracy porządkuję potrzeby, sprawdzam funkcję i
+            przekładam styl życia na konkretne decyzje: układ, przechowywanie, oświetlenie,
+            materiały i wyposażenie.
+          </p>
+        </div>
+        <ul class="qualities" aria-label="Efekty współpracy">
+          <li>
+            <strong>Optymalna przestrzeń</strong>
+            <span>układ dopasowany do codziennych rytuałów, przechowywania i komunikacji</span>
+          </li>
+          <li>
+            <strong>Indywidualny projekt</strong>
+            <span>rozwiązania wynikające z Twoich potrzeb, nie z gotowego schematu</span>
+          </li>
+          <li>
+            <strong>Praktyczne decyzje</strong>
+            <span>materiały, produkty i funkcje dobrane pod budżet, użytkowanie i remont</span>
+          </li>
+        </ul>
+      </section>
+
+      <section id="dla-kogo" class="section soft-band" aria-labelledby="dla-kogo-title">
+        <div class="section-heading">
+          <p class="eyebrow">Dla kogo?</p>
+          <h2 id="dla-kogo-title">Dla osób, które chcą podjąć dobre decyzje zanim zaczną wydawać pieniądze.</h2>
+          <p>
+            Nie musisz od razu zamawiać pełnego projektu. Czasem wystarczy uporządkować
+            kierunek, sprawdzić układ albo skonsultować jedną decyzję, która blokuje remont.
+          </p>
+        </div>
+        <div class="card-grid four-grid">
+          <article>
+            <h3>Przed remontem</h3>
+            <p>Pomagam zaplanować układ, instalacje, światło i kolejność decyzji, zanim wejdzie ekipa.</p>
+          </article>
+          <article>
+            <h3>Gdy pomysłów jest za dużo</h3>
+            <p>Porządkuję inspiracje i sprawdzam, co naprawdę pasuje do mieszkania, budżetu i sposobu życia.</p>
+          </article>
+          <article>
+            <h3>Jedno trudne pomieszczenie</h3>
+            <p>Pracuję nad kuchnią, łazienką, pokojem dzieci albo salonem, który potrzebuje konkretnego planu.</p>
+          </article>
+          <article>
+            <h3>Druga opinia przed zakupami</h3>
+            <p>Sprawdzam meble, kolory, płytki, oświetlenie lub układ, zanim zamówisz materiały.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="oferta" class="section" aria-labelledby="oferta-title">
+        <div class="section-heading">
+          <p class="eyebrow">Oferta</p>
+          <h2 id="oferta-title">Zakres dobieram do etapu, na którym jesteś.</h2>
+          <p>
+            Po krótkiej rozmowie ustalamy, czy potrzebujesz konsultacji, inwentaryzacji,
+            układu funkcjonalnego, wizualizacji, dokumentacji technicznej czy zestawienia
+            materiałów. Każdy zakres omawiam indywidualnie, bo zależy od metrażu,
+            złożoności inwestycji i stanu materiałów wyjściowych.
+          </p>
+        </div>
+        <div class="service-grid">
+          <article>
+            <span>01</span>
+            <h3>Bezpłatna konsultacja 30 min</h3>
+            <p>Krótka rozmowa o przestrzeni, problemie i tym, jaki rodzaj wsparcia ma sens.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Wizja lokalna / konsultacja na inwestycji</h3>
+            <p>Spotkanie na miejscu, omówienie założeń, ocena stanu istniejącego i ustalenie zakresu prac.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Inwentaryzacja</h3>
+            <p>Pomiary, dokumentacja zdjęciowa i rzut 2D stanu istniejącego z elementami stałymi.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Projekt funkcjonalny</h3>
+            <p>Warianty układu, rozmieszczenie mebli, stref użytkowych, komunikacji i przechowywania.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Projekt wizualny</h3>
+            <p>Stylistyka, kolorystyka, materiały, wyposażenie i fotorealistyczne widoki po akceptacji układu.</p>
+          </article>
+          <article>
+            <span>06</span>
+            <h3>Opracowanie techniczne i zestawienia</h3>
+            <p>Rysunki do realizacji oraz zestawienie materiałów, wyposażenia, ilości i modeli.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="konsultacja" class="section split-section" aria-labelledby="konsultacja-title">
+        <div class="section-heading compact-heading">
+          <p class="eyebrow">Pierwsza konsultacja</p>
+          <h2 id="konsultacja-title">Jak wygląda bezpłatna rozmowa?</h2>
+          <p>
+            To spokojne 30 minut online lub telefonicznie. Bez zobowiązań i bez presji na
+            pełny projekt. Chcę zrozumieć problem i wskazać sensowny następny krok.
+          </p>
+          <a
+            class="button button-primary"
+            href="https://cal.eu/izabela-switaj/30min"
+            target="_blank"
+            rel="noopener"
+          >
+            Umów bezpłatną konsultację
+          </a>
+        </div>
+        <ol class="consult-list">
+          <li>Krótko opisujesz przestrzeń, etap prac i to, co teraz blokuje decyzje.</li>
+          <li>Pytam o potrzeby, styl życia, budżet, termin i elementy, których nie można zmienić.</li>
+          <li>Możesz wysłać zdjęcia, rzut, inspiracje albo listę produktów, które rozważasz.</li>
+          <li>Po rozmowie rekomenduję zakres pomocy, który będzie najbardziej praktyczny.</li>
+        </ol>
+      </section>
+
+      <section class="section checklist-section" aria-labelledby="checklist-title">
+        <div class="section-heading">
+          <p class="eyebrow">Przed rozmową</p>
+          <h2 id="checklist-title">Co przygotować?</h2>
+          <p>Nie musisz mieć wszystkiego. Im więcej konkretów, tym szybciej ocenię problem.</p>
+        </div>
+        <ul class="checklist">
+          <li>zdjęcia pomieszczenia</li>
+          <li>orientacyjne wymiary albo rzut, jeśli jest dostępny</li>
+          <li>inspiracje, które Ci się podobają</li>
+          <li>widełki budżetu</li>
+          <li>lista rzeczy, które teraz nie działają</li>
+          <li>elementy stałe, których nie można zmienić</li>
+          <li>planowany termin remontu lub zakupów</li>
+        </ul>
+      </section>
+
+      <section id="proces" class="process section dark-band" aria-labelledby="proces-title">
+        <div class="section-heading">
+          <p class="eyebrow">Proces i zakres</p>
+          <h2 id="proces-title">Etapy pracy, które można dobrać do konkretnej inwestycji.</h2>
+          <p>
+            Nie każdy projekt wymaga wszystkich etapów. Czasem wystarczy konsultacja lub
+            układ funkcjonalny, a przy większym zakresie przechodzimy kolejno przez pomiary,
+            wizualizacje, dokumentację i zestawienia.
+          </p>
+        </div>
+        <div class="scope-table" role="table" aria-label="Etapy i zakres usług">
+          <div class="scope-row scope-head" role="row">
+            <div role="columnheader">Etap / usługa</div>
+            <div role="columnheader">Zakres usługi</div>
+          </div>
+          <div class="scope-row" role="row">
+            <div role="cell">Wizja lokalna / konsultacja na inwestycji</div>
+            <div role="cell">Spotkanie na miejscu inwestycji, omówienie założeń, ocena stanu istniejącego i ustalenie zakresu prac. Dojazd do 50 km omawiamy w ramach ustaleń organizacyjnych.</div>
+          </div>
+          <div class="scope-row" role="row">
+            <div role="cell">Inwentaryzacja</div>
+            <div role="cell">Przyjazd na miejsce inwestycji, szczegółowe pomiary lokalu, dokumentacja zdjęciowa oraz opracowanie rzutu 2D stanu istniejącego z uwzględnieniem ścian, otworów, wnęk, wysokości i elementów stałych.</div>
+          </div>
+          <div class="scope-row" role="row">
+            <div role="cell">Projekt funkcjonalny</div>
+            <div role="cell">Opracowanie na podstawie inwentaryzacji lub dokumentacji od klienta: 2-3 wersje układu funkcjonalnego, rzut z wymiarami, rozmieszczenie mebli i wyposażenia oraz układ stref użytkowych.</div>
+          </div>
+          <div class="scope-row" role="row">
+            <div role="cell">Projekt wizualny</div>
+            <div role="cell">Opracowanie na podstawie zaakceptowanego projektu funkcjonalnego: dobór stylistyki, kolorystyki, materiałów wykończeniowych oraz wyposażenia ruchomego i stałego. Liczbę widoków dopasowuję do wielkości i złożoności pomieszczenia.</div>
+          </div>
+          <div class="scope-row" role="row">
+            <div role="cell">Opracowanie techniczne</div>
+            <div role="cell">Zestaw rysunków technicznych potrzebnych do realizacji: układ wyburzeń i nowych ścian, posadzki, sufity, okładziny ścienne, punkty oświetlenia, gniazda, łączniki, punkty wod.-kan., kłady ścian, przekroje oraz rysunki zabudów stolarskich w zakresie projektu.</div>
+          </div>
+          <div class="scope-row" role="row">
+            <div role="cell">Kosztorysowanie / zestawienie materiałów i wyposażenia</div>
+            <div role="cell">Zestawienie materiałów wykończeniowych i wyposażenia na podstawie projektu wizualnego lub technicznego: ilości, modele oraz podział na pomieszczenia lub branże.</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section credibility" aria-labelledby="credibility-title">
+        <div class="section-heading">
+          <p class="eyebrow">Przygotowanie</p>
+          <h2 id="credibility-title">Świeże spojrzenie, solidne przygotowanie.</h2>
+        </div>
+        <div class="credibility-grid">
+          <p>
+            Rozpoczynam pracę z klientami komercyjnymi po przygotowaniu dyplomowym i
+            latach zainteresowania projektowaniem wnętrz. Łączę estetykę z funkcją:
+            ergonomią, przechowywaniem, światłem, spójną paletą materiałów i codziennym
+            użytkowaniem przestrzeni.
+          </p>
+          <p>
+            Nie narzucam gotowego stylu. Najpierw chcę zrozumieć, kto będzie mieszkał w
+            danym wnętrzu, jak wygląda dzień domowników i gdzie dziś pojawia się chaos,
+            niewygoda albo ryzyko nietrafionych zakupów.
+          </p>
+        </div>
+      </section>
+
+      <section class="consultation section">
+        <div>
+          <p class="eyebrow">Pierwsze terminy</p>
+          <h2>Otwieram pierwsze terminy konsultacji dla nowych klientów.</h2>
+        </div>
+        <p>
+          To dobry moment, jeśli planujesz remont, zmianę aranżacji albo chcesz uporządkować
+          decyzje przed zakupem mebli, płytek, oświetlenia lub wyposażenia.
+        </p>
+        <a
+          class="button button-primary"
+          href="https://cal.eu/izabela-switaj/30min"
+          target="_blank"
+          rel="noopener"
+        >
+          Zarezerwuj termin
+        </a>
+      </section>
+
+      <section id="faq" class="section faq-section" aria-labelledby="faq-title">
+        <div class="section-heading">
+          <p class="eyebrow">FAQ</p>
+          <h2 id="faq-title">Najczęstsze pytania przed pierwszą rozmową.</h2>
+        </div>
+        <div class="faq-list">
+          <details>
+            <summary>Czy można zacząć od samej konsultacji?</summary>
+            <p>Tak. Konsultacja może być jednorazową pomocą albo pierwszym krokiem do szerszego projektu.</p>
+          </details>
+          <details>
+            <summary>Czy muszę mieć rzut mieszkania?</summary>
+            <p>Nie. Rzut pomaga, ale na start wystarczą zdjęcia, orientacyjne wymiary i opis problemu.</p>
+          </details>
+          <details>
+            <summary>Czy współpraca może być online?</summary>
+            <p>Tak. Konsultacje i wiele etapów koncepcji można przeprowadzić online na podstawie zdjęć, planów i rozmowy.</p>
+          </details>
+          <details>
+            <summary>Czy można skonsultować tylko jedno pomieszczenie?</summary>
+            <p>Tak. Jedno trudne pomieszczenie to bardzo dobry zakres na konsultację albo metamorfozę.</p>
+          </details>
+          <details>
+            <summary>Czy pomagasz dobrać konkretne produkty?</summary>
+            <p>Tak, jeśli taki zakres ustalimy. Może to obejmować meble, oświetlenie, materiały i inspiracje zakupowe.</p>
+          </details>
+          <details>
+            <summary>Czy przygotowujesz pełny projekt?</summary>
+            <p>Tak, przy większym zakresie po omówieniu potrzeb, budżetu, dostępnych materiałów i harmonogramu.</p>
+          </details>
+          <details>
+            <summary>Kiedy warto zgłosić się przed remontem?</summary>
+            <p>Najlepiej zanim zamówisz materiały, meble lub rozpoczniesz prace. Wtedy najłatwiej uniknąć kosztownych zmian.</p>
+          </details>
+        </div>
+      </section>
+
+      <section id="kontakt" class="contact section" aria-labelledby="kontakt-title">
+        <div>
+          <p class="eyebrow">Kontakt</p>
+          <h2 id="kontakt-title">Projekty wnętrz dla klientów z całej Polski.</h2>
+          <p>
+            Najprościej zacząć od bezpłatnej 30-minutowej konsultacji. Jeśli wolisz, możesz
+            też napisać wiadomość z krótkim opisem pomieszczenia.
+          </p>
+        </div>
+        <address>
+          <a
+            class="button button-primary"
+            href="https://cal.eu/izabela-switaj/30min"
+            target="_blank"
+            rel="noopener"
+          >
+            Umów bezpłatną konsultację
+          </a>
+          <a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a>
+          <a href="tel:+48502272469">502 272 469</a>
+        </address>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <span>Iza Świtaj</span>
+      <span>© <span data-year></span></span>
+    </footer>
+
+    <div class="lightbox" data-lightbox hidden>
+      <button class="lightbox-close" type="button" data-lightbox-close aria-label="Zamknij podgląd zdjęcia">
+        Zamknij
+      </button>
+      <figure class="lightbox-frame">
+        <img
+          src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw=="
+          alt=""
+          data-lightbox-image
+        />
+        <figcaption data-lightbox-caption></figcaption>
+      </figure>
     </div>
-  </section>
-  </main>
-  <footer class="cv-footer cv-container">
-    <address aria-label="Kontakt">
-      <a href="mailto:izabela.switaj@gmail.com">izabela.switaj@gmail.com</a>
-      <a href="tel:+48502272469">502 272 469</a>
-      <span>Warszawa</span>
-    </address>
-  </footer>
-</body>
+
+    <script src="script.js?v=20260730-2"></script>
+  </body>
 </html>
